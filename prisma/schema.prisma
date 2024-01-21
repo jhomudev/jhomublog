@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String  @db.ObjectId @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique @map("session_token")
+  userId       String   @db.ObjectId @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String      @unique
+  emailVerified DateTime?   @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  posts         Post[]
+  comments      Comment[]
+  bookmarks     Bookmark[]
+  likes         Like[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String   @id @default(auto()) @map("_id") @db.ObjectId
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model Category {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  name  String  @unique
+  slug  String  @unique
+  img   String?
+  posts Post[]
+
+  @@map("categories")
+}
+
+model Post {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug      String    @unique
+  title     String
+  overview  String
+  content   String
+  img       String?
+  createdAt DateTime  @default(now())
+  views     Int       @default(0)
+  tags      String[]
+  catSlug   String    @map("cat_slug")
+  cat       Category  @relation(fields: [catSlug], references: [slug])
+  userEmail String    @map("user_email")
+  user      User      @relation(fields: [userEmail], references: [email])
+  comments  Comment[]
+  bookmarks Bookmark[]
+  likes     Like[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  desc      String
+  userEmail String    @map("user_email")
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userEmail], references: [email])
+  postSlug  String    @map("post_slug")
+  post      Post      @relation(fields: [postSlug], references: [slug])
+
+  @@map("comments")
+}
+
+model Bookmark {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userEmail String    @map("user_email")
+  user      User      @relation(fields: [userEmail], references: [email])
+  createdAt DateTime  @default(now())
+  postSlug  String    @map("post_slug")
+  post      Post      @relation(fields: [postSlug], references: [slug])
+
+  @@map("bookmarks")
+}
+
+model Like {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userEmail String    @map("user_email")
+  user      User      @relation(fields: [userEmail], references: [email])
+  createdAt DateTime  @default(now())
+  postSlug  String    @map("post_slug")
+  post      Post      @relation(fields: [postSlug], references: [slug])
+
+  @@map("likes")
+}
