@@ -1,13 +1,13 @@
 'use client'
+import MyTooltip from "@client/components/MyTooltip"
+import ThemeToggle from "@client/components/ThemeToggle"
+import UserDropdown from "@client/components/UserDropDown"
+import { BellIcon, EnterIcon } from '@radix-ui/react-icons'
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
-import { useState } from "react"
-import UserDropdown from "./UserDropDown"
-import {BellIcon, EnterIcon} from '@radix-ui/react-icons'
 import { usePathname } from "next/navigation"
-import ButtonPublishPost from "./ButtonPublishPost"
-import ThemeToggle from "./ThemeToggle"
-import MyTooltip from "./MyTooltip"
+import { useState } from "react"
+import PublishButton from "../features/write/components/PublishButton"
 
 function AuthLinks() {
   const pathname = usePathname()
@@ -25,7 +25,7 @@ function AuthLinks() {
           ? <MyTooltip content="Sign in"><Link href={'/login'} className="hidden sm:block"><EnterIcon width={20} height={20} /></Link></MyTooltip>
           : (
             <>
-              {isWritePage ? <ButtonPublishPost /> : <Link href={'/write'} className="hidden sm:block">Write</Link>}
+              {isWritePage ? <PublishButton /> : <Link href={'/write'} className="hidden sm:block">Write</Link>}
               <Link href={'/notifications'}><BellIcon width={20} height={20} /></Link>
               <UserDropdown />
             </>

@@ -1,6 +1,8 @@
-import db from "@/app/server/libs/prisma"
-import { ApiReponseWithReturn } from "@/app/client/types"
+import db from "@/app/client/lib/prisma"
+import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
+
+export const dynamic = "force-dynamic"
 
 export const GET = async (_req: NextRequest,) => {
   try {

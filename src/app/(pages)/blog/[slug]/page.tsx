@@ -1,20 +1,21 @@
-import Menu from "@/app/client/components/Menu"
-import CardUser from "@/app/client/components/CardUser"
-import Comments from "@/app/client/components/Comments"
+import Menu from "@client/components/Menu"
+import UserCard from "@/app/client/components/UserCard"
+import Comments from "@client/features/comments/components/Comments"
 import Image from "next/image"
-import { getPostBySlug } from "@/app/client/actions"
-import ActionsInPost from "@/app/client/components/ActionsInPost"
-import { DEFAULT_POST_IMG } from "@/app/client/data"
-import MyTooltip from "@/app/client/components/MyTooltip"
-import { Button } from "@/app/client/components/ui/button"
-import { Pencil2Icon } from "@radix-ui/react-icons"
-import { auth } from "@/app/client/libs/auth"
+import PostActions from "@/app/client/features/posts/components/PostActions"
+import { DEFAULT_POST_IMG } from "@client/data"
+import MyTooltip from "@client/components/MyTooltip"
+import { Button } from "@client/components/ui/button"
+import { Link2Icon, Pencil2Icon } from "@radix-ui/react-icons"
+import { auth } from "@client/lib/auth"
+import { getPost } from "@client/features/posts/services"
+import Link from "next/link"
 
 async function PostPage({params}: {params: {slug: string}}) {
   const { slug } = params
-  const post = await getPostBySlug(slug)
+  const post = await getPost(slug)
   const session = await auth()
-  
+
   if (!post) return <p className="text-text_color_soft dark:text-text">Post not found</p>
 
   const isPostFromUser = session?.user?.email  === post.user.email
@@ -25,7 +26,7 @@ async function PostPage({params}: {params: {slug: string}}) {
         <div className="flex-1 flex flex-col justify-center gap-7">
           <h1 className="text-3xl md:text-5xl text-balance font-bold">{post.title}</h1>
           <div className="flex gap-2 justify-between items-center">
-            <CardUser user={post.user.name} date={post.createdAt} avatar={post.user.image} />
+            <UserCard user={post.user.name} date={post.createdAt} avatar={post.user.image} />
             {
               isPostFromUser && (
                 <MyTooltip content="Edit post">
@@ -34,7 +35,7 @@ async function PostPage({params}: {params: {slug: string}}) {
               )
             }
           </div>
-          <ActionsInPost post={post} />
+          <PostActions post={post} />
         </div>
         <div className="relative flex-1 h-[300px min-h-[300px]">
           <Image className="object-cover rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
@@ -45,6 +46,17 @@ async function PostPage({params}: {params: {slug: string}}) {
           <main className="content-post text-lg md:text-xl text-pretty">
             <div dangerouslySetInnerHTML={{__html: post.content}} />
           </main>
+          <div className="h-6 mt-7 border-y-1 border-bg_soft dark:border-bg_soft_dark border-dotted"></div>
+          <div className="tags flex gap-3 text-xs uppercase mt-7">
+            <span className="flex gap-1 items-center"><Link2Icon />Tags</span>
+            {
+              post.tags.map((tag) => (
+                <span key={tag} className="px-2 py-1 rounded-full hover:bg-main_color/70 hover:text-white">
+                  <Link className="flex gap-1 items-center" href={`/blog?tag/${tag}`}>#{tag}</Link>
+                </span>
+              ))
+            }
+          </div>
           <section id="comments" className="mt-10">
             <Comments postSlug={post.slug} />
           </section>

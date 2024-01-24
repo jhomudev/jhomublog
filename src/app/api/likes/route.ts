@@ -1,5 +1,5 @@
-import { ApiReponseWithReturn } from "@/app/client/types"
-import db from "@/app/server/libs/prisma"
+import { ApiReponseWithReturn } from "@client/types"
+import db from "@/app/client/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 
 const DEFAULT = {
@@ -7,6 +7,8 @@ const DEFAULT = {
   page: 1,
   order: 'desc'
 }
+
+export const dynamic = "force-dynamic"
 
 export const GET = async (req: NextRequest) => {
   const { searchParams } = req.nextUrl
@@ -134,7 +136,6 @@ export const POST = async (req: NextRequest) => {
         userEmail
       },
     })
-    console.log(like)
     if (like) {
       return NextResponse.json({
         ok: true,

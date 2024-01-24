@@ -1,9 +1,7 @@
-import Featured from "@/app/client/components/Featured";
-import ListCategories from "@/app/client/components/ListCategories";
-import ListPosts from "@/app/client/components/ListPosts";
-import Menu from "@/app/client/components/Menu";
-import { Suspense } from "react";
-import ListCategoriesSkeleton from "./client/components/ListCategoriesSkeleton";
+import Featured from "@client/components/Featured";
+import Menu from "@client/components/Menu";
+import CategoriesList from "@/app/client/features/categories/components/CategoriesList";
+import PostsList from "@/app/client/features/posts/components/PostsList";
 
 export default function Home() {
   return (
@@ -11,14 +9,12 @@ export default function Home() {
       <Featured />
       <div className="mt-10">
         <h2 className="mt-3 mb-5 text-2xl font-semibold">Popular categories</h2>
-        <Suspense fallback={<ListCategoriesSkeleton />}>
-          <ListCategories />
-        </Suspense>
+        <CategoriesList />
       </div>
       <div className="flex flex-col md:flex-row gap-16 mt-10">
         <div className="flex-grow-[5] overflow-hidden">
           <h2 className="mt-3 mb-5 text-2xl font-semibold">Recent posts</h2>
-          <ListPosts />
+          <PostsList />
         </div>
         <Menu />
       </div>

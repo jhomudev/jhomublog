@@ -1,5 +1,7 @@
-import db from "@/app/server/libs/prisma"
+import db from "@/app/client/lib/prisma"
 import { NextResponse } from "next/server"
+
+export const dynamic = "force-dynamic"
 
 export const GET = async () => { 
   try {

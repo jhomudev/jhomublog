@@ -1,10 +1,10 @@
 'use client'
-import EditorBlog from '@/app/client/components/EditorBlog';
-import SelectCategoryForPost from '@/app/client/components/SelectCategoryForPost';
-import SelectTagsForPosts from '@/app/client/components/SelectTagsForPosts';
-import { Button } from '@/app/client/components/ui/button';
-import useDataPost from '@/app/client/hooks/useDataPost';
-import { slugify, uploadFileToStorage } from '@/app/client/libs/utils';
+import WriteEditor from '@/app/client/features/write/components/WriteEditor';
+import WriteSelectCategory from '@/app/client/features/write/components/WriteSelectCategory';
+import WriteSelectTags from '@/app/client/features/write/components/WriteSelectTags';
+import { Button } from '@client/components/ui/button';
+import useWritePost from '@client/features/write/hooks/useWritePost';
+import { slugify, uploadFileToStorage } from '@client/utils';
 import { TrashIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ function WritePage() {
   const [inputFileContent, setInputFileContent] = useState<FileList | null>(null)
   const [title, setTitle] = useState('')
   const [overview, setOverview] = useState('')
-  const {setDataPost} = useDataPost()
+  const {setWriteData} = useWritePost()
   
   const setMainImage = (file: File) => {
     const reader = new FileReader()
@@ -31,20 +31,20 @@ function WritePage() {
     uploadFileToStorage(inputFileContent[0]).then(res => {
       console.log({ res })
       if (res.upload) {
-        setDataPost((data) => ({
+        setWriteData((data) => ({
           ...data,
           img: res.url,
         }))
       }
     })
     
-  },[inputFileContent, setDataPost])
+  },[inputFileContent, setWriteData])
 
   
   useEffect(() => {
     const timestamp = Date.now() / 1000
     const slug = `${slugify(title)}_${timestamp}`
-    setDataPost((data) => {
+    setWriteData((data) => {
       return {
         ...data,
         title,
@@ -52,7 +52,7 @@ function WritePage() {
         overview
       }
     })
-  }, [title, setDataPost, overview])
+  }, [title, setWriteData, overview])
   
   return (
       <div className='mt-10'>
@@ -67,7 +67,7 @@ function WritePage() {
               placeholder='Write the main title here'
               className='w-full text-5xl font-bold outline-none bg-transparent min-h-52'
             />
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 p-2 bg-bg_soft/40 dark:bg-bg_soft_dark/40 rounded-md  border-l-3 border-warning">
               <textarea
                 onChange={(e) => {
                   const limit = 400
@@ -76,7 +76,7 @@ function WritePage() {
                 value={overview}
                 spellCheck={false}
                 placeholder='Write an overview'
-                className='pl-4 border-l-3 border-warning w-full text-lg font-medium outline-none bg-transparent min-h-40'
+                className='pl-4 w-full text-lg font-medium outline-none bg-transparent min-h-40'
               />
               <small className='self-end text-text_color_soft dark:text-text_color_soft_dark'>{ overview.length + '/ 400' }</small>
             </div>
@@ -98,14 +98,14 @@ function WritePage() {
                 )
               }
             </div>
-            <SelectTagsForPosts />
+            <WriteSelectTags />
           </div>
         </div>
         <div className='mt-7'>
-          <SelectCategoryForPost />
+          <WriteSelectCategory />
         </div>
         <main className="flex flex-col mt-10">
-          <EditorBlog />
+          <WriteEditor />
         </main>
       </div>
   )

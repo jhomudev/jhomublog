@@ -1,13 +1,13 @@
-import NavBar from './client/components/NavBar'
-import { ThemeContextProvider } from './client/context/ThemeContext'
-import ThemeProvider from './client/providers/ThemeProvider'
+import WritePostProvider from '@client/features/write/providers/WritePostProvider'
 import type { Metadata } from 'next'
 import { Nunito_Sans } from 'next/font/google'
-import './globals.css'
 import Footer from './client/components/Footer'
-import AuthProvider from './client/providers/AuthProvider'
+import NavBar from './client/components/NavBar'
 import { Toaster } from './client/components/ui/toaster'
-import WritePostProvider from '@/app/client/providers/WritePostProvider';
+import { ThemeContextProvider } from './client/context/ThemeContext'
+import AuthProvider from './client/providers/AuthProvider'
+import ThemeProvider from './client/providers/ThemeProvider'
+import './globals.css'
 
 
 const font = Nunito_Sans({
@@ -28,22 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} max-w-[100dvw] overflow-x-hidden scroll-smooth`}>
-        <AuthProvider>
-          <ThemeContextProvider>
-            <ThemeProvider>
-              <WritePostProvider>
-                <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
-                  <div className="container px-6 md:px-10">
-                    <NavBar />
-                    {children}
-                    <Footer />
+          <AuthProvider>
+            <ThemeContextProvider>
+              <ThemeProvider>
+                <WritePostProvider>
+                  <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
+                    <div className="container px-6 md:px-10">
+                      <NavBar />
+                      {children}
+                      <Footer />
+                    </div>
                   </div>
-                </div>
-              </WritePostProvider>
-              <Toaster />
-            </ThemeProvider>
-          </ThemeContextProvider>
-        </AuthProvider>
+                </WritePostProvider>
+                <Toaster />
+              </ThemeProvider>
+            </ThemeContextProvider>
+          </AuthProvider>
       </body>
     </html>
   )

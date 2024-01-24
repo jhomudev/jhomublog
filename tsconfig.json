@@ -25,7 +25,13 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@client/*": [
+        "./src/app/client/*"
+      ],
+      "@server/*": [
+        "./src/app/server/*"
+      ],
     }
   },
   "include": [

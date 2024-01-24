@@ -1,6 +1,8 @@
-import db from "@/app/server/libs/prisma"
-import { ApiReponseWithReturn } from "@/app/client/types"
+import db from "@/app/client/lib/prisma"
+import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
+
+export const dynamic = "force-dynamic"
 
 export const GET = async (_req: NextRequest, { params }: { params: { slug: string }}) => {
   const { slug } = params
@@ -18,6 +20,7 @@ export const GET = async (_req: NextRequest, { params }: { params: { slug: strin
         id: true,
         slug: true,
         title: true,
+        img: true,
         overview: true,
         content: true,
         views: true,

@@ -1,5 +1,6 @@
-import db from "@/app/server/libs/prisma"
-import { ApiReponseWithReturn, CategoryResponse } from "@/app/client/types"
+import { CategoryResponse } from "@/app/client/features/categories/types"
+import db from "@/app/client/lib/prisma"
+import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async (_req: NextRequest, { params }: { params: { slug: string }}) => {

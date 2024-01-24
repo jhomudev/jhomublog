@@ -20,3 +20,7 @@
   line-height: 1.4;
   padding: 0 !important;
 }
+
+.content-post ul {
+  @apply !list-disc !mt-2 !ml-0 !px-9;
+}
