@@ -4,8 +4,8 @@ import { Pagination } from "@nextui-org/pagination"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import useBookmarks from "../hooks/useBookmarks"
-import PostsListSkeleton from "../../posts/components/PostsListSkeleton"
 import BookmarkCardPost from "./BookmarkCardPost"
+import BookmarksListSkeleton from "./BookmarksListSkeleton"
 
 function BookmarksList() {
   const { replace } = useRouter()
@@ -13,7 +13,7 @@ function BookmarksList() {
   const pathname = usePathname()
   const { data: session } = useSession()
   
-  const { response:{isLoading, data}, bookmarks } = useBookmarks({ searchParamsStr: searchParams.toString() + `&user=${session?.user?.email}` })
+  const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: searchParams.toString() + `&user=${session?.user?.email}` })
   
   const hasBookmarks = bookmarks.length > 0
 
@@ -27,7 +27,7 @@ function BookmarksList() {
     replace(url)
   }
   
-  if (isLoading) return <PostsListSkeleton />
+  if (isLoading) return <BookmarksListSkeleton />
 
   if (!hasBookmarks) return <p className="text-text_color_soft dark:text-text_color_soft_dark">No bookmarks</p>
 
@@ -36,7 +36,7 @@ function BookmarksList() {
       <div className="flex flex-col divide-y-1">
         {
           bookmarks.map((bookmark) => (
-            <BookmarkCardPost key={bookmark.id} bookmark={bookmark} />
+            <BookmarkCardPost key={bookmark.id} bookmark={bookmark} updateBookmarks={mutate} />
           ))
         }
       </div>

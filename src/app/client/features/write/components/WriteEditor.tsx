@@ -2,7 +2,11 @@
 import { Editor } from '@tinymce/tinymce-react';
 import useWritePost from '../hooks/useWritePost';
 
-export default function WriteEditor () {
+type Props = {
+  content?: string
+}
+
+export default function WriteEditor ({content}: Props) {
   const {setWriteData} = useWritePost()
   
   const handleChangeEditor = (content: string) => { 
@@ -13,7 +17,7 @@ export default function WriteEditor () {
     <>
       <Editor
         apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-        initialValue="<p>Write the content of post here!.</p>"
+        initialValue={content || "<p>Write the content of post here!.</p>"}
         init={{
           height: 800,
           menubar: false,

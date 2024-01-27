@@ -28,22 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} max-w-[100dvw] overflow-x-hidden scroll-smooth`}>
-          <AuthProvider>
-            <ThemeContextProvider>
-              <ThemeProvider>
-                <WritePostProvider>
-                  <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
-                    <div className="container px-6 md:px-10">
-                      <NavBar />
-                      {children}
-                      <Footer />
-                    </div>
+        <AuthProvider>
+          <ThemeContextProvider>
+            <ThemeProvider>
+              <WritePostProvider>
+                <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
+                  <div className="container px-6 md:px-10">
+                    <NavBar />
+                    {children}
+                    <Footer />
                   </div>
-                </WritePostProvider>
-                <Toaster />
-              </ThemeProvider>
-            </ThemeContextProvider>
-          </AuthProvider>
+                </div>
+              </WritePostProvider>
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </AuthProvider>
+        <Toaster />
       </body>
     </html>
   )

@@ -12,9 +12,6 @@ const removeBookmark = async ({postSlug, userEmail}: Props): Promise<ApiResponse
   try {
     const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks?postSlug=${postSlug}&userEmail=${userEmail}`)
     const data = res.data
-    // if (data.ok) {
-    //   revalidateTag('bookmarks')
-    // }
     return data
   } catch (error) {
     console.log(error)

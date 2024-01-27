@@ -14,7 +14,8 @@ function AuthLinks() {
   const {status } = useSession()
   const [open, setOpen] = useState(false)
 
-  const isWritePage = pathname === '/write'
+  const isWritePage = pathname.startsWith('/write')
+  const isWritePageEdit = pathname.endsWith('/edit')
 
   if(status==='loading') return
 
@@ -25,7 +26,7 @@ function AuthLinks() {
           ? <MyTooltip content="Sign in"><Link href={'/login'} className="hidden sm:block"><EnterIcon width={20} height={20} /></Link></MyTooltip>
           : (
             <>
-              {isWritePage ? <PublishButton /> : <Link href={'/write'} className="hidden sm:block">Write</Link>}
+              {isWritePage ? <PublishButton action={isWritePageEdit ? 'edit' : 'publish'} /> : <Link href={'/write'} className="hidden sm:block">Write</Link>}
               <Link href={'/notifications'}><BellIcon width={20} height={20} /></Link>
               <UserDropdown />
             </>

@@ -84,10 +84,10 @@ function PostActions({post}: Props) {
         <MyTooltip content="Like">
           <Button
             variant={"ghost"}
-            className={`flex items-center ${info.byUser?.liked && 'text-main_color'}`}
+            className={`flex items-center`}
             onClick={ handleLike }
           >
-            { info.byUser?.liked ? <HeartFilledIcon /> : <HeartIcon /> }&nbsp;{isLoading ? 0 : formatQuantity(info._count.likes)}
+            { info.byUser?.liked ? <HeartFilledIcon className="text-main_color" /> : <HeartIcon /> }&nbsp;{isLoading ? 0 : formatQuantity(info._count.likes)}
           </Button>
         </MyTooltip>
         <MyTooltip content="Respond">
@@ -102,9 +102,8 @@ function PostActions({post}: Props) {
             size={'icon'}
             variant={"ghost"}
             onClick={ handleBookmark }
-            className={`${info.byUser?.bookmarked && 'text-main_color'}`}
           >
-            { info.byUser?.bookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon /> }
+            { info.byUser?.bookmarked ? <BookmarkFilledIcon className='text-main_color' /> : <BookmarkIcon /> }
           </Button>
         </MyTooltip>
         {

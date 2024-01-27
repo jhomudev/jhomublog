@@ -29,9 +29,9 @@ function ThemeToggle({variant='simple', className}: Props) {
       onClick={toggleTheme}
     >
       <div className="relative w-full flex items-center justify-between">
-        <Image src={'/moon.png'} alt='moon' width={20} height={20} />
+        <Image src={'/moon.svg'} alt='moon' width={20} height={20} />
         <div className={`absolute z-10 ${!isDark ? 'left-0' : 'left-[57%]'} top-0 w-[20px] h-[20px] bg-bg_main dark:bg-bg_main_dark rounded-full transition-all duration-300`}></div>
-        <Image src={'/sun.png'} alt='sun' width={20} height={20} />
+        <Image src={'/sun.svg'} alt='sun' width={20} height={20} />
       </div>
     </div>
   )

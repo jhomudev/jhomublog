@@ -8,10 +8,6 @@ const createLike = async (body: LikeInput): Promise<ApiResponse | undefined> => 
   try {
     const res = await axios.post<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/likes`, body)
     const data = res.data
-    console.log(data)
-    // if (data.ok) {
-    //   revalidateTag('likes')
-    // }
     return data
   } catch (error) {
     console.log(error)

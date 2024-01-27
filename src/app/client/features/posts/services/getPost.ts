@@ -2,6 +2,8 @@ import { Post, PostResponse } from "../types"
 import { formatPostResponse } from "../adapters"
 import { ApiReponseWithReturn } from "@client/types"
 
+export const dynamic = 'force-dynamic'
+
 /**
  * Return post by slug post
  * @param slug post slug

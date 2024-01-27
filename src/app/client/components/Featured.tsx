@@ -9,7 +9,7 @@ function Featured() {
       </h1>
       <div className="flex gap-10 items-center mt-8">
         <div className="relative hidden md:block flex-1 h-[500px]">
-          <Image src={'/p1.jpeg'} alt="" fill />
+          <Image src={'/p1.jpeg'} alt="" fill priority />
         </div>
         <div className="flex-1 flex flex-col gap-5">
           <h1 className="text-5xl font-semibold">Lorem ipsum dolor, sit amet consectetur adipisicing elit!</h1>

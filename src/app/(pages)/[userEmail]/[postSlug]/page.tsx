@@ -6,14 +6,15 @@ import PostActions from "@/app/client/features/posts/components/PostActions"
 import { DEFAULT_POST_IMG } from "@client/data"
 import MyTooltip from "@client/components/MyTooltip"
 import { Button } from "@client/components/ui/button"
-import { Link2Icon, Pencil2Icon } from "@radix-ui/react-icons"
+import { Link2Icon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons"
 import { auth } from "@client/lib/auth"
 import { getPost } from "@client/features/posts/services"
 import Link from "next/link"
+import PostAuthorActions from "@/app/client/features/posts/components/PostAuthorActions"
 
-async function PostPage({params}: {params: {slug: string}}) {
-  const { slug } = params
-  const post = await getPost(slug)
+async function PostPage({params}: {params: {postSlug: string}}) {
+  const { postSlug } = params
+  const post = await getPost(postSlug)
   const session = await auth()
 
   if (!post) return <p className="text-text_color_soft dark:text-text">Post not found</p>
@@ -24,15 +25,11 @@ async function PostPage({params}: {params: {slug: string}}) {
     <div className="mt-10">
       <section className="flex flex-col md:flex-row gap-10">
         <div className="flex-1 flex flex-col justify-center gap-7">
-          <h1 className="text-3xl md:text-5xl text-balance font-bold">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl text-balance font-bold">{post.title}</h1>
           <div className="flex gap-2 justify-between items-center">
             <UserCard user={post.user.name} date={post.createdAt} avatar={post.user.image} />
             {
-              isPostFromUser && (
-                <MyTooltip content="Edit post">
-                  <Button size={'icon'} variant={'secondary'}><Pencil2Icon /></Button>
-                </MyTooltip>
-              )
+              isPostFromUser && <PostAuthorActions post={post} />
             }
           </div>
           <PostActions post={post} />
@@ -51,8 +48,8 @@ async function PostPage({params}: {params: {slug: string}}) {
             <span className="flex gap-1 items-center"><Link2Icon />Tags</span>
             {
               post.tags.map((tag) => (
-                <span key={tag} className="px-2 py-1 rounded-full hover:bg-main_color/70 hover:text-white">
-                  <Link className="flex gap-1 items-center" href={`/blog?tag/${tag}`}>#{tag}</Link>
+                <span key={tag} className="rounded-full hover:bg-main_color/70 hover:text-white">
+                  <Link className="px-2 py-1 flex gap-1 items-center" href={`/blog?tag=${tag}`}>#{tag}</Link>
                 </span>
               ))
             }

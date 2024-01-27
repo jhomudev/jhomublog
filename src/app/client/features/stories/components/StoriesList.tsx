@@ -2,16 +2,18 @@
 import { getURLWithParams } from "@client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import PostsListSkeleton from "../../posts/components/PostsListSkeleton"
 import useStories from "../hooks/useStories"
 import StorieCardPost from "./StorieCardPost"
+import StoriesListSkeleton from "./StoriesListSkeleton"
+import Link from "next/link"
+import { Button } from "@/app/client/components/ui/button"
 
 function StoriesList() {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
   
-  const { response:{ isLoading, data }, stories } = useStories({ searchParams: searchParams.toString() })
+  const { response:{ isLoading, data, mutate }, stories } = useStories({ searchParams: searchParams.toString() })
   
   const hasStories = stories.length > 0
 
@@ -25,16 +27,25 @@ function StoriesList() {
     replace(url)
   }
   
-  if (isLoading) return <PostsListSkeleton />
+  if (isLoading) return <StoriesListSkeleton />
 
-  if (!hasStories) return <p className="text-text_color_soft dark:text-text_color_soft_dark">No bookmarks</p>
+  if (!hasStories) return (
+    <>
+      <div className="text-text_color_soft dark:text-text_color_soft_dark">
+        <p>You do not have any stories</p>
+      </div>
+      <div className="mt-3">
+        <Button variant={'primary'} rounded={"full"} asChild ><Link href="/write">Write a new story</Link></Button>
+      </div>
+    </>
+  )
 
   return (
     <>
-      <div className="flex flex-col divide-y-1">
+      <div className="flex flex-col gap-4">
         {
           stories.map((storie) => (
-            <StorieCardPost key={storie.id} storie={storie} />
+            <StorieCardPost key={storie.id} storie={storie} updateStories={mutate} />
           ))
         }
       </div>

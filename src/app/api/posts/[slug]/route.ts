@@ -59,3 +59,94 @@ export const GET = async (_req: NextRequest, { params }: { params: { slug: strin
     }, {status: 500})
   }
 }
+
+export const PUT = async (req: NextRequest, { params }: { params: { slug: string }}) => {
+  const { slug } = params
+  const data = await req.json()
+
+  try {
+    const postExists = await db.post.findUnique({
+      where: { slug },
+    })
+
+    if (!postExists) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Post not found',
+      }, { status: 404 })
+    }
+    const post = await db.post.update({
+      where: { slug },
+      data: { 
+        title: data.title,
+        slug: data.slug,
+        overview: data.overview,
+        content: data.content,
+        catSlug: data.catSlug,
+        tags: data.tags,
+        img: data.img
+      },
+    })
+
+    if (post) {
+      return NextResponse.json<ApiReponseWithReturn>({
+        ok: true,
+        message: 'Post updated successfully',
+        data: post
+      })
+    }
+
+
+    return NextResponse.json({
+      ok: false,
+      message: 'Internal server error',
+    }, { status: 500 })
+    
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json({
+      ok: false,
+      message: 'Something is wrong'
+    }, {status: 500})
+  }
+}
+
+export const DELETE = async (_req: NextRequest, { params }: { params: { slug: string }}) => {
+  const { slug } = params
+  try {
+    const postExists = await db.post.findUnique({
+      where: { slug },
+    })
+
+    if (!postExists) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Post not found',
+      }, { status: 404 })
+    }
+    const post = await db.post.delete({
+      where: { slug },
+    })
+
+    if (post) {
+      return NextResponse.json<ApiReponseWithReturn>({
+        ok: true,
+        message: 'Post deleted successfully',
+        data: post
+      })
+    }
+
+
+    return NextResponse.json({
+      ok: false,
+      message: 'Internal server error',
+    }, { status: 500 })
+    
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json({
+      ok: false,
+      message: 'Something is wrong'
+    }, {status: 500})
+  }
+}

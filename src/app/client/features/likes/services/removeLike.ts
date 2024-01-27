@@ -12,9 +12,6 @@ const removeLike = async ({postSlug, userEmail}: Props): Promise<ApiResponse | u
   try {
     const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/likes?postSlug=${postSlug}&userEmail=${userEmail}`)
     const data = res.data
-    // if (data.ok) {
-    //   revalidateTag('likes')
-    // }
     return data
   } catch (error) {
     console.log(error)

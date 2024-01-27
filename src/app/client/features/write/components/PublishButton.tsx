@@ -1,23 +1,27 @@
-import { DEFAULT_VALUE_DATA_POST } from "@client/features/write/context/WritePostContext";
 import { Button } from "@client/components/ui/button";
 import { useToast } from "@client/components/ui/use-toast";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { createPost } from "../../posts/services";
 import { PostInputSchema } from "../../posts/schemas";
-import { PostInput } from "../../posts/types";
+import { createPost, editPost } from "../../posts/services";
 import useWritePost from "../hooks/useWritePost";
 
-function PublishButton() {
-  const [isSubmitLoading, setIsSubmitLoading] = useState(false)
-  const { writeData, setWriteData } = useWritePost()
-  const {toast} = useToast()
-  const {push} = useRouter()
-  
-  const validationDataPost = PostInputSchema.safeParse(writeData)
+type Props = {
+  action?: 'edit' | 'publish'
+}
 
-  const publicPost = async () => {
-    console.log({validationDataPost})
+function PublishButton({ action = 'publish' }: Props) {
+  const isEdit = action === 'edit'
+  const { writeData, resetWriteData, postToEdit, resetPostToEdit} = useWritePost()
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false)
+  const {toast} = useToast()
+  const { push } = useRouter()
+  const {data: session} = useSession()
+
+  const validationDataPost = PostInputSchema.safeParse(writeData)
+  
+  const handleClick = async () => {
     if (!validationDataPost.success) {
       const [error] = validationDataPost.error.issues
       toast({
@@ -28,22 +32,25 @@ function PublishButton() {
       return
     }
     setIsSubmitLoading(true)
-    const res = await createPost(writeData)
+    const action = isEdit ? editPost(postToEdit.slug, writeData) : createPost(writeData)
+    const res = await action
     setIsSubmitLoading(false)
     if (!res?.ok) {
       toast({
         title: 'Something went wrong',
-        description: res?.message || 'Post not created',
+        description: res?.message || 'Action failed',
         variant: 'destructive',
       })
       return
     }
-    setWriteData(DEFAULT_VALUE_DATA_POST as PostInput)
+    resetWriteData()
+    resetPostToEdit()
+
     toast({
       title: 'Success',
-      description: res?.message || 'Post has been created',
+      description: res?.message || 'Action succeeded',
     })
-    push(`/blog/${writeData.slug}`)
+    push(`/${session?.user?.email}/${writeData.slug}`)
   }
 
   return (
@@ -53,9 +60,9 @@ function PublishButton() {
       className={`${
         !validationDataPost.success && 'opacity-70 pointer-events-none'
         } ${isSubmitLoading && 'animate-pulse pointer-events-none'}`}
-      onClick={publicPost}
+      onClick={handleClick}
     >
-      Publish
+      {isEdit ? 'Update' : 'Publish'}
     </Button>
   )
 }

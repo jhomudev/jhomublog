@@ -60,7 +60,7 @@ function WriteSelectTags() {
           />
           {
             showSuggestions && (
-              <ul className="border-l-2 border-warning absolute divide-y top-full left-0 flex flex-col  rounded-md">
+              <ul className="absolute z-10 top-full left-0 border-l-2 border-warning divide-y flex flex-col rounded-md">
                 {
                   suggestions.map((tag) => (
                     <li

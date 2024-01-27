@@ -7,13 +7,14 @@ import PostsInMenuSkeleton from "./PostsInMenuSkeleton"
 
 type Props = {
   withImage?: boolean,
+  bgImage?: 'user' | 'post'
   dataPost: {
     posts: PostInPosts[],
     isLoading: boolean
   }
 }
 
-function PostsInMenu({ withImage = false, dataPost:{ isLoading, posts } }: Props) {
+function PostsInMenu({ withImage = false, bgImage = 'post', dataPost:{ isLoading, posts } }: Props) {
   const hasPosts = posts.length > 0
 
   if (isLoading) return <PostsInMenuSkeleton />
@@ -25,11 +26,11 @@ function PostsInMenu({ withImage = false, dataPost:{ isLoading, posts } }: Props
       {
         posts.map(({id, title, slug, createdAt, user, img, cat}) => (
           <article key={id} className="relative flex gap-3 items-center p-2 rounded-lg">
-            <Link href={`/blog/${slug}`} className="absolute z-10 w-full h-full" />
+            <Link href={`/${user.email}/${slug}`} className="absolute z-10 w-full h-full" />
             {
               withImage && (
                 <div className="relative flex-[1] aspect-square">
-                  <Image className="rounded-full object-cover" src={img || DEFAULT_POST_IMG} alt={title} fill />
+                  <Image className="rounded-full object-cover" src={(bgImage === 'user' ? user.image : img) || DEFAULT_POST_IMG} alt={title} fill />
                 </div>
               )
             }

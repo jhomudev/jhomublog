@@ -6,7 +6,7 @@ import PostsInMenu from "../features/posts/components/PostsInMenu"
 function Menu() {
   const searchParams = new URLSearchParams()
   searchParams.set('views', 'desc')
-  searchParams.set('rowsPerPage', '4')
+  searchParams.set('rowsPerPage', '3')
 
   const { response: { isLoading: isLoadingPopular }, posts: popularPosts } = usePosts({ searchParams: searchParams.toString() })
   const { response: { isLoading: isLoadingAuthorPosts }, posts: authorPosts } = usePosts({ searchParams: searchParams.toString() })
@@ -24,7 +24,7 @@ function Menu() {
         <br />
         <small className="text-text_color_soft dark:text-text_color_soft_dark">Chosen By the editor</small>
         <h2 className="mb-5 text-2xl font-semibold">Editors Pick</h2>
-        <PostsInMenu withImage dataPost={{ posts: authorPosts, isLoading: isLoadingAuthorPosts }} />
+        <PostsInMenu withImage bgImage="user" dataPost={{ posts: authorPosts, isLoading: isLoadingAuthorPosts }} />
       </div>
     </aside>
   )
