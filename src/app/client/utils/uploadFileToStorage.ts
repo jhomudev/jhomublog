@@ -1,6 +1,6 @@
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "@client/lib/firebase";
-app
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+
 const storage = getStorage(app);
 
 // Create the file metadata
@@ -23,9 +23,9 @@ type ResponseUpload = {
  * @param file - File
  */
 
-const uploadFileToStorage = (file: File) => { 
+const uploadFileToStorage = async (foldername: string, file: File) => {
   const filename =  file.name + Date.now() / 1000;
-  const storageRef = ref(storage, 'images/' + filename);
+  const storageRef = ref(storage, foldername + filename);
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
   // Listen for state changes, errors, and completion of the upload.
