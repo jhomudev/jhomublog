@@ -1,9 +1,19 @@
-function UserPage() {
+import ProfilePostsList from "@/app/client/features/profile/components/ProfilePostsList"
+import { getUser } from "@/app/client/features/profile/services"
+
+async function UserProfilePage({params}: {params: {userEmail: string}}) {
+  const { userEmail } = params
+  const user = await getUser(userEmail)
+
+  if (!user) {
+    console.log('Failed to fetch user')
+    return <p>User not found</p>
+  }
+
   return (
     <div>
-      <h1>User Profile Pege</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut amet asperiores excepturi fugiat aliquam! Reiciendis repudiandae vitae repellat quas, magnam debitis. Rerum, asperiores! Voluptas ratione nam quaerat ex ut repellendus.</p>
+      <ProfilePostsList userId={user.id} />
     </div>
   )
 }
-export default UserPage
+export default UserProfilePage

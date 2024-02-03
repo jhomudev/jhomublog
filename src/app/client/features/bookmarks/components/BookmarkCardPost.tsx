@@ -62,7 +62,7 @@ function BookmarkCardPost({ bookmark, updateBookmarks }: Props) {
             <time dateTime={formatDate(bookmark.createdAt).shortReverse}>{formatDate(bookmark.post.createdAt).short}</time>
           </div>
           <h2 className="text-2xl font-semibold line-clamp-2">
-            <Link className="block" href={`/${bookmark.post.user.email}/${bookmark.post.slug}`}>{bookmark.post.title}</Link>
+            <Link className="block" href={`/blog/${bookmark.post.slug}`}>{bookmark.post.title}</Link>
           </h2>
           <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{bookmark.post.overview}</p>
           <div className="flex gap-2 justify-between items-center mt-auto">
@@ -71,7 +71,7 @@ function BookmarkCardPost({ bookmark, updateBookmarks }: Props) {
                 <Button size={'icon'} variant={'ghost'} onClick={handleBookmark}><BookmarkFilledIcon className="text-main_color" /></Button>
               </MyTooltip>
             </div>
-            <Link href={`/${bookmark.post.user.email}/${bookmark.post.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
+            <Link href={`/blog/${bookmark.post.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
           </div>
         </div>
         <div className="hidden lg:block flex-[1] relative h-full min-h-[100px] aspect-square">

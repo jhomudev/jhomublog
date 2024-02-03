@@ -96,8 +96,8 @@ function PostCard({ post }: Props) {
           <time dateTime={formatDate(post.createdAt).shortReverse}>{formatDate(post.createdAt).short}</time> |
           <span className="text-red-700 uppercase"><Link href={`/blog?cat=${post.cat.slug}`}>{post.cat.name}</Link></span>
         </div>
-        <h2 className="text-2xl font-semibold line-clamp-2"><Link href={`/${post.user.email}/${post.slug}`}>{post.title}</Link></h2>
-        <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
+        <h3 className="text-2xl font-semibold line-clamp-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+        <p className="text-base text-balance text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
         <div className="flex gap-2">
           {
             post.tags.map((tag) => (
@@ -123,7 +123,7 @@ function PostCard({ post }: Props) {
               <Button size={'icon'} variant={'ghost'}><MinusCircledIcon /></Button>
             </MyTooltip>
           </div>
-          <Link href={`/${post.user.email}/${post.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
+          <Link href={`/blog/${post.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
         </div>
       </div>
     </article>

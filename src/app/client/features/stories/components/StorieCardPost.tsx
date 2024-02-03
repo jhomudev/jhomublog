@@ -56,7 +56,7 @@ function StorieCardPost({ storie, updateStories }: Props) {
               <time dateTime={formatDate(storie.createdAt).shortReverse}>{formatDate(storie.createdAt).short}</time>
             </div>
             <h2 className="text-2xl font-semibold line-clamp-2">
-              <Link className="block" href={`/${session?.user?.email}/${storie.slug}`}>{storie.title}</Link>
+              <Link className="block" href={`/blog/${storie.slug}`}>{storie.title}</Link>
             </h2>
             <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{storie.overview}</p>
             <div className="flex gap-2 justify-between items-center mt-auto">
@@ -73,7 +73,7 @@ function StorieCardPost({ storie, updateStories }: Props) {
                   <Button variant={'destructive'} size='icon' className="flex gap-1 items-center" onClick={() => setShowModal(true)}><TrashIcon fontSize={20} /></Button>
                 </MyTooltip>
               </div>
-              <Link href={`/${session?.user?.email}/${storie.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
+              <Link href={`/blog/${storie.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
             </div>
           </div>
           <div className="hidden lg:block flex-[1] relative h-full min-h-[100px] aspect-square">

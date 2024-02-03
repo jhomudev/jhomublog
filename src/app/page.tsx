@@ -12,10 +12,10 @@ export default function Home() {
         <CategoriesList />
       </div>
       <div className="flex flex-col md:flex-row gap-16 mt-10">
-        <div className="flex-grow-[5] overflow-hidden">
+        <main className="flex-grow-[5] overflow-hidden">
           <h2 className="mt-3 mb-5 text-2xl font-semibold">Recent posts</h2>
           <PostsList />
-        </div>
+        </main>
         <Menu />
       </div>
     </>

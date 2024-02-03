@@ -26,10 +26,10 @@ function PostsInMenu({ withImage = false, bgImage = 'post', dataPost:{ isLoading
       {
         posts.map(({id, title, slug, createdAt, user, img, cat}) => (
           <article key={id} className="relative flex gap-3 items-center p-2 rounded-lg">
-            <Link href={`/${user.email}/${slug}`} className="absolute z-10 w-full h-full" />
+            <Link href={`/blog/${slug}`} className="absolute z-10 w-full h-full" />
             {
               withImage && (
-                <div className="relative flex-[1] aspect-square">
+                <div className="relative flex-[1] max-w-16 aspect-square">
                   <Image className="rounded-full object-cover" src={(bgImage === 'user' ? user.image : img) || DEFAULT_POST_IMG} alt={title} fill />
                 </div>
               )

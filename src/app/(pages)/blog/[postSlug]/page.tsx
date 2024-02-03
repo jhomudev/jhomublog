@@ -1,16 +1,14 @@
-import Menu from "@client/components/Menu"
-import UserCard from "@/app/client/components/UserCard"
-import Comments from "@client/features/comments/components/Comments"
-import Image from "next/image"
+import UserAndDateCard from "@/app/client/components/UserAndDateCard"
 import PostActions from "@/app/client/features/posts/components/PostActions"
-import { DEFAULT_POST_IMG } from "@client/data"
-import MyTooltip from "@client/components/MyTooltip"
-import { Button } from "@client/components/ui/button"
-import { Link2Icon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons"
-import { auth } from "@client/lib/auth"
-import { getPost } from "@client/features/posts/services"
-import Link from "next/link"
 import PostAuthorActions from "@/app/client/features/posts/components/PostAuthorActions"
+import Menu from "@client/components/Menu"
+import { DEFAULT_POST_IMG } from "@client/data"
+import Comments from "@client/features/comments/components/Comments"
+import { getPost } from "@client/features/posts/services"
+import { auth } from "@client/lib/auth"
+import { Link2Icon } from "@radix-ui/react-icons"
+import Image from "next/image"
+import Link from "next/link"
 
 async function PostPage({params}: {params: {postSlug: string}}) {
   const { postSlug } = params
@@ -27,7 +25,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
         <div className="flex-1 flex flex-col justify-center gap-7">
           <h1 className="text-4xl md:text-5xl text-balance font-bold">{post.title}</h1>
           <div className="flex gap-2 justify-between items-center">
-            <UserCard user={post.user.name} date={post.createdAt} avatar={post.user.image} />
+            <UserAndDateCard user={post.user.name} profile={post.user.email} date={post.createdAt} avatar={post.user.image} />
             {
               isPostFromUser && <PostAuthorActions post={post} />
             }

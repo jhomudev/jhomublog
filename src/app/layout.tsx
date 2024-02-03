@@ -1,18 +1,24 @@
 import WritePostProvider from '@client/features/write/providers/WritePostProvider'
 import type { Metadata } from 'next'
-import { Nunito_Sans } from 'next/font/google'
+import { Quicksand, Titillium_Web } from 'next/font/google'
 import Footer from './client/components/Footer'
 import NavBar from './client/components/NavBar'
 import { Toaster } from './client/components/ui/toaster'
 import { ThemeContextProvider } from './client/context/ThemeContext'
+import SearchProvider from './client/features/search/providers/SearchProvider'
 import AuthProvider from './client/providers/AuthProvider'
 import ThemeProvider from './client/providers/ThemeProvider'
 import './globals.css'
 
 
-const font = Nunito_Sans({
+const q = Quicksand({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const ti = Titillium_Web({
+  subsets: ['latin'],
+  weight: ["300", "400", "600", "700", "200", "900"],
 })
 
 export const metadata: Metadata = {
@@ -27,19 +33,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className} max-w-[100dvw] overflow-x-hidden scroll-smooth`}>
+      <body className={`${ti.className} max-w-[100dvw] overflow-x-hidden scroll-smooth`}>
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
-              <WritePostProvider>
-                <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
-                  <div className="container px-6 md:px-10">
-                    <NavBar />
-                    {children}
-                    <Footer />
+              <SearchProvider>
+                <WritePostProvider>
+                  <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
+                    <div className="container px-6 md:px-10">
+                      <NavBar />
+                      <div className="min-h-[100dvh]">
+                        {children}
+                      </div>
+                      <Footer />
+                    </div>
                   </div>
-                </div>
-              </WritePostProvider>
+                </WritePostProvider>
+              </SearchProvider>
             </ThemeProvider>
           </ThemeContextProvider>
         </AuthProvider>

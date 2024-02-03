@@ -1,6 +1,7 @@
-import { Post, PostResponse } from "../types"
-import { formatPostResponse } from "../adapters"
 import { ApiReponseWithReturn } from "@client/types"
+import axios from "axios"
+import { formatPostResponse } from "../adapters"
+import { Post, PostResponse } from "../types"
 
 export const dynamic = 'force-dynamic'
 
@@ -11,12 +12,8 @@ export const dynamic = 'force-dynamic'
  */
 const getPost = async (slug: string): Promise<Post | undefined> => { 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`, {
-      next: {
-        tags: ["post"]
-      }
-    })
-    const { ok, data, message } = await res.json() as ApiReponseWithReturn<PostResponse>
+    const res = await axios<ApiReponseWithReturn<PostResponse>>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`)
+    const { ok, data, message } = res.data
     if (ok) {
       const post = formatPostResponse(data)
       return post

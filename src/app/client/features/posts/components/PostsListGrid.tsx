@@ -1,18 +1,19 @@
 'use client'
-import { getURLWithParams } from "@client/utils"
-import { Pagination } from "@nextui-org/pagination"
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import usePosts from "../hooks/usePosts"
-import PostCard from "./PostCard"
-import PostsListSkeleton from "./PostsListSkeleton"
+import { getURLWithParams } from "@/app/client/utils"
+import PostsListGridSkeleton from "./PostsListGridSkeleton"
+import PostCardSquare from "./PostCardSquare"
+import { Pagination } from "@nextui-org/pagination"
 import NotFound from "@/app/client/components/NotFound"
 
-function PostsList() {
-  const { replace } = useRouter()
-  const searchParams = useSearchParams()
+function PostsListGrid() {
+  const {replace} = useRouter()
   const pathname = usePathname()
+  const searchParams  = useSearchParams()
   const { posts, response: { isLoading, data } } = usePosts({ searchParams: searchParams.toString() })
-
+  
   const hasPosts = posts.length > 0
 
   const handleChangePage = (page: number) => { 
@@ -23,16 +24,16 @@ function PostsList() {
     replace(url)
   }
   
-  if (isLoading) return <PostsListSkeleton />
+  if (isLoading) return <PostsListGridSkeleton/>
 
-  if (!hasPosts) return <NotFound />
-
+  if (!hasPosts) return <NotFound title="No results" message={`No results found for your search`} />
+  
   return (
     <>
-      <div className="flex flex-col gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {
-          posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+          posts.map(post => (
+            <PostCardSquare key={post.id} post={post} />
           ))
         }
       </div>
@@ -58,4 +59,4 @@ function PostsList() {
     </>
   )
 }
-export default PostsList
+export default PostsListGrid
