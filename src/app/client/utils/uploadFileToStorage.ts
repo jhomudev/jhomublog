@@ -24,7 +24,7 @@ type ResponseUpload = {
  */
 
 const uploadFileToStorage = async (foldername: string, file: File) => {
-  const filename =  file.name + Date.now() / 1000;
+  const filename = `${Date.now() / 1000}_${file.name}`;
   const storageRef = ref(storage, foldername + filename);
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 

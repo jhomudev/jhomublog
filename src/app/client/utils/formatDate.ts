@@ -5,7 +5,7 @@ export const formatDate = (date: string) => {
   const year = d.getFullYear().toString()
   
   return {
-    simple: d.toUTCString(),
+    simple: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     short: `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`,
     shortReverse: `${year}/${month.padStart(2, '0')}/${day.padStart(2, '0')}`
   }
