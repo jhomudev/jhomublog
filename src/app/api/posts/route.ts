@@ -20,6 +20,8 @@ export const GET = async (req: NextRequest,) => {
   const q = sp.q
   const views = sp.views as 'desc' | 'asc'
   const cat = sp.cat
+  const tag = sp.tag
+  const user = sp.user
 
   try {
     const [posts, rowsObtained, totalRows] = await db.$transaction([
@@ -29,7 +31,15 @@ export const GET = async (req: NextRequest,) => {
             contains: q,
             mode: 'insensitive'
           }}),
-          ...(cat && {catSlug: cat})
+          ...(cat && {catSlug: cat}),
+          ...((!cat && tag) && {
+            tags: {
+            has: tag
+          }}),
+          ...(user && {
+            user: {
+            id: user
+          }})
         },
         take: all ? undefined : rowsPerPage,
         skip: all ? undefined : rowsPerPage * (page - 1),
@@ -68,7 +78,15 @@ export const GET = async (req: NextRequest,) => {
             contains: q,
             mode: 'insensitive'
           }}),
-          ...(cat && {catSlug: cat})
+          ...(cat && { catSlug: cat }),
+          ...((!cat && tag) && {
+            tags: {
+            has: tag
+          }}),
+          ...(user && {
+            user: {
+            id: user
+          }})
         }
       }),
       db.post.count()
