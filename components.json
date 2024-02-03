@@ -12,6 +12,6 @@
   },
   "aliases": {
     "components": "@client/components",
-    "utils": "@client/libs/shadcn_clsx"
+    "utils": "@client/lib/shadcn_clsx"
   }
 }

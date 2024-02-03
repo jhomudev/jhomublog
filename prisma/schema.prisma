@@ -52,6 +52,7 @@ model User {
   comments      Comment[]
   bookmarks     Bookmark[]
   likes         Like[]
+  // TODO: add folows and createdAt
 
   @@map("users")
 }

@@ -4,7 +4,7 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    './node_modules/@nextui-org/theme/dist/components/(pagination|avatar|dropdown|user|toggle|modal).js',
+    './node_modules/@nextui-org/theme/dist/components/(pagination|avatar|dropdown|user|toggle|modal|tabs).js',
     './client/(pages)/**/*.{ts,tsx}',
     './client/components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
