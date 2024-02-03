@@ -5,7 +5,7 @@ function Featured() {
   return (
     <div className="mt-8">
       <h1 className="text-3xl md:text-5xl mb-5">
-        <b>Hey, jhonandev here!</b> Discover my stories and creative ideas.
+        <b>Hey, jhonanblog here!</b> Discover the most interesting stories and creative ideas.
       </h1>
       <div className="flex gap-10 items-center mt-8">
         <div className="relative hidden md:block flex-1 h-[500px]">
