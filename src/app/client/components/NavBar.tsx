@@ -2,15 +2,19 @@ import Image from "next/image"
 import Link from "next/link"
 import AuthLinks from "./AuthLinks"
 import ThemeToggle from "./ThemeToggle"
+import NavSearchInput from "../features/search/components/NavSearchInput"
 
 function NavBar() {
   return (
     <header className="flex items-center justify-between h-[100px]">
-      <div className="text-left text-nowrap font-bold text-2xl md:text-3xl">
-        <Link href="/" className="flex gap-2 items-center ">
-          <Image src={'/logo.svg'} alt="logo jhonanmc" width={40} height={40} />
-          jhonanblog
-        </Link>
+      <div className="flex gap-2 items-center">
+        <div className="text-left text-nowrap font-bold text-2xl md:text-3xl">
+          <Link href="/" className="flex gap-2 items-center ">
+            <Image src={'/logo.svg'} alt="logo jhonanmc" width={40} height={40} />
+            jhonanblog
+          </Link>
+        </div>
+        <NavSearchInput />
       </div>
       <nav className="flex items-center justify-end gap-5 text-lg">
         <ThemeToggle variant="images" className="hidden sm:block" />
