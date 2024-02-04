@@ -1,16 +1,12 @@
 'use client'
 import MyTooltip from "@client/components/MyTooltip"
 import { Button } from "@client/components/ui/button"
-import { useToast } from "@client/components/ui/use-toast"
 import { formatQuantity } from "@client/utils"
 import { BookmarkFilledIcon, BookmarkIcon, ChatBubbleIcon, EyeOpenIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
 import { useSession } from "next-auth/react"
-import { createBookmark, removeBookmark } from "../../bookmarks/services"
-import { createLike, removeLike } from "../../likes/services"
+import usePostActions from "../hooks/usePostActions"
 import usePostInfo from "../hooks/usePostInfo"
 import { Post } from "../types"
-import { ToastAction } from "@/app/client/components/ui/toast"
-import { useRouter } from "next/navigation"
 
 type Props = {
   post: Post
@@ -18,61 +14,24 @@ type Props = {
 
 function PostActions({post}: Props) {
   const { data: session } = useSession()
-  const { toast } = useToast()
-  const {push} = useRouter()
+  const { toggleBookmark, toggleLike } = usePostActions({post})
+  const { response: { mutate, isLoading }, info } = usePostInfo({ postSlug: post.slug, userEmail: session?.user?.email || '' })
+  
   const hasSession = !!session?.user
   const isPostFromUser = session?.user?.email === post.user.email
-  
-  const { response: { mutate, isLoading }, info } = usePostInfo({ postSlug: post.slug, userEmail: session?.user?.email || '' })
 
   const handleBookmark = async () => {
-    if (!hasSession) {
-      toast({
-        title: 'Login required',
-        description: 'Please login to like this post',
-        action: <ToastAction altText="Login" onClick={()=> push('/login')}>Login</ToastAction>
-      })
-      return
-    }
-    const action = info.byUser?.bookmarked ? removeBookmark : createBookmark
-    const res = await action({ postSlug: post.slug, userEmail: session.user?.email || '' })
-    
-    if (!res?.ok) {
-      toast({
-        title: 'Something went wrong',
-        description: res?.message || 'The action failed',
-        variant: 'destructive',
-      })
-      return
-    }
-    toast({
-      title: 'Success',
-      description: res?.message || 'The action succeeded',
+    toggleBookmark({
+      bookmarked: info.byUser?.bookmarked,
+      callback: mutate
     })
-    mutate()
   }
-
+  
   const handleLike = async () => {
-    if (!hasSession) {
-      toast({
-        title: 'Login required',
-        description: 'Please login to like this post',
-        action: <ToastAction altText="Login" onClick={()=> push('/login')}>Login</ToastAction>
-      })
-      return
-    }
-    const action = info.byUser?.liked ? removeLike : createLike
-    const res = await action({ postSlug: post.slug, userEmail: session.user?.email || '' })
-    
-    if (!res?.ok) {
-      toast({
-        title: 'Something went wrong',
-        description: res?.message || 'The action failed',
-        variant: 'destructive',
-      })
-      return
-    }
-    mutate()
+    toggleLike({
+      liked: info.byUser?.liked,
+      callback: mutate
+    })
   }
 
   return (

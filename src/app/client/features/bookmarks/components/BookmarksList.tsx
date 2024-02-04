@@ -33,7 +33,7 @@ function BookmarksList() {
 
   return (
     <>
-      <div className="flex flex-col divide-y-1">
+      <div className="flex flex-col divide-y-2 divide-bg_soft dark:divide-bg_soft_dark">
         {
           bookmarks.map((bookmark) => (
             <BookmarkCardPost key={bookmark.id} bookmark={bookmark} updateBookmarks={mutate} />

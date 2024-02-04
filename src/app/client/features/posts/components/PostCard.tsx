@@ -1,19 +1,15 @@
 'use client'
-import { ArrowRightIcon, BookmarkFilledIcon, BookmarkIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
-import Image from "next/image"
-import Link from "next/link"
-import { formatDate } from "@client/utils"
-import { DEFAULT_POST_IMG } from "@client/data"
-import { PostInPosts } from "../types"
 import MyTooltip from "@client/components/MyTooltip"
 import { Button } from "@client/components/ui/button"
-import usePostInfo from "../hooks/usePostInfo"
+import { DEFAULT_POST_IMG } from "@client/data"
+import { formatDate } from "@client/utils"
+import { ArrowRightIcon, BookmarkFilledIcon, BookmarkIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
 import { useSession } from "next-auth/react"
-import { ToastAction } from "@/app/client/components/ui/toast"
-import { useToast } from "@/app/client/components/ui/use-toast"
-import { useRouter } from "next/navigation"
-import { createBookmark, removeBookmark } from "../../bookmarks/services"
-import { createLike, removeLike } from "../../likes/services"
+import Image from "next/image"
+import Link from "next/link"
+import usePostActions from "../hooks/usePostActions"
+import usePostInfo from "../hooks/usePostInfo"
+import { PostInPosts } from "../types"
 
 type Props = {
   post: PostInPosts
@@ -21,59 +17,21 @@ type Props = {
 
 function PostCard({ post }: Props) {
   const { data: session } = useSession()
-  const hasSession = !!session?.user
-  const { toast } = useToast()
-  const {push} = useRouter()
+  const { toggleBookmark, toggleLike } = usePostActions({post})
   const { response: {mutate}, info } = usePostInfo({ postSlug: post.slug, userEmail: session?.user?.email || '' })
 
   const handleBookmark = async () => {
-    if (!hasSession) {
-      toast({
-        title: 'Login required',
-        description: 'Please login to like this post',
-        action: <ToastAction altText="Login" onClick={()=> push('/login')}>Login</ToastAction>
-      })
-      return
-    }
-    const action = info.byUser?.bookmarked ? removeBookmark : createBookmark
-    const res = await action({ postSlug: post.slug, userEmail: session.user?.email || '' })
-    
-    if (!res?.ok) {
-      toast({
-        title: 'Something went wrong',
-        description: res?.message || 'The action failed',
-        variant: 'destructive',
-      })
-      return
-    }
-    toast({
-      title: 'Success',
-      description: res?.message || 'The action succeeded',
+    toggleBookmark({
+      bookmarked: info.byUser?.bookmarked,
+      callback: mutate
     })
-    mutate()
   }
-
+  
   const handleLike = async () => {
-    if (!hasSession) {
-      toast({
-        title: 'Login required',
-        description: 'Please login to like this post',
-        action: <ToastAction altText="Login" onClick={()=> push('/login')}>Login</ToastAction>
-      })
-      return
-    }
-    const action = info.byUser?.liked ? removeLike : createLike
-    const res = await action({ postSlug: post.slug, userEmail: session.user?.email || '' })
-    
-    if (!res?.ok) {
-      toast({
-        title: 'Something went wrong',
-        description: res?.message || 'The action failed',
-        variant: 'destructive',
-      })
-      return
-    }
-    mutate()
+    toggleLike({
+      liked: info.byUser?.liked,
+      callback: mutate
+    })
   }
 
   return (
@@ -109,7 +67,7 @@ function PostCard({ post }: Props) {
         </div>
         <div className="flex gap-2 justify-between items-center mt-auto">
           <div className="flex gap-1">
-            <MyTooltip content={info.byUser?.bookmarked ? "Bookmark" :'Remove from bookmarks'}>
+            <MyTooltip content={!info.byUser?.bookmarked ? "Bookmark" :'Remove from bookmarks'}>
               <Button size={'icon'} variant={'ghost'} onClick={handleBookmark}>
                 {info.byUser?.bookmarked ? <BookmarkFilledIcon className="text-main_color" /> : <BookmarkIcon />}
               </Button>

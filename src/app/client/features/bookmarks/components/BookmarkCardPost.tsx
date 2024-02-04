@@ -1,57 +1,32 @@
 'use client'
-import { ToastAction } from "@/app/client/components/ui/toast"
-import { useToast } from "@/app/client/components/ui/use-toast"
 import MyTooltip from "@client/components/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
 import { formatDate } from "@client/utils"
 import { ArrowRightIcon, BookmarkFilledIcon } from "@radix-ui/react-icons"
-import { useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { removeBookmark } from "../services"
 import { Bookmark } from "../types"
+import useBookmarkActions from "../hooks/useBookmarkActions"
 
 type Props = {
   bookmark: Bookmark
   updateBookmarks: () => void
 }
 
+
 function BookmarkCardPost({ bookmark, updateBookmarks }: Props) {
-  const { toast } = useToast()
-  const { push } = useRouter()
-  const { data: session } = useSession()
-  const hasSession = !!session?.user
+  const { toggleBookmark } = useBookmarkActions({bookmark})
 
   const handleBookmark = async () => {
-    if (!hasSession) {
-      toast({
-        title: 'Login required',
-        description: 'Please login to like this post',
-        action: <ToastAction altText="Login" onClick={()=> push('/login')}>Login</ToastAction>
-      })
-      return
-    }
-    const res = await removeBookmark({ postSlug: bookmark.post.slug, userEmail: session.user?.email || '' })
-    
-    if (!res?.ok) {
-      toast({
-        title: 'Something went wrong',
-        description: res?.message || 'The action failed',
-        variant: 'destructive',
-      })
-      return
-    }
-    toast({
-      title: 'Success',
-      description: res?.message || 'The action succeeded',
+    toggleBookmark({
+      bookmarked: true,
+      callback: updateBookmarks
     })
-    updateBookmarks()
   }
 
   return (
-      <article className="flex gap-10 p-4 rounded-md">
+      <article className="flex gap-10 p-4">
         <div className="flex-[4] flex flex-col gap-2 overflow-hidden">
           <div className="flex gap-2 items-center text-sm">
             <div className="relative flex gap-2 items-center">
