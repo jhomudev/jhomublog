@@ -1,3 +1,4 @@
+import NavSearchInput from "@/app/client/features/search/components/NavSearchInput"
 import SearchPageContent from "@/app/client/features/search/components/SearchPageContent"
 import Menu from "@client/components/Menu"
 import SearchTextResult from "@client/features/search/components/SearchTextResult"
@@ -11,6 +12,9 @@ function SearchLayout({children}: Props) {
     <div>
       <div className="flex flex-col md:flex-row gap-16">
         <div className="flex-grow-[5] overflow-hidden">
+          <div className="flex items-center justify-center md:hidden">
+            <NavSearchInput className="px-3 py-2 w-full max-w-lg" />
+          </div>
           <SearchTextResult />
           <SearchPageContent>{children}</SearchPageContent>
         </div>

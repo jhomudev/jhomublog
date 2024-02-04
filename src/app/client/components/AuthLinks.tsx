@@ -26,7 +26,7 @@ function AuthLinks() {
           ? <MyTooltip content="Sign in"><Link href={'/login'} className="hidden sm:block"><EnterIcon width={20} height={20} /></Link></MyTooltip>
           : (
             <>
-              {isWritePage ? <PublishButton action={isWritePageEdit ? 'edit' : 'publish'} /> : <Link href={'/write'} className="hidden sm:block">Write</Link>}
+              {isWritePage ? <PublishButton action={isWritePageEdit ? 'edit' : 'publish'} /> : <Link href={'/write'} className="hidden md:block">Write</Link>}
               <Link href={'/notifications'}><BellIcon width={20} height={20} /></Link>
               <UserDropdown />
             </>
@@ -42,7 +42,6 @@ function AuthLinks() {
           <>
             <ul className="absolute z-30 top-[100px] left-0 h-[calc(100dvh_-_100px)] w-full flex sm:hidden items-center justify-center flex-col gap-10 text-2xl bg-bg_main dark:bg-bg_main_dark backdrop-blur-lg">
               <li><Link href={'/'}><ThemeToggle variant="images" /></Link></li>
-              <li onClick={()=>setOpen(false)}><Link href={'/'}>Home</Link></li>
               <li onClick={()=>setOpen(false)}><Link href={'/blog'}>Blog</Link></li>
               {
                 status === 'unauthenticated'

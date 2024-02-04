@@ -5,11 +5,17 @@ import { getURLWithParams } from "@/app/client/utils"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import useSearchRecents from "../hooks/useSearchRecents"
 
-function NavSearchInput() {
+type Props = {
+  className?: React.ComponentProps<'div'>['className']
+}
+
+function NavSearchInput({className}: Props) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const { replace, push } = useRouter()
   const {addRecentItem} = useSearchRecents()
+
+  const isOnSearchPage = pathname.includes('search')
 
   const handleSearch = (value: string) => {
     if(!value) return
@@ -35,7 +41,7 @@ function NavSearchInput() {
   }
 
   return (
-    <SearchInput placeholder="Search" onPressEnter={handleSearch} className="rounded-full" />
+    <SearchInput placeholder="Search" onPressEnter={handleSearch} className={`rounded-full ${className}`} defaultValue={isOnSearchPage ? (searchParams.get('q') || '') : ''} />
   )
 }
 export default NavSearchInput

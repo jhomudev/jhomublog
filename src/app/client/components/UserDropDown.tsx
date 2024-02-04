@@ -71,8 +71,8 @@ export default function UserDropdown() {
               }}
             />
           </DropdownItem>
-          <DropdownItem key="write" onPress={()=> push('/write')} className="flex items-center sm:hidden" startContent={<Pencil2Icon />}>Write</DropdownItem>
-          <DropdownItem key="profile" onPress={()=> push('/me/profile')} className="flex items-center" startContent={<PersonIcon />}>Profile</DropdownItem>
+          <DropdownItem key="write" onPress={()=> push('/write')} className="flex items-center md:hidden" startContent={<Pencil2Icon />}>Write</DropdownItem>
+          <DropdownItem key="profile" onPress={()=> push(`/${session?.user?.email}`)} className="flex items-center" startContent={<PersonIcon />}>Profile</DropdownItem>
           <DropdownItem key="library" onPress={()=> push('/me/bookmarks')} className="flex items-center" startContent={<BookmarkIcon />}>Bookmarks</DropdownItem>
           <DropdownItem key="stories" onPress={()=> push('/me/stories')} className="flex items-center" startContent={<ReaderIcon />}>Stories</DropdownItem>
         </DropdownSection>
