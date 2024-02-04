@@ -16,10 +16,10 @@ function BlogPageContent() {
     <div>
       {
         isPerTag ? (
-          <div className="w-full h-20 flex justify-center items-center gap-1">
+          <header className="w-full h-20 flex justify-center items-center gap-1">
             <p className="text-text_color_soft dark:text-text_color_soft_dark">Results found per Tag</p>
             <h1 className="text-main_color font-bold text-xl">{ `"${tag}"` }</h1>
-          </div>
+          </header>
         ) : <CategoryCardTop />
       }
       <div className="flex flex-col md:flex-row gap-16">

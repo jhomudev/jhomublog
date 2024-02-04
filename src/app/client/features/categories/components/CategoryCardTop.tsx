@@ -17,7 +17,7 @@ function CategoryCardTop() {
   }, [cat])
 
   return cat && (
-    <div className="flex flex-col gap-3 items-center justify-center p-3 mb-10 text-center">
+    <header className="flex flex-col gap-3 items-center justify-center p-3 mb-10 text-center">
       <div className="flex items-center gap-6">
         <h1
           className={`
@@ -30,7 +30,7 @@ function CategoryCardTop() {
         </h1>
       </div>
       <p className="text-text_color_soft dark:text-text_color_soft_dark text-xs font-semibold">See the most interesting posts in the <span className="lowercase">{category.name}</span> category.</p>
-    </div>
+    </header>
   )
 }
 export default CategoryCardTop
