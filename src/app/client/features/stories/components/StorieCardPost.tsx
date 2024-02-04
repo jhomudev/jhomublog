@@ -1,19 +1,17 @@
 'use client'
+import { useToast } from "@/app/client/components/ui/use-toast"
 import MyTooltip from "@client/components/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { CATEGORIE_COLORS, CatColors, DEFAULT_POST_IMG } from "@client/data"
 import { formatDate, formatQuantity } from "@client/utils"
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal"
 import { ArrowRightIcon, HeartIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"
-import { Storie } from "../types"
-import usePostInfo from "../../posts/hooks/usePostInfo"
-import { useSession } from "next-auth/react"
 import { useState } from "react"
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/modal"
+import usePostInfo from "../../posts/hooks/usePostInfo"
 import { deletePost } from "../../posts/services"
-import { useToast } from "@/app/client/components/ui/use-toast"
-
+import { Storie } from "../types"
 type Props = {
   storie: Storie
   updateStories: () => void
@@ -21,7 +19,6 @@ type Props = {
 
 function StorieCardPost({ storie, updateStories }: Props) {
   const { info, response: { isLoading } } = usePostInfo({ postSlug: storie.slug })
-  const {data: session} = useSession()
   const { toast } = useToast()
   const [showModal, setShowModal] = useState(false)
   const [isLoadingDelete, setIsLoadingDelete] = useState(false)
@@ -49,7 +46,7 @@ function StorieCardPost({ storie, updateStories }: Props) {
 
   return (
       <>
-        <article className="flex gap-10 p-4 rounded-md">
+        <article className="flex gap-10 p-4">
           <div className="flex-[4] flex flex-col gap-2 overflow-hidden">
             <div className="flex gap-2 items-center text-sm">
               <span className="font-semibold uppercase" style={{ color: `${CATEGORIE_COLORS[storie.cat.slug as CatColors]}` }}>{ storie.cat.name }</span> -

@@ -42,7 +42,7 @@ function StoriesList() {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col divide-y-2 divide-bg_soft dark:divide-bg_soft_dark">
         {
           stories.map((storie) => (
             <StorieCardPost key={storie.id} storie={storie} updateStories={mutate} />
