@@ -23,12 +23,12 @@ export const PostInputSchema = z.object({
   tags: z.array(z.string({ required_error: 'The tag is required' }))
     .min(1, 'The tag is required')
     .max(7, 'The tag is too much'),
-  userEmail: z.string({
-    required_error: 'The email is required',
+  userId: z.string({
+    required_error: 'The user is required',
   })
     .trim()
-    .email('The email is not valid'),
-  catSlug: z.string({
+    .min(2, ('The user is required')),
+  catId: z.string({
     required_error: 'The category is required',
   })
     .trim()

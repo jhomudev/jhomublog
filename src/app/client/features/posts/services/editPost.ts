@@ -8,7 +8,7 @@ import { PostInput } from "../types"
  * @param postSlug Params post slug to edit
  * @returns Return api response
  */
-const editPost = async (postSlug: string, input: PostInput): Promise<ApiResponse | undefined> => { 
+const editPost = async (postSlug: string, input: Omit<PostInput, 'userId'>): Promise<ApiResponse | undefined> => { 
   try {
     const res = await axios.put<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postSlug}`, input)
     return res.data

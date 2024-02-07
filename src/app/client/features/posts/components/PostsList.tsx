@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import usePosts from "../hooks/usePosts"
 import PostCard from "./PostCard"
 import PostsListSkeleton from "./PostsListSkeleton"
-import NotFound from "@/app/client/components/NotFound"
+import NoData from "@/app/client/components/molecules/NoData"
 
 function PostsList() {
   const { replace } = useRouter()
@@ -25,7 +25,7 @@ function PostsList() {
   
   if (isLoading) return <PostsListSkeleton />
 
-  if (!hasPosts) return <NotFound />
+  if (!hasPosts) return <NoData />
 
   return (
     <>

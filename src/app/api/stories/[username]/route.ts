@@ -10,7 +10,7 @@ const DEFAULT = {
 
 export const dynamic = "force-dynamic"
 
-export const GET = async (req: NextRequest, {params}:{params: {user: string}}) => {
+export const GET = async (req: NextRequest, {params}:{params: {username: string}}) => {
   const { searchParams } = req.nextUrl
   const sp = Object.fromEntries(searchParams)
   const all = sp.all === 'true' 
@@ -19,18 +19,16 @@ export const GET = async (req: NextRequest, {params}:{params: {user: string}}) =
   const order = sp.order as 'desc' | 'asc' ?? DEFAULT.order
   const q = sp.q
   const views = sp.views as 'desc' | 'asc'
-  const {user} = params
+  const {username} = params
 
   try {
-    if(!user) return NextResponse.json({
+    if(!username) return NextResponse.json({
       ok: false,
       message: 'Invalid request'
     }, { status: 400 })
 
-    const existUser = await db.user.findUnique({
-      where: {
-        email: user
-      }
+    const existUser = await db.user.findFirst({
+      where: { username }
     })
 
     if(!existUser) return NextResponse.json({
@@ -45,7 +43,7 @@ export const GET = async (req: NextRequest, {params}:{params: {user: string}}) =
             contains: q,
             mode: 'insensitive'
           }}),
-          ...(user && {userEmail: user})
+          user: {username}
         },
         take: all ? undefined : rowsPerPage,
         skip: all ? undefined : rowsPerPage * (page - 1),
@@ -55,7 +53,9 @@ export const GET = async (req: NextRequest, {params}:{params: {user: string}}) =
         select: {
           _count: {
             select: {
-              likes: true
+              likes: true,
+              comments: true,
+              bookmarks: true
             }
           },
           id: true,
@@ -76,12 +76,12 @@ export const GET = async (req: NextRequest, {params}:{params: {user: string}}) =
             contains: q,
             mode: 'insensitive'
           }}),
-          ...(user && {userEmail: user})
+          user: {username}
         }
       }),
       db.post.count({
         where: {
-          ...(user && {userEmail: user})
+          user: {username}
         }
       }),
     ])

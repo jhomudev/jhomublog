@@ -1,1 +1,1 @@
-export { default as formatComentResponse } from './formatComentResponse';
+export { default as formatCommentResponse } from './formatCommentResponse';

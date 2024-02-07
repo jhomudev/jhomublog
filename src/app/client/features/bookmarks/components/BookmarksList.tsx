@@ -6,14 +6,19 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import useBookmarks from "../hooks/useBookmarks"
 import BookmarkCardPost from "./BookmarkCardPost"
 import BookmarksListSkeleton from "./BookmarksListSkeleton"
+import NoData from "@/app/client/components/molecules/NoData"
+import { Button } from "@/app/client/components/ui/button"
+import Link from "next/link"
 
 function BookmarksList() {
   const { replace } = useRouter()
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
   const { data: session } = useSession()
+  const searchParams = useSearchParams()
+  const sp = new URLSearchParams(searchParams)
+  sp.set('user', session?.user.username || '')
+  const pathname = usePathname()
   
-  const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: searchParams.toString() + `&user=${session?.user?.email}` })
+  const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: searchParams.toString() })
   
   const hasBookmarks = bookmarks.length > 0
 
@@ -29,7 +34,16 @@ function BookmarksList() {
   
   if (isLoading) return <BookmarksListSkeleton />
 
-  if (!hasBookmarks) return <p className="text-text_color_soft dark:text-text_color_soft_dark">No bookmarks</p>
+  if (!hasBookmarks) return (
+    <NoData
+      title="No bookmarks"
+      message="Start by seeing interesting posts"
+      actionNode={(
+        <div className="mt-3">
+          <Button variant={'primary'} asChild ><Link href="/blog?views=desc">Go to blog</Link></Button>
+        </div>
+      )}
+    />)
 
   return (
     <>

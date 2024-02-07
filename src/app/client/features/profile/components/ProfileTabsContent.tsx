@@ -27,8 +27,8 @@ function ProfileTabsContent({ user }: Props) {
           tabList: 'p-0'
         }}  
       >
-        <Tab title="Home" key={`/${user.email}`} />
-        <Tab  title="About" key={`/${user.email}/about`} />
+        <Tab title="Home" key={`/${user.username}`} />
+        <Tab  title="About" key={`/${user.username}/about`} />
       </Tabs>
     </div>
   )

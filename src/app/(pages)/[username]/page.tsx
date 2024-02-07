@@ -1,9 +1,9 @@
 import ProfilePostsList from "@/app/client/features/profile/components/ProfilePostsList"
 import { getUser } from "@/app/client/features/profile/services"
 
-async function UserProfilePage({params}: {params: {userEmail: string}}) {
-  const { userEmail } = params
-  const user = await getUser(userEmail)
+async function UserProfilePage({params}: {params: {username: string}}) {
+  const { username } = params
+  const user = await getUser(username)
 
   if (!user) {
     console.log('Failed to fetch user')
@@ -12,7 +12,7 @@ async function UserProfilePage({params}: {params: {userEmail: string}}) {
 
   return (
     <div>
-      <ProfilePostsList userId={user.id} />
+      <ProfilePostsList username={user.username} />
     </div>
   )
 }

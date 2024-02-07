@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 export const GET = async (req: NextRequest, { params }: { params: { slug: string }}) => {
   const { slug } = params
   const { searchParams } = req.nextUrl
-  const user = searchParams.get('user')
+  const username = searchParams.get('username')
 
   try {
     const post = await db.post.findUnique({
@@ -33,18 +33,18 @@ export const GET = async (req: NextRequest, { params }: { params: { slug: string
       }, { status: 404 })
     }
 
-    if (user) {
+    if (username) {
       const [bookmarkByUser, likeByUser] = await db.$transaction([
         db.bookmark.findFirst({
           where: {
-            postSlug: slug,
-            userEmail: user
+            postId: post.id,
+            user: {username}
           }
         }),
         db.like.findFirst({
           where: {
-            postSlug: slug,
-            userEmail: user
+            postId: post.id,
+            user: {username}
           }
         })
       ])
@@ -56,7 +56,7 @@ export const GET = async (req: NextRequest, { params }: { params: { slug: string
           ...post,
           byUser: {
             bookmarked: !!bookmarkByUser,
-          liked: !!likeByUser
+            liked: !!likeByUser
           }
         }
       })

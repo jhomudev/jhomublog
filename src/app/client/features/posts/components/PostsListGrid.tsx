@@ -6,7 +6,7 @@ import { getURLWithParams } from "@/app/client/utils"
 import PostsListGridSkeleton from "./PostsListGridSkeleton"
 import PostCardSquare from "./PostCardSquare"
 import { Pagination } from "@nextui-org/pagination"
-import NotFound from "@/app/client/components/NotFound"
+import NoData from "@/app/client/components/molecules/NoData"
 
 function PostsListGrid() {
   const {replace} = useRouter()
@@ -26,7 +26,7 @@ function PostsListGrid() {
   
   if (isLoading) return <PostsListGridSkeleton/>
 
-  if (!hasPosts) return <NotFound title="No results" message={`No results found for your search`} />
+  if (!hasPosts) return <NoData title="No results" message={`No results found for your search`} />
   
   return (
     <>

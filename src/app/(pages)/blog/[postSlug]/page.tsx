@@ -17,7 +17,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
 
   if (!post) return <p className="text-text_color_soft dark:text-text">Post not found</p>
 
-  const isPostFromUser = session?.user?.email  === post.user.email
+  const isPostFromUser = session?.user?.id  === post.user.id
 
   return (
     <div className="mt-10">
@@ -25,10 +25,8 @@ async function PostPage({params}: {params: {postSlug: string}}) {
         <div className="flex-1 flex flex-col justify-center gap-7">
           <h1 className="text-4xl md:text-5xl text-balance font-bold">{post.title}</h1>
           <div className="flex gap-2 justify-between items-center">
-            <UserAndDateCard user={post.user.name} profile={post.user.email} date={post.createdAt} avatar={post.user.image} />
-            {
-              isPostFromUser && <PostAuthorActions post={post} />
-            }
+            <UserAndDateCard user={post.user.name} profile={post.user.username} date={post.createdAt} avatar={post.user.image} />
+            { isPostFromUser && <PostAuthorActions post={post} /> }
           </div>
           <PostActions post={post} />
         </div>
@@ -53,7 +51,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
             }
           </div>
           <section id="comments" className="mt-10">
-            <Comments postSlug={post.slug} />
+            <Comments postId={post.id} />
           </section>
         </div>
         <Menu />

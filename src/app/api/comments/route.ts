@@ -4,21 +4,23 @@ import { NextRequest, NextResponse } from "next/server"
 export const dynamic = "force-dynamic"
 
 export const GET = async (req: NextRequest) => {
-  const searchParams = req.nextUrl.searchParams
-  const slug = searchParams.get('postSlug')
+  const { searchParams } = req.nextUrl
+  const { postId } = Object.fromEntries(searchParams)
+  
   try {
     const comments = await db.comment.findMany({
       where: {
-        ...(slug && { postSlug: slug })
+        ...(postId && { postId })
       },
       select: {
         id: true,
         desc: true,
-        postSlug: true,
+        postId: true,
         createdAt: true,
         user: {
           select: {
             id: true,
+            username: true,
             name: true,
             email: true,
             image: true
@@ -53,14 +55,17 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (req: NextRequest) => {
-  const {desc, userEmail, postSlug} = await req.json()
+  const {desc, userId, postId} = await req.json()
   try {
-    const [user, post] = await db.$transaction([
+    const [user, post, alreadyExist] = await db.$transaction([
       db.user.findUnique({
-        where: {email: userEmail}
+        where: {id: userId}
       }),
       db.post.findUnique({
-        where: {slug: postSlug}
+        where: {id: postId}
+      }),
+      db.comment.findFirst({
+        where: {postId, userId}
       })
     ])
     if (!user) {
@@ -75,12 +80,18 @@ export const POST = async (req: NextRequest) => {
         message: 'Post not found'
       }, {status: 400})
     }
+    if (alreadyExist) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Already commented'
+      }, {status: 400})
+    }
 
     const comment = await db.comment.create({
       data: {
         desc,
-        userEmail,
-        postSlug
+        userId: user.id,
+        postId
       }
     })
 

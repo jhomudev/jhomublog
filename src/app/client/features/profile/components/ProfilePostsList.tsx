@@ -5,16 +5,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import usePosts from "../../posts/hooks/usePosts"
 import StorieCardPost from "./ProfilePostCard"
 import ProfilePostsListSkeleton from "./ProfilePostsListSkeleton"
+import NoData from "@/app/client/components/molecules/NoData"
 
 type Props = {
-  userId: string
+  username: string
 }
 
-function ProfilePostsList({userId}: Props) {
+function ProfilePostsList({username}: Props) {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const sp = new URLSearchParams(searchParams.toString())
-  sp.set('user', userId)
+  sp.set('user', username)
   const pathname = usePathname()
   
   const { response:{ isLoading, data }, posts } = usePosts({ searchParams: sp.toString() })
@@ -33,7 +34,7 @@ function ProfilePostsList({userId}: Props) {
   
   if (isLoading) return <ProfilePostsListSkeleton />
 
-  if (!hasPosts) return <p>Not posts</p>
+  if (hasPosts) return <NoData hideAction title="No posts" message="This user hasn't published a post yet" />
 
   return (
     <>

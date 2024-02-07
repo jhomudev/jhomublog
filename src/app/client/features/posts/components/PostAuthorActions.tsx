@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@/app/client/components/MyTooltip"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
 import { Button } from "@/app/client/components/ui/button"
 import { useToast } from "@/app/client/components/ui/use-toast"
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/modal'

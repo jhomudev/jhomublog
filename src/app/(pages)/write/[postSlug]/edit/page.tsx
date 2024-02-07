@@ -12,7 +12,7 @@ async function EditPostPage({ params }: { params: { postSlug: string } }) {
   
   const { user } = session
   
-  if (user?.email !== postData?.user?.email) {
+  if (user?.id !== postData?.user?.id) {
     redirect('/')
   }
 

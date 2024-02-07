@@ -1,7 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
+import { getCategories } from "../features/categories/services"
 
-function Footer() {
+async function Footer() {
+  const cats = await getCategories()
+
   return (
     <footer className="flex flex-col gap-2 mt-10 py-5">
       <div className="flex gap-10 flex-col md:flex-row justify-between">
@@ -10,7 +13,7 @@ function Footer() {
             <div className="relative w-[40px] h-[40px]">
               <Image className="aspect-square object-cover" src={'/logo.svg'} alt="" fill />
             </div>
-            jhonanblog
+            jhomublog
           </div>
           <p className="text-balance">
             Discover the most interesting stories and creative ideas.
@@ -27,10 +30,14 @@ function Footer() {
           </ul>
           <ul className="flex flex-col gap-1">
             <li className="text-text_color dark:text-text_color_dark font-semibold">Tags</li>
-            <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/'>Style</Link></li>
-            <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/'>Fashion</Link></li>
-            <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/'>Coding</Link></li>
-            <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/'>Travel</Link></li>
+            {
+              cats?.map((cat, id) => {
+                if (id > 5) return
+                return (
+                  <li key={cat.id}><Link className="text-text_color_soft dark:text-text_color_soft_dark" href={`/blog?cat=${cat.slug}`}>{cat.name}</Link></li>
+                )
+              })
+            }
           </ul>
           <ul className="flex flex-col gap-1">
             <li className="text-text_color dark:text-text_color_dark font-semibold">Social</li>
@@ -43,7 +50,7 @@ function Footer() {
       </div>
       <div className="w-full grid place-items-center h-8">
         <p className="text-text_color_soft dark:text-text_color_soft_dark">
-          Developed by <Link href={'https://jhonanmc.com'} target="_blank" className="text-main_color font-bold">jhonandev</Link>
+          Developed by <Link href={'https://jhonanmc.com'} target="_blank" className="text-main_color font-bold">jhomudev</Link>
         </p>
       </div>
     </footer>

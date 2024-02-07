@@ -22,11 +22,11 @@ const formSchema = z.object({
 })
 
 type Props = {
-  postSlug: string,
+  postId: string,
   updateComments: () => void
 }
 
-function CreateCommentForm({postSlug, updateComments}: Props) {
+function CreateCommentForm({postId, updateComments}: Props) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
   })
@@ -39,8 +39,8 @@ function CreateCommentForm({postSlug, updateComments}: Props) {
     if(!session?.user?.email) return 
     const body: z.infer<typeof CommentInputSchema> = {
       desc: data.desc,
-      postSlug,
-      userEmail: session.user.email
+      postId,
+      userId: session.user.id
     }
 
     const validation = CommentInputSchema.safeParse(body)

@@ -30,6 +30,7 @@ export const GET = async (_req: NextRequest, { params }: { params: { slug: strin
         user: {
           select: {
             id: true,
+            username: true,
             name: true,
             email: true,
             image: true
@@ -82,7 +83,7 @@ export const PUT = async (req: NextRequest, { params }: { params: { slug: string
         slug: data.slug,
         overview: data.overview,
         content: data.content,
-        catSlug: data.catSlug,
+        catId: data.catId,
         tags: data.tags,
         img: data.img
       },

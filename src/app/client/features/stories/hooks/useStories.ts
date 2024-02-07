@@ -12,7 +12,7 @@ type Props = {
 
 function useStories({ searchParams }: Props) {
   const {data: session } = useSession()
-  const response = useSWR<ApiReponseWithReturn<StorieResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/stories/${session?.user?.email}?${searchParams}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<StorieResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/stories/${session?.user?.username}?${searchParams}`, fetcher, {
     keepPreviousData: true
   })
   

@@ -11,8 +11,8 @@ function NavBar() {
       <div className="flex gap-3 items-center">
         <div className="text-left text-nowrap font-bold text-2xl md:text-3xl">
           <Link href="/" className="flex gap-2 items-center ">
-            <Image src={'/logo.svg'} alt="logo jhonanmc" width={40} height={40} />
-            jhonanblog
+            <Image src={'/logo.svg'} alt="logo jhomublog" width={40} height={40} />
+            jhomublog
           </Link>
         </div>
         <div className="hidden md:block">

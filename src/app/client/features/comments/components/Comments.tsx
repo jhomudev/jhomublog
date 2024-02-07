@@ -5,9 +5,9 @@ import useComments from "../hooks/useComments"
 import CommentsList from "./CommentsList"
 import CreateCommentForm from "./CreateCommentForm"
 
-function Comments({postSlug}: {postSlug: string}) {
+function Comments({postId}: {postId: string}) {
   const { data: session } = useSession()
-  const { response: { mutate, isLoading }, comments } = useComments({ postSlug })
+  const { response: { mutate, isLoading }, comments } = useComments({ postId })
 
   return (
     <>
@@ -16,7 +16,7 @@ function Comments({postSlug}: {postSlug: string}) {
         {
           !session ? (
             <Link href={`/login`} className="hover:underline">Login to write a comment</Link>
-          ): ( <CreateCommentForm postSlug={postSlug} updateComments={mutate} /> )
+          ): ( <CreateCommentForm postId={postId} updateComments={mutate} /> )
         }
       </div>
       <CommentsList comments={comments} isLoading={isLoading} />

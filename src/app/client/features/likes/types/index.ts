@@ -1,13 +1,14 @@
+import { BaseEntity } from "@/app/client/types"
+
 export type LikeInput = {
-  postSlug: string
-  userEmail: string
+  postId: string
+  username: string
 }
 
-export type LikeResponse = {
-  id: string
-  createdAt: string
+export type LikeResponse = BaseEntity & {
   user: {
     id: string
+    username: string
     name: string | null
     email: string
     image: string | null
@@ -21,6 +22,7 @@ export type LikeResponse = {
     createdAt: string,
     user: {
       id: string,
+      username: string
       name: string,
       email: string,
       image: string
@@ -28,11 +30,10 @@ export type LikeResponse = {
   }
 }
 
-export type Like = {
-  id: string
-  createdAt: string
+export type Like = BaseEntity & {
   user: {
     id: string
+    username: string
     name: string | null
     email: string
     image: string | null
@@ -46,6 +47,7 @@ export type Like = {
     createdAt: string,
     user: {
       id: string,
+      username: string
       name: string,
       email: string,
       image: string

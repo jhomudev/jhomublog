@@ -31,7 +31,7 @@ function useBookmarkActions({ bookmark }: Props) {
       return
     }
     const action = bookmarked ? removeBookmark : createBookmark
-    const res = await action({ postSlug: bookmark.post.slug, userEmail: session.user?.email || '' })
+    const res = await action({ postId: bookmark.post.id, username: session.user?.username })
     
     if (!res?.ok) {
       toast({

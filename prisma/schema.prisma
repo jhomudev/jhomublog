@@ -12,7 +12,7 @@ datasource db {
 
 model Account {
   id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String  @db.ObjectId @map("user_id")
+  userId             String  @db.ObjectId @unique @map("user_id")
   type               String
   provider           String
   providerAccountId  String  @map("provider_account_id")
@@ -41,20 +41,36 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String      @unique
   emailVerified DateTime?   @map("email_verified")
   image         String?
-  accounts      Account[]
+  username      String  @unique @default(uuid())
+  password      String?
+  createdAt     DateTime    @default(now()) @map("created_at")
+  account       Account?
   sessions      Session[]
   posts         Post[]
   comments      Comment[]
   bookmarks     Bookmark[]
   likes         Like[]
-  // TODO: add folows and createdAt
+  followers    Follows[]   @relation("followers")
+  following     Follows[]   @relation("following")
 
   @@map("users")
+}
+
+model Follows {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  follower   User     @relation("followers", fields: [followerId], references: [id])
+  followerId String   @map("followed_by_id") @db.ObjectId
+  following    User     @relation("following", fields: [followingId], references: [id])
+  followingId  String   @map("following_id") @db.ObjectId
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("follows")
+  @@unique([followerId, followingId])
 }
 
 model VerificationToken {
@@ -86,10 +102,10 @@ model Post {
   createdAt DateTime  @default(now())
   views     Int       @default(0)
   tags      String[]
-  catSlug   String    @map("cat_slug")
-  cat       Category  @relation(fields: [catSlug], references: [slug])
-  userEmail String    @map("user_email")
-  user      User      @relation(fields: [userEmail], references: [email])
+  catId     String    @map("cat_id") @db.ObjectId
+  cat       Category  @relation(fields: [catId], references: [id])
+  userId    String    @map("user_id") @db.ObjectId
+  user      User      @relation(fields: [userId], references: [id])
   comments  Comment[]
   bookmarks Bookmark[]
   likes     Like[]
@@ -100,33 +116,36 @@ model Post {
 model Comment {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   desc      String
-  userEmail String    @map("user_email")
+  userId    String    @map("user_id") @db.ObjectId
   createdAt DateTime  @default(now())
-  user      User      @relation(fields: [userEmail], references: [email])
-  postSlug  String    @map("post_slug")
-  post      Post      @relation(fields: [postSlug], references: [slug])
+  user      User      @relation(fields: [userId], references: [id])
+  postId    String    @map("post_id")
+  post      Post      @relation(fields: [postId], references: [slug])
 
   @@map("comments")
+  @@unique([userId, postId])
 }
 
 model Bookmark {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  userEmail String    @map("user_email")
-  user      User      @relation(fields: [userEmail], references: [email])
+  userId    String    @map("user_id") @db.ObjectId
+  user      User      @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
-  postSlug  String    @map("post_slug")
-  post      Post      @relation(fields: [postSlug], references: [slug])
+  postId    String    @map("post_id")
+  post      Post      @relation(fields: [postId], references: [slug])
 
   @@map("bookmarks")
+  @@unique([userId, postId])
 }
 
 model Like {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  userEmail String    @map("user_email")
-  user      User      @relation(fields: [userEmail], references: [email])
+  userId    String    @map("user_id") @db.ObjectId
+  user      User      @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
-  postSlug  String    @map("post_slug")
-  post      Post      @relation(fields: [postSlug], references: [slug])
+  postId    String    @map("post_id")
+  post      Post      @relation(fields: [postId], references: [slug])
 
   @@map("likes")
+  @@unique([userId, postId])
 }

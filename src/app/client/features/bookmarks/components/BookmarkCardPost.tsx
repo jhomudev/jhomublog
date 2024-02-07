@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@client/components/MyTooltip"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
 import { formatDate } from "@client/utils"
@@ -30,7 +30,7 @@ function BookmarkCardPost({ bookmark, updateBookmarks }: Props) {
         <div className="flex-[4] flex flex-col gap-2 overflow-hidden">
           <div className="flex gap-2 items-center text-sm">
             <div className="relative flex gap-2 items-center">
-              <Link href={`/${bookmark.post.user.email}`} className="absolute z-10 w-full h-full" />
+              <Link href={`/${bookmark.post.user.username}`} className="absolute z-10 w-full h-full" />
               <Image src={bookmark.post.user.image || ''} alt={bookmark.post.user.name || ''} className="rounded-full" width={20} height={20} />
               <span>{bookmark.post.user.name}</span>
             </div> -

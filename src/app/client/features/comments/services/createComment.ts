@@ -1,4 +1,3 @@
-'use server'
 import { ApiResponse } from "@client/types"
 import axios from "axios"
 import { CommentInput } from "../types"

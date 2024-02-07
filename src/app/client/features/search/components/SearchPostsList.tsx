@@ -1,5 +1,5 @@
 'use client'
-import NotFound from "@/app/client/components/NotFound"
+import NoData from "@/app/client/components/molecules/NoData"
 import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { useSearchParams, usePathname } from "next/navigation"
@@ -26,7 +26,7 @@ function SearchPostsList() {
   
   if (isLoading) return <PostsListSkeleton />
 
-  if (!hasPosts) return <NotFound />
+  if (!hasPosts) return <NoData hideAction title="No posts" message="No posts found in your search" />
 
   return (
     <>

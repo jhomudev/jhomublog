@@ -17,13 +17,26 @@ export const GET = async (req: NextRequest) => {
   const page = sp.page ? Number(sp.page) : DEFAULT.page
   const rowsPerPage = sp.rowsPerPage ? Number(sp.rowsPerPage) : DEFAULT.rowsPerPage
   const order = sp.order as 'desc' | 'asc' ?? DEFAULT.order
-  const user = sp.user
+  const username = sp.user
 
   try {
+    if (username) {
+      const existUser = await db.user.findUnique({
+        where: {username}
+      })
+
+      if (!existUser) {
+        return NextResponse.json({
+          ok: false,
+          message: 'User not found'
+        }, { status: 400 })
+      }
+    }
+
     const [bookmarks, rowsObtained, totalRows] = await db.$transaction([
       db.bookmark.findMany({
         where: {
-          ...(user && {userEmail: user})
+          user: { username }
         },
         take: all ? undefined : rowsPerPage,
         skip: all ? undefined : rowsPerPage * (page - 1),
@@ -34,6 +47,7 @@ export const GET = async (req: NextRequest) => {
           user: {
             select: {
               id: true,
+              username: true,
               name: true,
               email: true,
               image: true
@@ -50,6 +64,7 @@ export const GET = async (req: NextRequest) => {
               user: {
                 select: {
                   id: true,
+                  username: true,
                   name: true,
                   email: true,
                   image: true
@@ -61,7 +76,7 @@ export const GET = async (req: NextRequest) => {
       }),
       db.bookmark.count({
         where: {
-          ...(user && {userEmail: user})
+          user: {username}
         }
       }),
       db.bookmark.count()
@@ -90,23 +105,19 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (req: NextRequest) => {
-  const {postSlug, userEmail} = await req.json()
+  const {postId, username} = await req.json()
   try {
-    if(postSlug === undefined || userEmail === undefined) {
+    if(postId === undefined || username === undefined) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
       }, {status: 400})
     }
     const [user, post, bookmarkExist] = await db.$transaction([
-      db.user.findUnique({
-        where: {email: userEmail}
-      }),
-      db.post.findUnique({
-        where: {slug: postSlug}
-      }),
+      db.user.findUnique({ where: { username } }),
+      db.post.findUnique({ where: {id: postId} }),
       db.bookmark.findFirst({
-        where: {postSlug, userEmail}
+        where: { postId, user: {username} }
       })
     ])
     if (!user) {
@@ -129,8 +140,8 @@ export const POST = async (req: NextRequest) => {
     }
     const bookmark = await db.bookmark.create({
       data: {
-        postSlug,
-        userEmail
+        postId,
+        userId: user.id
       },
     })
 
@@ -152,9 +163,10 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const searchParams = req.nextUrl.searchParams
-    const [postSlug, userEmail] = [searchParams.get('postSlug'), searchParams.get('userEmail')]
-    if (!postSlug || !userEmail) {
+    const { searchParams } = req.nextUrl
+    const { postId, username } = Object.fromEntries(searchParams)
+    
+    if (!postId || !username) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
@@ -162,7 +174,7 @@ export const DELETE = async (req: NextRequest) => {
     }
 
     const bookmark = await db.bookmark.findFirst({
-      where: { postSlug, userEmail }
+      where: { postId, user: {username} }
     })
     if(!bookmark) {
       return NextResponse.json({
@@ -181,6 +193,7 @@ export const DELETE = async (req: NextRequest) => {
         user: {
           select: {
             id: true,
+            username: true,
             name: true,
             email: true,
             image: true

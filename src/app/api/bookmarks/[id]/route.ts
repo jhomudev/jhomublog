@@ -17,6 +17,7 @@ export const GET = async (_req: NextRequest, {params}: {params: {id: string}}) =
         user: {
           select: {
             id: true,
+            username: true,
             name: true,
             email: true,
             image: true

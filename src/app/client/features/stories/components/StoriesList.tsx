@@ -7,6 +7,7 @@ import StorieCardPost from "./StorieCardPost"
 import StoriesListSkeleton from "./StoriesListSkeleton"
 import Link from "next/link"
 import { Button } from "@/app/client/components/ui/button"
+import NoData from "@/app/client/components/molecules/NoData"
 
 function StoriesList() {
   const { replace } = useRouter()
@@ -29,15 +30,16 @@ function StoriesList() {
   
   if (isLoading) return <StoriesListSkeleton />
 
-  if (!hasStories) return (
-    <>
-      <div className="text-text_color_soft dark:text-text_color_soft_dark">
-        <p>You do not have any stories</p>
-      </div>
-      <div className="mt-3">
-        <Button variant={'primary'} rounded={"full"} asChild ><Link href="/write">Write a new story</Link></Button>
-      </div>
-    </>
+  if (hasStories) return (
+    <NoData
+      title="No stories"
+      message="You do not have any stories"
+      actionNode={(
+        <div className="mt-3">
+          <Button variant={'primary'} asChild ><Link href="/write">Write a new story</Link></Button>
+        </div>
+      )}
+    />
   )
 
   return (

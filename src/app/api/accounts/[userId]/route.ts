@@ -3,31 +3,30 @@ import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
-
-export const GET = async (_req: NextRequest, { params }: { params: { userEmail: string }}) => {
-  const { userEmail } = params
+export const GET = async (_req: NextRequest, { params }: { params: { userId: string } }) => {
+  const { userId } = params
   try {
-    const user = await db.user.findUnique({
-      where: { email: userEmail },
+    const account = await db.account.findUnique({
+      where: { userId },
       select: {
         id: true,
-        name: true,
-        email: true,
-        image: true
+        access_token: true,
+        expires_at: true,
+        user: true,
       }
     })
 
-    if (user) {
+    if (account) {
       return NextResponse.json<ApiReponseWithReturn>({
         ok: true,
-        message: 'User fetched successfully',
-        data: user
+        message: 'Account fetched successfully',
+        data: account
       })
     }
 
     return NextResponse.json({
       ok: false,
-      message: 'User not found',
+      message: 'Account not found',
     }, { status: 404 })
     
   } catch (error) {

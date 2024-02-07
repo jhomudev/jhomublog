@@ -17,7 +17,6 @@ function PublishButton({ action = 'publish' }: Props) {
   const [isSubmitLoading, setIsSubmitLoading] = useState(false)
   const {toast} = useToast()
   const { push } = useRouter()
-  const {data: session} = useSession()
 
   const validationDataPost = PostInputSchema.safeParse(writeData)
   
@@ -50,7 +49,7 @@ function PublishButton({ action = 'publish' }: Props) {
       title: 'Success',
       description: res?.message || 'Action succeeded',
     })
-    push(`/${session?.user?.email}/${writeData.slug}`)
+    push(`/blog/${writeData.slug}`)
   }
 
   return (

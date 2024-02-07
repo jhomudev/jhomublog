@@ -7,11 +7,11 @@ import { PostInfo, PostInfoResponse } from "../types"
 
 type Props = {
   postSlug: string
-  userEmail?: string
+  username?: string
 }
 
-function usePostInfo({postSlug, userEmail }: Props) {
-  const response = useSWR<ApiReponseWithReturn<PostInfoResponse>>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postSlug}/info${userEmail ? `?user=${userEmail}` : ''}`, fetcher, {
+function usePostInfo({postSlug, username }: Props) {
+  const response = useSWR<ApiReponseWithReturn<PostInfoResponse>>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postSlug}/info${username ? `?user=${username}` : ''}`, fetcher, {
     keepPreviousData: true
   })
 

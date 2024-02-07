@@ -8,9 +8,9 @@ import { formatStorieResponse } from "../adapters"
  * @param {String} searchParams The search params
  * @returns {Promise} The posts - PostInPostsResponse[]
  */
-const getStories = async (searchParams: string | undefined = ''): Promise<StorieResponse[] | undefined> => { 
+const getStories = async (username: string,searchParams: string | undefined = ''): Promise<StorieResponse[] | undefined> => { 
   try {
-    const res = await axios<ApiReponseWithReturn<StorieResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/posts?${searchParams}`)
+    const res = await axios<ApiReponseWithReturn<StorieResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/stories/${username}?${searchParams}`)
     const { ok, data, message } = res.data
     if (ok) { 
       const stories = data.map(storie => formatStorieResponse(storie))

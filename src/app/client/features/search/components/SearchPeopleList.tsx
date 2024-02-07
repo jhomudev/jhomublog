@@ -1,5 +1,5 @@
 'use client'
-import NotFound from "@/app/client/components/NotFound"
+import NoData from "@/app/client/components/molecules/NoData"
 import UserCardFollow from "@/app/client/components/UserCardFollow"
 import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
@@ -25,7 +25,7 @@ function SearchPeopleList() {
   
   if (isLoading) return <SearchPeopleListSkeleton />
 
-  if (!hasUsers) return <NotFound title="No users" message='No users found in your search' />
+  if (!hasUsers) return <NoData hideAction title="No users" message='No users found in your search' />
 
   return (
     <>
@@ -33,10 +33,7 @@ function SearchPeopleList() {
         {users.map((user) => (
           <UserCardFollow
             key={user.id}
-            avatar={user.image || ''}
-            name={ user.name || ''}
-            email={ user.email }
-            description={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestiae explicabo corrupti aliquid amet similique nemo! Labore provident natus quidem, dignissimos autem quasi praesentium aliquam debitis, recusandae consequuntur saepe. Labore!'}
+            user={user}
           />
           ))
         }

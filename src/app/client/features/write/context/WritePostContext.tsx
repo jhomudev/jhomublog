@@ -23,12 +23,12 @@ export const WritePostContextProvider = ({ children }: { children: ReactNode }) 
   const [postToEdit, sePostToEdit] = useState<Post>({} as Post)
 
   const resetWriteData = () => { 
-    const userEmail = session?.user?.email
-    if(!userEmail) return
+    const userId = session?.user?.id
+    if(!userId) return
     setWriteData(DEFAULT_VALUE_DATA_POST as PostInput)
     setWriteData((data) => ({
       ...data,
-      userEmail
+      userId
     }))
   }
 
@@ -38,11 +38,11 @@ export const WritePostContextProvider = ({ children }: { children: ReactNode }) 
 
   
   useEffect(() => {
-    const userEmail = session?.user?.email
-    if(!userEmail) return
+    const userId = session?.user?.id
+    if(!userId) return
     setWriteData((data) => ({
       ...data,
-      userEmail
+      userId
     }))
   }, [session])
 

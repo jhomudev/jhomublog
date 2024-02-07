@@ -15,7 +15,8 @@ export type Storie = BaseEntity & {
   },
   _count: {
     likes: number,
-    comments: number
+    comments: number,
+    bookmarks: number
   }
 }
 
@@ -34,6 +35,7 @@ export type StorieResponse = BaseEntity & {
   },
   _count: {
     likes: number,
-    comments: number
+    comments: number,
+    bookmarks: number
   }
 }

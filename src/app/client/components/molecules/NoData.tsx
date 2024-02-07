@@ -1,12 +1,13 @@
 import Link from "next/link"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import Image from "next/image"
 
 type Props = {
   title?: string,
   message?: React.ReactNode
   image?: string
-  actionNode?: React.ReactNode
+  actionNode?: React.ReactNode,
+  hideAction?: boolean
 }
 
 const DEFAULT_VALUES: Props = {
@@ -17,14 +18,16 @@ const DEFAULT_VALUES: Props = {
     <Button variant={'primary'} className="w-max" asChild>
       <Link href={'/'} >Go home</Link>
     </Button>
-  )
+  ),
+  hideAction: false
 }
 
-function NotFound({
+function NoData({
   title = DEFAULT_VALUES.title,
   message = DEFAULT_VALUES.message,
   image = DEFAULT_VALUES.image,
-  actionNode = DEFAULT_VALUES.actionNode
+  actionNode = DEFAULT_VALUES.actionNode,
+  hideAction = DEFAULT_VALUES.hideAction
 }: Props) {
 
   return (
@@ -32,8 +35,8 @@ function NotFound({
       {image && <Image src={image} alt="not found" width={130} height={130}/>}
       <h1 className="text-3xl font-bold">{title }</h1>
       <div>{message}</div>
-      {actionNode}
+      {!hideAction && actionNode}
     </div>
   )
 }
-export default NotFound
+export default NoData

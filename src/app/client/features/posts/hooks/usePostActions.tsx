@@ -33,7 +33,7 @@ function usePostActions({post}: Props) {
       return
     }
     const action = bookmarked ? removeBookmark : createBookmark
-    const res = await action({ postSlug: post.slug , userEmail: session.user?.email || '' })
+    const res = await action({ postId: post.id, username: session.user?.username })
     
     if (!res?.ok) {
       toast({
@@ -60,7 +60,7 @@ function usePostActions({post}: Props) {
       return
     }
     const action = liked ? removeLike : createLike
-    const res = await action({ postSlug: post.slug, userEmail: session.user?.email || '' })
+    const res = await action({ postId: post.id, username: session.user?.username })
     console.log(res?.message)
     callback()
   }

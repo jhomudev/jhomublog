@@ -18,7 +18,8 @@ const formatStorieResponse = (postResponse: StorieResponse): Storie => {
     },
     _count: {
       likes: postResponse._count.likes,
-      comments: postResponse._count.comments
+      comments: postResponse._count.comments,
+      bookmarks: postResponse._count.bookmarks
     }
   }
 }

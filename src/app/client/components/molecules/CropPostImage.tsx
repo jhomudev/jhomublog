@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Cropper, { Point, Area } from "react-easy-crop";
-import { Slider } from "./ui/slider";
+import { Slider } from "../ui/slider";
 
 type Props = {
   image: string

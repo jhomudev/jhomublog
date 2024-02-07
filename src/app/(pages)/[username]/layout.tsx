@@ -5,13 +5,13 @@ import { getUser } from "@/app/client/features/profile/services"
 type Props = {
   children: React.ReactNode
   params: {
-    userEmail: string
+    username: string
   }
 }
 
 async function UserProfileLayout({ children, params }: Props) {
-  const { userEmail } = params
-  const user = await getUser(userEmail)
+  const { username } = params
+  const user = await getUser(username)
 
   if (!user) {
     console.log('Failed to fetch user')

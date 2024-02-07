@@ -1,9 +1,9 @@
 import axios from "axios"
-import { CategoryResponse } from "../types"
+import { Category, CategoryResponse } from "../types"
 import { ApiReponseWithReturn } from "@client/types"
 import { formatCategoryResponse } from "../adapters"
 
-const getCategories = async (): Promise<CategoryResponse[] | undefined> => { 
+const getCategories = async (): Promise<Category[] | undefined> => { 
   try {
     const res = await axios<ApiReponseWithReturn<CategoryResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
     const { ok, data, message } =  res.data

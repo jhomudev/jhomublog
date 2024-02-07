@@ -1,6 +1,6 @@
 'use client'
 
-import SearchInput from "@/app/client/components/SearchInput"
+import SearchInput from "@/app/client/components/molecules/SearchInput"
 import { getURLWithParams } from "@/app/client/utils"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import useSearchRecents from "../hooks/useSearchRecents"

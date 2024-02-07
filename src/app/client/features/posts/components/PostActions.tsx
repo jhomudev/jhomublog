@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@client/components/MyTooltip"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { formatQuantity } from "@client/utils"
 import { BookmarkFilledIcon, BookmarkIcon, ChatBubbleIcon, EyeOpenIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
@@ -15,10 +15,10 @@ type Props = {
 function PostActions({post}: Props) {
   const { data: session } = useSession()
   const { toggleBookmark, toggleLike } = usePostActions({post})
-  const { response: { mutate, isLoading }, info } = usePostInfo({ postSlug: post.slug, userEmail: session?.user?.email || '' })
+  const { response: { mutate, isLoading }, info } = usePostInfo({ postSlug: post.slug, username: session?.user?.username })
   
   const hasSession = !!session?.user
-  const isPostFromUser = session?.user?.email === post.user.email
+  const isPostFromUser = session?.user?.id === post.user.id
 
   const handleBookmark = async () => {
     toggleBookmark({

@@ -1,5 +1,4 @@
 import { BaseEntity } from '@client/types';
-
 export type PostInPosts = BaseEntity & {
   slug: string,
   title: string,
@@ -15,6 +14,7 @@ export type PostInPosts = BaseEntity & {
   },
   user: {
     id: string,
+    username: string
     name: string,
     email: string,
     image: string
@@ -41,6 +41,7 @@ export type Post = BaseEntity & {
   },
   user: {
     id: string,
+    username: string
     name: string,
     email: string,
     image: string
@@ -58,8 +59,8 @@ export type PostInPostsResponse = BaseEntity & {
   img: string | null,
   tags: string[]
   views: number,
-  catSlug: string,
-  userEmail: string,
+  catId: string,
+  userId: string,
   cat: {
     id: string,
     name: string,
@@ -68,6 +69,7 @@ export type PostInPostsResponse = BaseEntity & {
   },
   user: {
     id: string,
+    username: string
     name: string,
     email: string,
     image: string
@@ -84,8 +86,8 @@ export type PostResponse = PostInPostsResponse & {
 
 export type PostInput = Pick<Post, 'title' | 'overview' | 'content' | 'slug' | 'tags' | 'img'> &
 {
-  userEmail: string,
-  catSlug: string
+  userId: string,
+  catId: string
 }
 
 export type PostInfoResponse = {

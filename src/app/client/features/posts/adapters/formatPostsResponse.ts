@@ -18,6 +18,7 @@ const formatPostsResponse = (postResponse: PostInPostsResponse): PostInPosts => 
     },
     user: {
       id: postResponse.user.id,
+      username: postResponse.user.username,
       name: postResponse.user.name,
       email: postResponse.user.email,
       image: postResponse.user.image

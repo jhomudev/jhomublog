@@ -26,7 +26,7 @@ function WriteEditorPost({ postData }: Props) {
       ...data,
       title: postData.title,
       overview: postData.overview,
-      catSlug: postData.cat.slug,
+      catId: postData.cat.id,
       tags: postData.tags,
       content: postData.content,
       ...(postData.img && {img: postData.img}),

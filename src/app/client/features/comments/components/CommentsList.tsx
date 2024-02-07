@@ -19,7 +19,7 @@ function CommentsList({comments, isLoading}: Props) {
               hasComments ? (
                 comments.map((com) => (
                   <li key={com.id} className="flex flex-col gap-4">
-                    <UserAndDateCard user={com.user.name || ''} profile={com.user.email} date={com.createdAt} avatar={com.user.image || '/p1.jpeg'} />
+                    <UserAndDateCard user={com.user.name || ''} profile={com.user.username} date={com.createdAt} avatar={com.user.image || '/p1.jpeg'} />
                     <p>{com.desc}</p>
                   </li>
                 ))

@@ -1,16 +1,14 @@
-'use server'
 import { ApiResponse } from "@client/types"
 import axios from "axios"
-import { revalidateTag } from "next/cache"
 
 type Props = {
-  postSlug: string
-  userEmail: string
+  postId: string
+  username: string
 }
 
-const removeBookmark = async ({postSlug, userEmail}: Props): Promise<ApiResponse | undefined> => { 
+const removeBookmark = async ({postId, username}: Props): Promise<ApiResponse | undefined> => { 
   try {
-    const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks?postSlug=${postSlug}&userEmail=${userEmail}`)
+    const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks?postId=${postId}&username=${username}`)
     const data = res.data
     return data
   } catch (error) {

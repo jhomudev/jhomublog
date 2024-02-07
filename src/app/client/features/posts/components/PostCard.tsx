@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@client/components/MyTooltip"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
 import { formatDate } from "@client/utils"
@@ -18,7 +18,7 @@ type Props = {
 function PostCard({ post }: Props) {
   const { data: session } = useSession()
   const { toggleBookmark, toggleLike } = usePostActions({post})
-  const { response: {mutate}, info } = usePostInfo({ postSlug: post.slug, userEmail: session?.user?.email || '' })
+  const { response: {mutate}, info } = usePostInfo({ postSlug: post.slug, username: session?.user?.username })
 
   const handleBookmark = async () => {
     toggleBookmark({
@@ -47,9 +47,9 @@ function PostCard({ post }: Props) {
       <div className="flex-[3] flex flex-col gap-2 py-2 overflow-hidden">
         <div className="flex gap-2 items-center text-sm">
           <div className="relative flex gap-2 items-center">
-            <Link href={`/${post.user.email}`} className="absolute z-10 w-full h-full" />
+            <Link href={`/${post.user.username}`} className="absolute z-10 w-full h-full" />
             <Image src={post.user.image} alt={post.user.name} className="rounded-full" width={20} height={20} />
-            <span>{post.user.name}</span>
+            <span className="line-clamp-1">{post.user.name}</span>
           </div> -
           <time dateTime={formatDate(post.createdAt).shortReverse}>{formatDate(post.createdAt).short}</time> |
           <span className="text-red-700 uppercase"><Link href={`/blog?cat=${post.cat.slug}`}>{post.cat.name}</Link></span>

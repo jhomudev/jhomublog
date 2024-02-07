@@ -17,15 +17,15 @@ export const GET = async (req: NextRequest) => {
   const page = sp.page ? Number(sp.page) : DEFAULT.page
   const rowsPerPage = sp.rowsPerPage ? Number(sp.rowsPerPage) : DEFAULT.rowsPerPage
   const order = sp.order as 'desc' | 'asc' ?? DEFAULT.order
-  const user = sp.user
-  const post = sp.post
+  const username = sp.user
+  const postId = sp.postId
 
   try {
     const [likes, rowsObtained, totalRows] = await db.$transaction([
       db.like.findMany({
         where: {
-          ...(user && {userEmail: user}),
-          ...(post && {postSlug: post})
+          postId,
+          user: {username}
         },
         take: all ? undefined : rowsPerPage,
         skip: all ? undefined : rowsPerPage * (page - 1),
@@ -36,6 +36,7 @@ export const GET = async (req: NextRequest) => {
           user: {
             select: {
               id: true,
+              username: true,
               name: true,
               email: true,
               image: true
@@ -52,6 +53,7 @@ export const GET = async (req: NextRequest) => {
               user: {
                 select: {
                   id: true,
+                  username: true,
                   name: true,
                   email: true,
                   image: true
@@ -63,8 +65,8 @@ export const GET = async (req: NextRequest) => {
       }),
       db.like.count({
         where: {
-          ...(user && {userEmail: user}),
-          ...(post && {postSlug: post}),
+          postId,
+          user: {username}
         }
       }),
       db.like.count()
@@ -93,9 +95,9 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (req: NextRequest) => {
-  const { postSlug, userEmail } = await req.json()
+  const { postId, username } = await req.json()
   try {
-    if(postSlug === undefined || userEmail === undefined) {
+    if(postId === undefined || username === undefined) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
@@ -103,13 +105,13 @@ export const POST = async (req: NextRequest) => {
     }
     const [user, post, likeExists] = await db.$transaction([
       db.user.findUnique({
-        where: {email: userEmail}
+        where: { username }
       }),
       db.post.findUnique({
-        where: {slug: postSlug}
+        where: { id: postId }
       }),
       db.like.findFirst({
-        where: {postSlug, userEmail}
+        where: { postId, user: { username } }
       })
     ])
     if (!user) {
@@ -132,8 +134,8 @@ export const POST = async (req: NextRequest) => {
     }
     const like = await db.like.create({
       data: {
-        postSlug,
-        userEmail
+        postId: postId,
+        userId: user.id
       },
     })
     if (like) {
@@ -154,17 +156,18 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const searchParams = req.nextUrl.searchParams
-    const [postSlug, userEmail] = [searchParams.get('postSlug'), searchParams.get('userEmail')]
-    if (!postSlug || !userEmail) {
+    const { searchParams } = req.nextUrl
+    const { postId, username } = Object.fromEntries(searchParams)
+    
+    if (!postId || !username) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
-      }, {status: 400})
+      }, { status: 400 })
     }
-
+    
     const like = await db.like.findFirst({
-      where: { postSlug, userEmail }
+      where: { postId, user: {username} }
     })
     if(!like) {
       return NextResponse.json({

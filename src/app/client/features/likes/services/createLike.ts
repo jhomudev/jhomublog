@@ -1,7 +1,6 @@
 'use server'
 import { ApiResponse } from "@client/types"
 import axios from "axios"
-import { revalidateTag } from "next/cache"
 import { LikeInput } from "../types"
 
 const createLike = async (body: LikeInput): Promise<ApiResponse | undefined> => { 

@@ -19,9 +19,9 @@ export const GET = async (req: NextRequest,) => {
   const order = sp.order as 'desc' | 'asc' ?? DEFAULT.order
   const q = sp.q
   const views = sp.views as 'desc' | 'asc'
-  const cat = sp.cat
+  const cat = sp.cat // is catSlug
   const tag = sp.tag
-  const user = sp.user
+  const user = sp.user // is username
 
   try {
     const [posts, rowsObtained, totalRows] = await db.$transaction([
@@ -30,16 +30,14 @@ export const GET = async (req: NextRequest,) => {
           ...(q && {title: {
             contains: q,
             mode: 'insensitive'
-          }}),
-          ...(cat && {catSlug: cat}),
+          }
+          }),
+          ...(cat && {cat: {slug: cat}}),
           ...((!cat && tag) && {
             tags: {
             has: tag
           }}),
-          ...(user && {
-            user: {
-            id: user
-          }})
+          ...(user && {user: {username: user}})
         },
         take: all ? undefined : rowsPerPage,
         skip: all ? undefined : rowsPerPage * (page - 1),
@@ -64,6 +62,7 @@ export const GET = async (req: NextRequest,) => {
           user: {
             select: {
               id: true,
+              username: true,
               name: true,
               email: true,
               image: true
@@ -78,15 +77,12 @@ export const GET = async (req: NextRequest,) => {
             contains: q,
             mode: 'insensitive'
           }}),
-          ...(cat && { catSlug: cat }),
+          ...(cat && {cat: {slug: cat}}),
           ...((!cat && tag) && {
             tags: {
             has: tag
           }}),
-          ...(user && {
-            user: {
-            id: user
-          }})
+          ...(user && {user: {username: user}})
         }
       }),
       db.post.count()

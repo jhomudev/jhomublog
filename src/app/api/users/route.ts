@@ -27,9 +27,17 @@ export const GET = async (req: NextRequest) => {
         skip: all ? undefined : rowsPerPage * (page - 1),
         select: {
           id: true,
+          username: true,
           name: true,
           email: true,
-          image: true
+          image: true,
+          createdAt: true,
+          _count: {
+            select: {
+              followers: true,
+              following: true
+            }
+          }
         }
       }),
       db.user.count({

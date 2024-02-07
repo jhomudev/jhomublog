@@ -1,9 +1,7 @@
 'use client'
-import { PostInput } from '@/app/client/features/posts/types';
 import WriteEditor from '@/app/client/features/write/components/WriteEditor';
 import WriteSelectCategory from '@/app/client/features/write/components/WriteSelectCategory';
 import WriteSelectTags from '@/app/client/features/write/components/WriteSelectTags';
-import { DEFAULT_VALUE_DATA_POST } from '@/app/client/features/write/context/WritePostContext';
 import { Button } from '@client/components/ui/button';
 import useWritePost from '@client/features/write/hooks/useWritePost';
 import { slugify, uploadFileToStorage } from '@client/utils';
