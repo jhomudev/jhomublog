@@ -24,7 +24,7 @@ function WritePage() {
   useEffect(() => {
     if(!(inputFileContent instanceof FileList)) return
     if(!inputFileContent[0]) return
-    uploadFileToStorage('/background-post-images', inputFileContent[0]).then(res => {
+    uploadFileToStorage('/background-post-images/', inputFileContent[0]).then(res => {
       console.log({ res })
       if (res.upload) {
         setImage(res.url)

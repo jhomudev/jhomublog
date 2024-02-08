@@ -27,6 +27,7 @@ export const GET = async (_req: NextRequest, { params }: { params: { slug: strin
         tags: true,
         cat: true,
         createdAt: true,
+        updatedAt: true,
         user: {
           select: {
             id: true,

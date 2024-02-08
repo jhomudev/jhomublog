@@ -30,7 +30,7 @@ function StoriesList() {
   
   if (isLoading) return <StoriesListSkeleton />
 
-  if (hasStories) return (
+  if (!hasStories) return (
     <NoData
       title="No stories"
       message="You do not have any stories"

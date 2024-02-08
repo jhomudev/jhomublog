@@ -58,6 +58,7 @@ export const GET = async (req: NextRequest,) => {
           views: true,
           tags: true,
           createdAt: true,
+          updatedAt: true,
           cat: true,
           user: {
             select: {

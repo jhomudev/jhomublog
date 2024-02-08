@@ -10,6 +10,7 @@ const formatPostResponse = (postResponse: PostResponse): Post => {
     img: postResponse.img,
     views: postResponse.views,
     createdAt: postResponse.createdAt,
+    updatedAt: postResponse?.updatedAt,
     tags: postResponse.tags,
     cat: {
       id: postResponse.cat.id,

@@ -34,7 +34,7 @@ function ProfilePostsList({username}: Props) {
   
   if (isLoading) return <ProfilePostsListSkeleton />
 
-  if (hasPosts) return <NoData hideAction title="No posts" message="This user hasn't published a post yet" />
+  if (!hasPosts) return <NoData hideAction title="No posts" message="This user hasn't published a post yet" />
 
   return (
     <>

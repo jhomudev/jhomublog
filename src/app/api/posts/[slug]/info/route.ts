@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 export const GET = async (req: NextRequest, { params }: { params: { slug: string }}) => {
   const { slug } = params
   const { searchParams } = req.nextUrl
-  const username = searchParams.get('username')
+  const username = searchParams.get('user')
 
   try {
     const post = await db.post.findUnique({
