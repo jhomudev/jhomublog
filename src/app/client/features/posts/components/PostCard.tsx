@@ -2,7 +2,7 @@
 import MyTooltip from "@/app/client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
-import { formatDate } from "@client/utils"
+import { formatDate, limitText } from "@client/utils"
 import { ArrowRightIcon, BookmarkFilledIcon, BookmarkIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
@@ -60,7 +60,15 @@ function PostCard({ post }: Props) {
           {
             post.tags.map((tag) => (
               <span key={tag} className="px-2 py-1 rounded-full text-xs bg-bg_soft dark:bg-bg_soft_dark">
-                <Link href={`/blog?tag=${tag}`}>{tag}</Link>
+                <Link href={`/blog?tag=${tag}`}>
+                {
+                      limitText({
+                        text: tag,
+                        limit: 22,
+                        noLimit: tag.length <= 20
+                      })
+                    }
+                </Link>
               </span>
             ))
           }
