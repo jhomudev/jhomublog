@@ -6,6 +6,7 @@ const formatBookmarksResponse = (likeResponse: BookmarkResponse): Bookmark => {
     createdAt: likeResponse.createdAt,
     user: {
       id: likeResponse.user.id,
+      username: likeResponse.user.username,
       name: likeResponse.user.name,
       email: likeResponse.user.email,
       image: likeResponse.user.image
@@ -19,6 +20,7 @@ const formatBookmarksResponse = (likeResponse: BookmarkResponse): Bookmark => {
       createdAt: likeResponse.post.createdAt,
       user: {
         id: likeResponse.post.user.id,
+        username: likeResponse.user.username,
         name: likeResponse.post.user.name,
         email: likeResponse.post.user.email,
         image: likeResponse.post.user.image

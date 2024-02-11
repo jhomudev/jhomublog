@@ -1,31 +1,64 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
-import { User } from "../features/profile/types"
 import { Button } from "./ui/button"
+import useFollows from "../features/follows/hooks/useFollows"
+import { useSession } from "next-auth/react"
+import useFollowActions from "../features/follows/hooks/useFollowActions"
+import FollowButton from "../features/follows/components/FollowButton"
 
 type Props = {
-  user: User
+  user: {
+    id: string
+    image: string,
+    username: string,
+    name: string
+  },
+  updateUsers: () => void
 }
 function UserCardFollow({
   user: {
+    id,
     image = 'https://unavatar.io/avatar',
     name,
     username
-  }
+  },
+  updateUsers
 }: Props) {
+  // const { data: session } = useSession()
+  
+  // const sp = new URLSearchParams()
+  // sp.set('follower', session?.user.id || '')
+  // sp.set('following', username)
+  // const { follows } = useFollows({ searchParams: sp.toString() })
+
+  // const { toggleFollow } = useFollowActions({userIdToFollow: id})
+  
+  // const followed = !!follows
+  
+  // const handleFollow = () => { 
+  //   toggleFollow({
+  //     isFollow: followed,
+  //     callback: updateUsers
+  //   })
+  // }
+
+
   return (
     <div className="relative flex items-center gap-4">
-      <Link href={`/users/${username}`}  className="absolute w-full h-full"/>
+      <Link href={`/${username}`}  className="absolute w-full h-full"/>
       <div className="relative min-w-12 h-12 rounded-full overflow-hidden">
         <Image src={image || ''} alt="user" fill />
       </div>
       <div className="flex flex-col gap-1">
-        <strong className="text-lg font-bold">{name}</strong>
-        <p className="text-text_color_soft dark:text-text_color_soft_dark text-sm line-clamp-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestiae explicabo corrupti aliquid amet similique nemo! Labore provident natus quidem, dignissimos autem quasi praesentium aliquam debitis, recusandae consequuntur saepe. Labore!
-        </p>
+        <strong className="text-base md:text-lg font-bold line-clamp-2">{name}</strong>
+        <div className="hidden md:block">
+          <p className="text-text_color_soft dark:text-text_color_soft_dark text-sm line-clamp-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestiae explicabo corrupti aliquid amet similique nemo! Labore provident natus quidem, dignissimos autem quasi praesentium aliquam debitis, recusandae consequuntur saepe. Labore!
+          </p>
+        </div>
       </div>
-      <Button variant={'primary'} rounded={'full'}>Follow</Button>
+      <FollowButton userIdToFollow={id} className="relative z-10" />
     </div>
   )
 }

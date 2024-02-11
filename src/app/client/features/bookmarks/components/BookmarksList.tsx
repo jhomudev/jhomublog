@@ -18,7 +18,7 @@ function BookmarksList() {
   sp.set('user', session?.user.username || '')
   const pathname = usePathname()
   
-  const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: searchParams.toString() })
+  const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: sp.toString() })
   
   const hasBookmarks = bookmarks.length > 0
 

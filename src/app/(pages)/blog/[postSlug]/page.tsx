@@ -1,4 +1,4 @@
-import UserAndDateCard from "@/app/client/components/UserAndDateCard"
+import PostUserCard from "@/app/client/features/posts/components/PostUserCard"
 import PostActions from "@/app/client/features/posts/components/PostActions"
 import PostAuthorActions from "@/app/client/features/posts/components/PostAuthorActions"
 import Menu from "@client/components/Menu"
@@ -9,6 +9,7 @@ import { auth } from "@client/lib/auth"
 import { Link2Icon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"
+import { limitText } from "@/app/client/utils"
 
 async function PostPage({params}: {params: {postSlug: string}}) {
   const { postSlug } = params
@@ -25,7 +26,12 @@ async function PostPage({params}: {params: {postSlug: string}}) {
         <div className="flex-1 flex flex-col justify-center gap-7">
           <h1 className="text-4xl md:text-5xl text-balance font-bold">{post.title}</h1>
           <div className="flex gap-2 justify-between items-center">
-            <UserAndDateCard user={post.user.name} profile={post.user.username} date={post.createdAt} avatar={post.user.image} />
+            <PostUserCard
+              id={post.user.id}
+              user={post.user.name}
+              profile={post.user.username}
+              date={post.createdAt} avatar={post.user.image}
+            />
             { isPostFromUser && <PostAuthorActions post={post} /> }
           </div>
           <PostActions post={post} />
@@ -40,12 +46,20 @@ async function PostPage({params}: {params: {postSlug: string}}) {
             <div dangerouslySetInnerHTML={{__html: post.content}} />
           </main>
           <div className="h-6 mt-7 border-y-1 border-bg_soft dark:border-bg_soft_dark border-dotted"></div>
-          <div className="tags flex gap-3 text-xs uppercase mt-7">
+          <div className="tags flex flex-wrap gap-3 text-xs uppercase mt-7">
             <span className="flex gap-1 items-center"><Link2Icon />Tags</span>
             {
               post.tags.map((tag) => (
                 <span key={tag} className="rounded-full hover:bg-main_color/70 hover:text-white">
-                  <Link className="px-2 py-1 flex gap-1 items-center" href={`/blog?tag=${tag}`}>#{tag}</Link>
+                  <Link className="px-2 py-1 flex gap-1 items-center truncate" href={`/blog?tag=${tag}`}>#
+                    {
+                      limitText({
+                        text: tag,
+                        limit: 22,
+                        noLimit: tag.length <= 20
+                      })
+                    }
+                  </Link>
                 </span>
               ))
             }

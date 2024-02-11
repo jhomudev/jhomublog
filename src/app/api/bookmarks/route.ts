@@ -105,19 +105,19 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (req: NextRequest) => {
-  const {postId, username} = await req.json()
+  const {postId, userId} = await req.json()
   try {
-    if(postId === undefined || username === undefined) {
+    if(postId === undefined || userId === undefined) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
       }, {status: 400})
     }
     const [user, post, bookmarkExist] = await db.$transaction([
-      db.user.findUnique({ where: { username } }),
+      db.user.findUnique({ where: { id: userId } }),
       db.post.findUnique({ where: {id: postId} }),
       db.bookmark.findFirst({
-        where: { postId, user: {username} }
+        where: { postId, userId }
       })
     ])
     if (!user) {
@@ -141,7 +141,7 @@ export const POST = async (req: NextRequest) => {
     const bookmark = await db.bookmark.create({
       data: {
         postId,
-        userId: user.id
+        userId
       },
     })
 
@@ -163,18 +163,16 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const { searchParams } = req.nextUrl
-    const { postId, username } = Object.fromEntries(searchParams)
+    const { postId, userId } = await req.json()
     
-    if (!postId || !username) {
+    if (!postId || !userId) {
       return NextResponse.json({
         ok: false,
         message: 'Invalid request'
       }, {status: 400})
     }
-
     const bookmark = await db.bookmark.findFirst({
-      where: { postId, user: {username} }
+      where: { postId, userId }
     })
     if(!bookmark) {
       return NextResponse.json({

@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { User } from "../types"
-import { Button } from "@/app/client/components/ui/button"
 import { formatQuantity } from "@/app/client/utils"
+import Image from "next/image"
+import FollowButton from "../../follows/components/FollowButton"
+import { User } from "../types"
 
 type Props = {
   user: User
@@ -20,7 +20,7 @@ function ProfileAside({user}: Props) {
             <span className="text-sm text-text_color_soft dark:text-text_color_soft_dark">{followersQ} Followers · {followingQ} Following</span>
           </div>
           <p className="text-sm text-text_color_soft dark:text-text_color_soft_dark">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id odit dolore, itaque laborum reprehenderit excepturi?</p>
-          <Button variant={'primary'} rounded="full" className="w-max">Follow</Button>
+          <FollowButton userIdToFollow={user.id} className="w-max" />
         </div>
       </aside>
     </div>

@@ -1,10 +1,9 @@
 import { DEFAULT_POST_IMG } from "@/app/client/data"
-import { formatDate } from "@/app/client/utils"
+import { formatDate, limitText } from "@/app/client/utils"
 import { ClockIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
-import { PostInPosts } from "../types"
 import Link from "next/link"
-import { Button } from "@/app/client/components/ui/button"
+import { PostInPosts } from "../types"
 
 type Props = {
   post: PostInPosts
@@ -16,11 +15,21 @@ function PostCardSquare({post}: Props) {
       <Link href={`/blog/${post.slug}`} className="absolute z-10 w-full h-full"></Link>
       <div className="relative flex w-full h-64 rounded-lg overflow-hidden">
         <Image src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
-        <div className="p-3 relative self-end flex w-full h-32 before:content-normal before:absolute before:z-10 before:inset-0 before:bg-gradient-to-t from-zinc-900 to-transparent">
-          <ul className="relative z-20 self-end flex flex-wrap gap-2 items-center">
+        <div className="relative self-end flex w-full h-32 before:content-normal before:absolute before:z-10 before:inset-0 before:bg-gradient-to-t from-zinc-900 to-transparent">
+          <ul className="relative z-20 p-3 self-end flex flex-wrap gap-2 items-center">
             {
-              post.tags.map((tag) => (
-                <li key={tag}><Link href={`/blog?tag=${tag}`} className="text-xs px-2 py-1 rounded-full text-white bg-main_color text-nowrap">{tag}</Link></li>
+              post.tags.filter((_,id) => id < 6).map((tag) => (
+                <li key={tag} className="flex">
+                  <Link href={`/blog?tag=${tag}`} className="text-xs px-2 py-[2px] rounded-full text-white bg-main_color truncate">
+                    {
+                      limitText({
+                        text: tag,
+                        limit: 22,
+                        noLimit: tag.length <= 20
+                      })
+                    }
+                  </Link>
+                </li>
               ))
             }
           </ul>

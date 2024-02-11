@@ -1,19 +1,23 @@
 'use client'
-import NoData from "@/app/client/components/molecules/NoData"
 import UserCardFollow from "@/app/client/components/UserCardFollow"
+import NoData from "@/app/client/components/molecules/NoData"
 import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import useUsers from "../../profile/hooks/useUsers"
-import SearchPeopleListSkeleton from "./SearchPeopleListSkeleton"
+import SearchPeopleListSkeleton from "../../search/components/SearchPeopleListSkeleton"
+import useFollowing from "../hooks/useFollowing"
+import { User } from "../types"
 
-function SearchPeopleList() {
+type Props = {
+  user: User
+}
+function ProfileFollowingList({user}: Props) {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { users, response: { isLoading, data, mutate } } = useUsers({ searchParams: searchParams.toString() })
+  const { following, response: { isLoading, data, mutate } } = useFollowing({user})
 
-  const hasUsers = users.length > 0
+  const hasFollowing = following.length > 0
 
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
@@ -25,27 +29,22 @@ function SearchPeopleList() {
   
   if (isLoading) return <SearchPeopleListSkeleton />
 
-  if (!hasUsers) return <NoData hideAction title="No users" message='No users found in your search' />
+  if (!hasFollowing) return <NoData hideAction title="No Following" message="This user doesn't follow anyone yet" />
 
   return (
     <>
       <div className="flex flex-col gap-10">
-        {users.map((user) => (
+        {following.map((follow) => (
           <UserCardFollow
             key={user.id}
-            user={{
-              id: user.id,
-              image: user.image || '',
-              name: user.name || '',
-              username: user.username
-            }}
+            user={follow.user}
             updateUsers={mutate}
           />
           ))
         }
       </div>
       {
-        users.length > 10 && (
+        following.length > 10 && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
@@ -66,4 +65,4 @@ function SearchPeopleList() {
     </>
   )
 }
-export default SearchPeopleList
+export default ProfileFollowingList

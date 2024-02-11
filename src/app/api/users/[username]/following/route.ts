@@ -41,13 +41,14 @@ export const GET = async (req: NextRequest, { params }: { params: { username: st
         orderBy: { createdAt: 'desc' },
         select: {
           id: true,
-          follower: {
+          following: {
             select: {
               id: true,
               username: true,
               email: true,
               name: true,
               image: true,
+              createdAt: true
             }
           },
           createdAt: true,

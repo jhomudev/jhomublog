@@ -21,3 +21,39 @@ export type UserResponse = BaseEntity & {
     following: number
   }
 }
+
+export type FollowingResponse = BaseEntity & {
+  following: BaseEntity & {
+    username: string,
+    email: string,
+    name: string,
+    image: string,
+  }
+}
+
+export type FollowerResponse = BaseEntity & {
+  follower: BaseEntity & {
+    username: string,
+    email: string,
+    name: string,
+    image: string,
+  }
+}
+
+export type Following = BaseEntity & {
+  user: BaseEntity & {
+    username: string,
+    email: string,
+    name: string,
+    image: string,
+  }
+}
+
+export type Follower = BaseEntity & {
+  user: BaseEntity & {
+    username: string,
+    email: string,
+    name: string,
+    image: string,
+  }
+}

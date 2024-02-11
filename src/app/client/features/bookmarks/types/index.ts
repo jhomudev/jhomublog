@@ -2,11 +2,12 @@ import { BaseEntity } from "@/app/client/types"
 
 export type BookmarkInput = {
   postId: string
-  username: string
+  userId: string
 }
 export type BookmarkResponse = BaseEntity &{
   user: {
     id: string
+    username: string
     name: string | null
     email: string
     image: string | null

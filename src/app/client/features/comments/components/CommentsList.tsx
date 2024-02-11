@@ -1,5 +1,5 @@
-import UserAndDateCard from "@/app/client/components/UserAndDateCard"
 import { Comment } from "../types"
+import CommentUser from "./CommentUser"
 import CommentsSkeleton from "./CommentsSkeleton"
 
 type Props = {
@@ -19,7 +19,14 @@ function CommentsList({comments, isLoading}: Props) {
               hasComments ? (
                 comments.map((com) => (
                   <li key={com.id} className="flex flex-col gap-4">
-                    <UserAndDateCard user={com.user.name || ''} profile={com.user.username} date={com.createdAt} avatar={com.user.image || '/p1.jpeg'} />
+                    <CommentUser
+                      id={com.user.id}
+                      user={com.user.name || ''}
+                      profile={com.user.username}
+                      date={com.createdAt}
+                      avatar={com.user.image || '/p1.jpeg'}
+                      hideFollowButton
+                    />
                     <p>{com.desc}</p>
                   </li>
                 ))

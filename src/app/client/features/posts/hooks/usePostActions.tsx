@@ -33,7 +33,7 @@ function usePostActions({post}: Props) {
       return
     }
     const action = bookmarked ? removeBookmark : createBookmark
-    const res = await action({ postId: post.id, username: session.user?.username })
+    const res = await action({ postId: post.id, userId: session.user?.id })
     
     if (!res?.ok) {
       toast({

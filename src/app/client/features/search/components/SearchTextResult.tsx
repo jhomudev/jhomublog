@@ -14,9 +14,9 @@ function SearchTextResult() {
     <div className="mt-7 mb-5">
       {
         (!isOnSearchMainPage && search) ? (
-          <h1 className="text-5xl text-text_color_soft dark:text-text_color_soft_dark">Results for <span className="text-main_color font-bold">{search}</span></h1>
+          <h1 className="text-2xl md:text-5xl text-text_color_soft dark:text-text_color_soft_dark">Results for <span className="text-main_color font-bold">{search}</span></h1>
         ) : (
-          <h1 className="text-5xl text-text_color_soft dark:text-text_color_soft_dark">Recent searches</h1>
+          <h1 className="text-2xl md:text-5xl text-text_color_soft dark:text-text_color_soft_dark">Recent searches</h1>
         )
       }
       {

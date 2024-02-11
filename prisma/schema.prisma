@@ -54,20 +54,20 @@ model User {
   comments      Comment[]
   bookmarks     Bookmark[]
   likes         Like[]
-  followers    Follows[]   @relation("followers")
-  following     Follows[]   @relation("following")
+  followers    Follows[]   @relation("following")
+  following     Follows[]   @relation("followers")
   createdAt     DateTime    @default(now()) @map("created_at")
 
   @@map("users")
 }
 
 model Follows {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  follower   User     @relation("followers", fields: [followerId], references: [id])
-  followerId String   @map("followed_by_id") @db.ObjectId
-  following    User     @relation("following", fields: [followingId], references: [id])
-  followingId  String   @map("following_id") @db.ObjectId
-  createdAt    DateTime @default(now()) @map("created_at")
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  follower     User       @relation("followers", fields: [followerId], references: [id])
+  followerId   String     @map("follower_id") @db.ObjectId
+  following    User       @relation("following", fields: [followingId], references: [id])
+  followingId  String     @map("following_id") @db.ObjectId
+  createdAt    DateTime   @default(now()) @map("created_at")
 
   @@map("follows")
   @@unique([followerId, followingId])
