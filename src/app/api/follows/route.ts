@@ -86,7 +86,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({
         ok: false,
         message: 'Already follow'
-      }, {status: 400})
+      }, {status: 409})
     }
 
     const follow = await db.follows.create({

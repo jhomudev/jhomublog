@@ -38,13 +38,12 @@ function ProfileFollowersList({user}: Props) {
           <UserCardFollow
             key={user.id}
             user={follow.user}
-            updateUsers={mutate}
           />
           ))
         }
       </div>
       {
-        followers.length > 10 && (
+        followers.length >= 10 && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls

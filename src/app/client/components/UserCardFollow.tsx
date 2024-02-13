@@ -13,8 +13,7 @@ type Props = {
     image: string,
     username: string,
     name: string
-  },
-  updateUsers: () => void
+  }
 }
 function UserCardFollow({
   user: {
@@ -22,26 +21,8 @@ function UserCardFollow({
     image = 'https://unavatar.io/avatar',
     name,
     username
-  },
-  updateUsers
+  }
 }: Props) {
-  // const { data: session } = useSession()
-  
-  // const sp = new URLSearchParams()
-  // sp.set('follower', session?.user.id || '')
-  // sp.set('following', username)
-  // const { follows } = useFollows({ searchParams: sp.toString() })
-
-  // const { toggleFollow } = useFollowActions({userIdToFollow: id})
-  
-  // const followed = !!follows
-  
-  // const handleFollow = () => { 
-  //   toggleFollow({
-  //     isFollow: followed,
-  //     callback: updateUsers
-  //   })
-  // }
 
 
   return (
@@ -58,7 +39,7 @@ function UserCardFollow({
           </p>
         </div>
       </div>
-      <FollowButton userIdToFollow={id} className="relative z-10" />
+      <FollowButton userIdToFollow={id} className="relative z-10 ml-auto md:ml-0"  />
     </div>
   )
 }

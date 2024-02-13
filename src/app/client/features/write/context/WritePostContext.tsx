@@ -7,7 +7,7 @@ type Context = {
   setWriteData: Dispatch<SetStateAction<PostInput>>,
   resetWriteData: () => void,
   postToEdit: Post,
-  sePostToEdit: Dispatch<SetStateAction<Post>>,
+  setPostToEdit: Dispatch<SetStateAction<Post>>,
   resetPostToEdit: () => void,
 }
 
@@ -20,7 +20,7 @@ export const WritePostContext = createContext<Context>({} as Context);
 export const WritePostContextProvider = ({ children }: { children: ReactNode }) => {
   const {data: session} = useSession()
   const [writeData, setWriteData] = useState<PostInput>(DEFAULT_VALUE_DATA_POST as PostInput)
-  const [postToEdit, sePostToEdit] = useState<Post>({} as Post)
+  const [postToEdit, setPostToEdit] = useState<Post>({} as Post)
 
   const resetWriteData = () => { 
     const userId = session?.user?.id
@@ -33,7 +33,7 @@ export const WritePostContextProvider = ({ children }: { children: ReactNode }) 
   }
 
   const resetPostToEdit = () => { 
-    sePostToEdit({} as Post)
+    setPostToEdit({} as Post)
   }
 
   
@@ -51,7 +51,7 @@ export const WritePostContextProvider = ({ children }: { children: ReactNode }) 
     setWriteData,
     resetWriteData,
     postToEdit,
-    sePostToEdit,
+    setPostToEdit,
     resetPostToEdit
   }}>{children}</WritePostContext.Provider>
 }

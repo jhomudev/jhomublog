@@ -76,10 +76,6 @@ const uploadFileToStorage = async (foldername: string, file: File) => {
     }
   );
   })
-
-  // const { } = await upload()
-
-  // return response
 }
 
 export default uploadFileToStorage

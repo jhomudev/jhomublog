@@ -40,7 +40,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
           <Image className="object-cover rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
         </div>
       </section>
-      <div className="flex flex-col md:flex-row gap-16 mt-10">
+      <div className="flex flex-col lg:flex-row gap-16 mt-10">
         <div className="flex-[3] overflow-hidden">
           <main className="content-post text-lg md:text-xl text-pretty">
             <div dangerouslySetInnerHTML={{__html: post.content}} />

@@ -84,7 +84,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({
         ok: false,
         message: 'Already commented'
-      }, {status: 400})
+      }, {status: 409})
     }
 
     const comment = await db.comment.create({

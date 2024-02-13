@@ -3,7 +3,7 @@ import db from "@/app/client/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 
 const DEFAULT = {
-  rowsPerPage: 5,
+  rowsPerPage: 10,
   page: 1,
   order: 'desc'
 }
@@ -115,6 +115,22 @@ export const POST = async (req: NextRequest) => {
   const {tags, ...body} = await req.json()
   const tagsNoRepeat = new Set<string>(tags)
   try {
+    const alreadyPost = await db.post.findFirst({
+      where: {
+        OR: [
+          { title: body.title },
+          { slug: body.slug }
+        ]
+      }
+    })
+
+    if (alreadyPost) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Post has already exist'
+      }, {status: 409})
+    }
+
     const post = await db.post.create({
       data: {
         tags: [...tagsNoRepeat],

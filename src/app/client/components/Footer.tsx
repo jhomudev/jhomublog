@@ -29,10 +29,10 @@ async function Footer() {
             <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/contact'>Contact</Link></li>
           </ul>
           <ul className="flex flex-col gap-1">
-            <li className="text-text_color dark:text-text_color_dark font-semibold">Tags</li>
+            <li className="text-text_color dark:text-text_color_dark font-semibold">Categories</li>
             {
               cats?.map((cat, id) => {
-                if (id > 5) return
+                if (id >= 5) return
                 return (
                   <li key={cat.id}><Link className="text-text_color_soft dark:text-text_color_soft_dark" href={`/blog?cat=${cat.slug}`}>{cat.name}</Link></li>
                 )

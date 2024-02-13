@@ -11,7 +11,7 @@ export default function Home() {
         <h2 className="mt-3 mb-5 text-2xl font-semibold">Popular categories</h2>
         <CategoriesList />
       </div>
-      <div className="flex flex-col md:flex-row gap-16 mt-10">
+      <div className="flex flex-col lg:flex-row gap-16 mt-10">
         <main className="flex-grow-[5] overflow-hidden">
           <h2 className="mt-3 mb-5 text-2xl font-semibold">Recent posts</h2>
           <PostsList />

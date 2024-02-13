@@ -25,15 +25,14 @@ export default function UserDropdown() {
     >
       <DropdownTrigger>
         <Avatar
-            isBordered
-            isDisabled={!session?.user}
-            as="button"
-            className="transition-transform"
-            src={session?.user?.image || DEFAULT_USER_AVATAR}
-            imgProps={{
-              referrerPolicy: 'no-referrer'
-            }}
-          />
+          isBordered
+          isDisabled={!session?.user}
+          as="button"
+          size="sm"
+          className="transition-transform"
+          src={session?.user?.image || DEFAULT_USER_AVATAR}
+          imgProps={{ referrerPolicy: 'no-referrer' }}
+        />
       </DropdownTrigger>
       <DropdownMenu
         aria-label="User options navigate"

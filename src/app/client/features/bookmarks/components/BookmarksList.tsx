@@ -55,7 +55,7 @@ function BookmarksList() {
         }
       </div>
       {
-        totalPages > 10 && (
+        totalPages >= 10 && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls

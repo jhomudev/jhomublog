@@ -3,7 +3,7 @@ import db from "@/app/client/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 
 const DEFAULT = {
-  rowsPerPage: 5,
+  rowsPerPage: 10,
   page: 1,
   order: 'desc'
 }

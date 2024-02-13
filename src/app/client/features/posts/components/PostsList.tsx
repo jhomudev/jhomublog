@@ -37,7 +37,7 @@ function PostsList() {
         }
       </div>
       {
-        posts.length > 10 && (
+        posts.length >= 10 && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls

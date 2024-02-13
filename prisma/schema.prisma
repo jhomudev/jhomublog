@@ -41,31 +41,31 @@ model Session {
 }
 
 model User {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String      @unique
-  emailVerified DateTime?   @map("email_verified")
-  image         String?
-  username      String  @unique @default(uuid())
-  password      String?
-  account       Account?
-  sessions      Session[]
-  posts         Post[]
-  comments      Comment[]
-  bookmarks     Bookmark[]
-  likes         Like[]
-  followers    Follows[]   @relation("following")
-  following     Follows[]   @relation("followers")
-  createdAt     DateTime    @default(now()) @map("created_at")
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String      @unique
+  emailVerified   DateTime?   @map("email_verified")
+  image           String?
+  username        String      @unique @default(uuid())
+  password        String?
+  account         Account?
+  sessions        Session[]
+  posts           Post[]
+  comments        Comment[]
+  bookmarks       Bookmark[]
+  likes           Like[]
+  followers       Follows[]    @relation("following")
+  following       Follows[]    @relation("followers")
+  createdAt       DateTime     @default(now()) @map("created_at")
 
   @@map("users")
 }
 
 model Follows {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
-  follower     User       @relation("followers", fields: [followerId], references: [id])
+  follower     User       @relation("followers", fields: [followerId], references: [id], onDelete: Cascade)
   followerId   String     @map("follower_id") @db.ObjectId
-  following    User       @relation("following", fields: [followingId], references: [id])
+  following    User       @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId  String     @map("following_id") @db.ObjectId
   createdAt    DateTime   @default(now()) @map("created_at")
 
@@ -91,25 +91,24 @@ model Category {
 
   @@map("categories")
 }
-
 model Post {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  slug      String    @unique
-  title     String
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  slug      String      @unique
+  title     String      @unique
   overview  String
   content   String
   img       String?
-  views     Int       @default(0)
+  views     Int         @default(0)
   tags      String[]
-  catId     String    @map("cat_id") @db.ObjectId
-  cat       Category  @relation(fields: [catId], references: [id])
-  userId    String    @map("user_id") @db.ObjectId
-  user      User      @relation(fields: [userId], references: [id])
+  catId     String      @map("cat_id") @db.ObjectId
+  cat       Category    @relation(fields: [catId], references: [id])
+  userId    String      @map("user_id") @db.ObjectId
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments  Comment[]
   bookmarks Bookmark[]
   likes     Like[]
-  createdAt DateTime  @map("created_at")  @default(now())
-  updatedAt DateTime  @map("update_at")  @default(now()) @updatedAt
+  createdAt DateTime    @map("created_at")  @default(now())
+  updatedAt DateTime    @map("update_at")  @default(now()) @updatedAt
 
   @@map("posts")
 }
@@ -118,9 +117,9 @@ model Comment {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   desc      String
   userId    String    @map("user_id") @db.ObjectId
-  user      User      @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   postId    String    @map("post_id") @db.ObjectId
-  post      Post      @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime  @map("created_at")  @default(now())
 
   @@map("comments")
@@ -130,9 +129,9 @@ model Comment {
 model Bookmark {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String    @map("user_id") @db.ObjectId
-  user      User      @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   postId    String    @map("post_id") @db.ObjectId
-  post      Post      @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime  @map("created_at")  @default(now())
 
   @@map("bookmarks")
@@ -142,9 +141,9 @@ model Bookmark {
 model Like {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String    @map("user_id") @db.ObjectId
-  user      User      @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   postId    String    @map("post_id") @db.ObjectId
-  post      Post      @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime  @map("created_at") @default(now())
 
   @@map("likes")

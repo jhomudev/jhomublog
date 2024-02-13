@@ -6,7 +6,7 @@ type Props = {
 function MeLayout({children}: Props) {
   return (
     <div>
-      <div className="flex flex-col md:flex-row gap-16">
+      <div className="flex flex-col lg:flex-row gap-16">
         <div className="flex-grow-[5] overflow-hidden">
           {children}
         </div>

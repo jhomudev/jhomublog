@@ -19,7 +19,7 @@ function PostUserCard({ id, user, profile, date, avatar, hideFollowButton = fals
           <Image src={avatar} alt="" fill />
         </div>
         <div className="flex flex-col gap-1 text-text_color_soft dark:text-text_color_soft_dark">
-          <Link href={`/${profile}`} className="text-lg font-semibold">{user}</Link>
+          <Link href={`/${profile}`} className="text-lg font-semibold line-clamp-1">{user}</Link>
           <time className="text-xs">{formatDate(date).simple}</time>
         </div>
       </div>

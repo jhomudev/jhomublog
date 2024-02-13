@@ -44,7 +44,7 @@ function FollowButton({userIdToFollow, className}: Props) {
       <Button
         variant={alreadyFollow ? 'default' : 'primary'}
         rounded={'full'}
-        className={`ml-auto md:ml-0 ${className}`}
+        className={className}
         onClick={handleFollow}
       >
         {alreadyFollow ? 'Unfollow' : 'Follow'}

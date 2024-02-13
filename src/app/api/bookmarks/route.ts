@@ -136,7 +136,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({
         ok: false,
         message: 'Bookmark already exists'
-      })
+      }, {status: 409})
     }
     const bookmark = await db.bookmark.create({
       data: {

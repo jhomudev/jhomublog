@@ -6,9 +6,12 @@ type Props = {
 }
 
 const limitText = ({ text, by = 'characters', limit, noLimit = false }: Props) => { 
-  if(text.length < 15 || noLimit) return text
+  if(noLimit) return text
   if (by === 'words') return text.split(' ').slice(0, limit).join(' ') + '...'
-  if (by === 'characters') return text.slice(0, limit) + '...'
+  if (by === 'characters') {
+    const limitedText = text.slice(0, limit)
+    return limitedText.length === text.length ? text : limitedText + '...'
+  }
   return text
 }
 

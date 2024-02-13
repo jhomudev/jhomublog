@@ -16,10 +16,27 @@ type Props = {
 
 function WriteEditorPost({ postData }: Props) {
   const [image, setImage] = useState<string>(postData.img || '')
-  const [inputFileContent, setInputFileContent] = useState<FileList | null>(null)
+  // const [inputFileContent, setInputFileContent] = useState<FileList | null>(null)
   const [title, setTitle] = useState(postData.title)
   const [overview, setOverview] = useState(postData.overview)
-  const {setWriteData, sePostToEdit} = useWritePost()
+  const { setWriteData, setPostToEdit } = useWritePost()
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
+
+  const handleChangeFile = async (content: FileList | null) => { 
+    setIsUploadingImage(true)
+    if(!(content instanceof FileList)) return
+    if(!content[0]) return
+    const res = await uploadFileToStorage('/background-post-images/', content[0])
+    console.log({ res })
+    if (res.upload) {
+      setImage(res.url)
+      setWriteData((data) => ({
+        ...data,
+        img: res.url,
+      }))
+    }
+    setIsUploadingImage(false)
+  }
   
   useEffect(() => {
     setWriteData(data => ({
@@ -32,29 +49,11 @@ function WriteEditorPost({ postData }: Props) {
       ...(postData.img && {img: postData.img}),
       slug: postData.slug,
     }))
-    sePostToEdit(postData)
-  },[postData, setWriteData, sePostToEdit])
+    setPostToEdit(postData)
+  },[postData, setWriteData, setPostToEdit])
 
   useEffect(() => {
-    if(!(inputFileContent instanceof FileList)) return
-    if(!inputFileContent[0]) return
-    uploadFileToStorage('/background-post-images', inputFileContent[0]).then(res => {
-      console.log({ res })
-      if (res.upload) {
-        setImage(res.url)
-        setWriteData((data) => ({
-          ...data,
-          img: res.url,
-        }))
-      }
-    })
-    
-  },[inputFileContent, setWriteData])
-
-  
-  useEffect(() => {
-    const timestamp = Date.now() / 1000
-    const slug = `${slugify(title)}_${timestamp}`
+    const slug = slugify(title)
     setWriteData((data) => {
       return {
         ...data,
@@ -94,10 +93,10 @@ function WriteEditorPost({ postData }: Props) {
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <div className='relative w-full flex flex-col items-end justify-between min-h-[300px]'>
-              <Button size={'lg'} variant={'outline'} className='z-20' asChild >
-                <label htmlFor="file">{ image ? 'Change main image' : 'Add a main image'}</label>
+              <Button size={'lg'} variant={'outline'} disabled={isUploadingImage} className={`z-20 ${isUploadingImage && 'opacity-80 pointer-events-none'}`} asChild >
+                <label htmlFor="file">{ isUploadingImage ? 'Uploading image...' : image ? 'Change main image' : 'Add a main image'}</label>
               </Button>
-              <input onChange={(e) => setInputFileContent(e.target.files)} hidden type="file" id="file" />
+              <input onChange={(e) => handleChangeFile(e.target.files)} hidden type="file" id="file" />
               {
                 image && (
                   <>

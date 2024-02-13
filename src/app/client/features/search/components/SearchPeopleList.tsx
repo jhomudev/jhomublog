@@ -39,13 +39,12 @@ function SearchPeopleList() {
               name: user.name || '',
               username: user.username
             }}
-            updateUsers={mutate}
           />
           ))
         }
       </div>
       {
-        users.length > 10 && (
+        users.length >= 10 && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
