@@ -1,15 +1,14 @@
-import PostUserCard from "@client/features/posts/components/PostUserCard"
-import PostActions from "@client/features/posts/components/PostActions"
-import PostAuthorActions from "@client/features/posts/components/PostAuthorActions"
 import Menu from "@client/components/Menu"
 import { DEFAULT_POST_IMG } from "@client/data"
 import Comments from "@client/features/comments/components/Comments"
+import PostActions from "@client/features/posts/components/PostActions"
+import PostAuthorActions from "@client/features/posts/components/PostAuthorActions"
+import PostUserCard from "@client/features/posts/components/PostUserCard"
 import { getPost } from "@client/features/posts/services"
 import { auth } from "@client/lib/auth"
 import { Link2Icon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"
-import { limitText } from "@client/utils"
 
 async function PostPage({params}: {params: {postSlug: string}}) {
   const { postSlug } = params
@@ -47,18 +46,12 @@ async function PostPage({params}: {params: {postSlug: string}}) {
           </main>
           <div className="h-6 mt-7 border-y-1 border-bg_soft dark:border-bg_soft_dark border-dotted"></div>
           <div className="tags flex items-center flex-wrap gap-3 text-xs uppercase mt-7">
-            <span><Link href={"/tags"} className="flex gap-1 items-center"><Link2Icon />Tags</Link></span>
+            <span><Link href={"/tags"} className="flex gap-1 items-center leading-normal"><Link2Icon />Tags</Link></span>
             {
               post.tags.map((tag) => (
                 <span key={tag} className="rounded-full hover:bg-main_color/70 hover:text-white">
-                  <Link className="px-2 py-1 flex gap-1 items-center truncate" href={`/tags/${encodeURIComponent(tag)}`}>#
-                    {
-                      limitText({
-                        text: tag,
-                        limit: 22,
-                        noLimit: tag.length <= 20
-                      })
-                    }
+                  <Link className="px-2 py-1 flex gap-1 items-center truncate leading-normal" href={`/tags/${encodeURIComponent(tag)}`}>
+                    #{tag}
                   </Link>
                 </span>
               ))

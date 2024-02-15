@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest,) => {
   const q = sp.q
   const views = sp.views as 'desc' | 'asc'
   const cat = sp.cat // is catSlug
-  const tag = sp.tag
+  const tag = sp.tag && decodeURIComponent(sp.tag) // decode because it's encoded
   const user = sp.user // is username
 
   try {

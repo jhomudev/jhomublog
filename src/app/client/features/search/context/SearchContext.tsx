@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 
 export type SearchRecentItem = {
   id: string,
@@ -11,7 +11,7 @@ type Context = {
   setRecents: React.Dispatch<React.SetStateAction<SearchRecentItem[]>>
 }
 
-export const SEARCH_ITEMS_LOCAL_STORAGE = 'jhomublog_search_recents'
+export const SEARCH_ITEMS_LOCAL_STORAGE = '__jhomublog_search_recents__'
 
 const getRecentsFromLocalStorage = () => {
   if (typeof window !== 'undefined') {

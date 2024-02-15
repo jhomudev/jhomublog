@@ -20,9 +20,12 @@ function BookmarksList() {
   
   const { response:{isLoading, data, mutate}, bookmarks } = useBookmarks({ searchParamsStr: sp.toString() })
   
-  const hasBookmarks = bookmarks.length > 0
+  if (isLoading) return <BookmarksListSkeleton />
 
-  const totalPages = data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0
+  if (!(data && data.meta)) return
+  
+  const hasBookmarks = bookmarks.length > 0
+  const totalPages = Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
 
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
@@ -32,8 +35,6 @@ function BookmarksList() {
     replace(url)
   }
   
-  if (isLoading) return <BookmarksListSkeleton />
-
   if (!hasBookmarks) return (
     <NoData
       title="No bookmarks"
@@ -55,7 +56,7 @@ function BookmarksList() {
         }
       </div>
       {
-        totalPages >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls

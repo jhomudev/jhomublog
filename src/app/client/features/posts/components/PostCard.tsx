@@ -62,7 +62,7 @@ function PostCard({ post }: Props) {
           {
             post.tags.map((tag) => (
               <span key={tag} className="px-2 py-1 rounded-full text-xs bg-bg_soft dark:bg-bg_soft_dark">
-                <Link href={`/tags/${tag}`} className="truncate">
+                <Link href={`/tags/${tag}`} className="truncate leading-normal">
                 {
                   limitText({
                     text: tag,

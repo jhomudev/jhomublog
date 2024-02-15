@@ -21,7 +21,7 @@ async function CategoryPage({ params: { slug } }: Props) {
       </div>
       <div className="flex flex-col lg:flex-row gap-16 mt-10">
         <main className="flex-grow-[5] overflow-hidden">
-          <PostsContent view="grid" sp={`cat=${category.slug}`}/>
+          <PostsContent view="grid" spToInclude={{cat: category.slug}}/>
         </main>
         <Menu />
       </div>

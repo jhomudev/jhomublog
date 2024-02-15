@@ -20,9 +20,12 @@ function ProfilePostsList({username}: Props) {
   
   const { response:{ isLoading, data }, posts } = usePosts({ searchParams: sp.toString() })
   
+  if (isLoading) return <ProfilePostsListSkeleton />
+  
+  if (!(data && data.meta)) return
+  
   const hasPosts = posts.length > 0
-
-  const totalPages = data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0
+  const totalPages = Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
 
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
@@ -31,8 +34,6 @@ function ProfilePostsList({username}: Props) {
     })
     replace(url)
   }
-  
-  if (isLoading) return <ProfilePostsListSkeleton />
 
   if (!hasPosts) return <NoData hideAction title="No posts" message="This user hasn't published a post yet" />
 
@@ -46,7 +47,7 @@ function ProfilePostsList({username}: Props) {
         }
       </div>
       {
-        totalPages >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls

@@ -19,7 +19,7 @@ async function TagPage({ params: { tag } }: Props) {
       </div>
       <div className="flex flex-col lg:flex-row gap-16 mt-10">
         <main className="flex-grow-[5] overflow-hidden">
-          <PostsContent view="grid" sp={`tag=${tag}`} hidePagination/>
+          <PostsContent view="grid" spToInclude={{tag}} hidePagination/>
         </main>
         <Menu />
       </div>

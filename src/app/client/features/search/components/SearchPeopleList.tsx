@@ -11,8 +11,13 @@ function SearchPeopleList() {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { users, response: { isLoading, data, mutate } } = useUsers({ searchParams: searchParams.toString() })
+  const { users, response: { isLoading, data } } = useUsers({ searchParams: searchParams.toString() })
+  
+  if (isLoading) return <SearchPeopleListSkeleton />
 
+  if (!(data && data.meta)) return
+
+  const totalPages = Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
   const hasUsers = users.length > 0
 
   const handleChangePage = (page: number) => { 
@@ -22,8 +27,6 @@ function SearchPeopleList() {
     })
     replace(url)
   }
-  
-  if (isLoading) return <SearchPeopleListSkeleton />
 
   if (!hasUsers) return <NoData hideAction title="No users" message='No users found in your search' />
 
@@ -44,11 +47,11 @@ function SearchPeopleList() {
         }
       </div>
       {
-        users.length >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
-              total={ data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0}
+              total={ totalPages }
               page={data?.meta?.page || 1}
               onChange={handleChangePage}
               classNames={{

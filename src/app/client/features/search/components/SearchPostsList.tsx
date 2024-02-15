@@ -13,7 +13,12 @@ function SearchPostsList() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { posts, response: { isLoading, data } } = usePosts({ searchParams: searchParams.toString() })
+  
+  if (isLoading) return <PostsListSkeleton />
 
+  if (!(data && data.meta)) return
+  
+  const totalPages =Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
   const hasPosts = posts.length > 0
 
   const handleChangePage = (page: number) => { 
@@ -24,8 +29,6 @@ function SearchPostsList() {
     replace(url)
   }
   
-  if (isLoading) return <PostsListSkeleton />
-
   if (!hasPosts) return <NoData hideAction title="No posts" message="No posts found in your search" />
 
   return (
@@ -38,11 +41,11 @@ function SearchPostsList() {
         }
       </div>
       {
-        posts.length >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
-              total={ data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0}
+              total={ totalPages }
               page={data?.meta?.page || 1}
               onChange={handleChangePage}
               classNames={{

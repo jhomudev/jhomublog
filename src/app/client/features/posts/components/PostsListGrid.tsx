@@ -13,7 +13,6 @@ type Props = {
 function PostsListGrid({posts = [] , isLoading = true }: Props) {
   
   const hasPosts = posts.length > 0
-  const hasJustOne = posts.length === 1
 
   if (isLoading) return <PostsListGridSkeleton/>
 

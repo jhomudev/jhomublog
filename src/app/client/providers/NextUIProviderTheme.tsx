@@ -16,7 +16,7 @@ function NextUIProviderTheme({children}: {children: React.ReactNode}) {
       <NextThemesProvider
         attribute="class"
         defaultTheme = 'light'
-        storageKey="__jhomublog-theme__"
+        storageKey="__jhomublog_theme__"
         themes={["light", "dark"]}
       >
         {children}

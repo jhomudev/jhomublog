@@ -20,7 +20,7 @@ function PostCardSquare({post}: Props) {
             {
               post.tags.slice(0, 4).map((tag) => (
                 <li key={tag} className="flex">
-                  <Link href={`/tags/${tag}`} className="text-xs px-2 py-[2px] rounded-full text-white bg-main_color truncate">
+                  <Link href={`/tags/${tag}`} className="text-xs px-2 py-[2px] rounded-full text-white bg-main_color truncate leading-normal">
                     {
                       limitText({
                         text: tag,

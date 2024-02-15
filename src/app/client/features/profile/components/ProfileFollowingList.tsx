@@ -15,10 +15,8 @@ function ProfileFollowingList({user}: Props) {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { following, response: { isLoading, data, mutate } } = useFollowing({user})
-
-  const hasFollowing = following.length > 0
-
+  const { following, response: { isLoading, data } } = useFollowing({ user })
+  
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
       pathname, searchParams, newParams: {page},
@@ -28,6 +26,12 @@ function ProfileFollowingList({user}: Props) {
   }
   
   if (isLoading) return <SearchPeopleListSkeleton />
+
+  if (!(data && data.meta)) return
+  
+  const totalPages = Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
+
+  const hasFollowing = following.length > 0
 
   if (!hasFollowing) return <NoData hideAction title="No Following" message="This user doesn't follow anyone yet" />
 
@@ -43,11 +47,11 @@ function ProfileFollowingList({user}: Props) {
         }
       </div>
       {
-        following.length >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
-              total={ data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0}
+              total={totalPages}
               page={data?.meta?.page || 1}
               onChange={handleChangePage}
               classNames={{

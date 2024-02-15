@@ -15,10 +15,13 @@ function StoriesList() {
   const pathname = usePathname()
   
   const { response:{ isLoading, data, mutate }, stories } = useStories({ searchParams: searchParams.toString() })
+
+  if (isLoading) return <StoriesListSkeleton />
+
+  if(!(data && data.meta)) return
   
   const hasStories = stories.length > 0
-
-  const totalPages = data?.meta ? Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage) : 0
+  const totalPages = Math.ceil(data.meta.rowsObtained / data.meta.rowsPerPage)
 
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
@@ -27,8 +30,6 @@ function StoriesList() {
     })
     replace(url)
   }
-  
-  if (isLoading) return <StoriesListSkeleton />
 
   if (!hasStories) return (
     <NoData
@@ -52,7 +53,7 @@ function StoriesList() {
         }
       </div>
       {
-        totalPages >= 10 && (
+        data.meta.rowsPerPage < data.meta.rowsObtained && (
           <div className="ml-0 md:ml-auto my-10 flex justify-end">
             <Pagination
               showControls
