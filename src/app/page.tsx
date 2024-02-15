@@ -1,7 +1,6 @@
 import Featured from "@client/components/Featured";
 import Menu from "@client/components/Menu";
 import CategoriesList from "@client/features/categories/components/CategoriesList";
-import PostsList from "@client/features/posts/components/PostsList";
 import PostsContent from "./client/features/posts/components/PostsContent";
 
 export default function Home() {
