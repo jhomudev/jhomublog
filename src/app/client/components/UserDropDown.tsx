@@ -1,26 +1,25 @@
 'use client'
 
-import React from "react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem } from "@nextui-org/dropdown";
-import { User} from "@nextui-org/user";
-import { signOut, useSession } from "next-auth/react";
-import { DEFAULT_USER_AVATAR } from "../data";
 import { Avatar } from "@nextui-org/avatar";
-import ThemeToggle from "./ThemeToggle";
-import {PersonIcon, ReaderIcon, BookmarkIcon, Pencil2Icon, ExitIcon, QuestionMarkIcon, SunIcon} from '@radix-ui/react-icons'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
+import { User } from "@nextui-org/user";
+import { BookmarkIcon, ExitIcon, Pencil2Icon, PersonIcon, QuestionMarkIcon, ReaderIcon, SunIcon } from '@radix-ui/react-icons';
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { DEFAULT_USER_AVATAR } from "../data";
+import ThemeToggle from "./ThemeToggle";
 
 export default function UserDropdown() {
   const { data: session } = useSession()
-  const {push} = useRouter()
-
+  const { push } = useRouter()
+  
   return (
     <Dropdown
       showArrow
       radius="sm"
       classNames={{
         base: "before:bg-default-200", // change arrow background
-        content: "p-0 border-small border-divider bg-background",
+        content: `p-0 border-small border-divider dark:bg-bg_main_dark bg-background`,
       }}
     >
       <DropdownTrigger>
@@ -40,15 +39,16 @@ export default function UserDropdown() {
         itemClasses={{
           base: [
             "rounded-md",
-            "text-default-500",
+            "text-text_color dark:text-text_color_dark",
             "transition-opacity",
-            "data-[hover=true]:text-foreground",
+            "data-[hover=true]:text-text_color",
+            "dark:data-[hover=true]:text-text_color_dark",
             "data-[hover=true]:bg-default-100",
-            "dark:data-[hover=true]:bg-default-50",
+            "dark:data-[hover=true]:bg-bg_soft_dark",
             "data-[selectable=true]:focus:bg-default-50",
             "data-[pressed=true]:opacity-70",
             "data-[focus-visible=true]:ring-default-500",
-          ],
+          ]
         }}
       >
         <DropdownSection aria-label="Profile & Actions" showDivider>
@@ -61,8 +61,8 @@ export default function UserDropdown() {
               name={session?.user?.name}
               description={session?.user?.username}
               classNames={{
-                name: "text-default-600",
-                description: "text-default-500",
+                name:  "text-text_color dark:text-text_color_dark",
+                description: "text-text_soft_color dark:text-text_color_soft_dark"
               }}
               avatarProps={{
                 size: "sm",
