@@ -1,6 +1,6 @@
-import PostUserCard from "@/app/client/features/posts/components/PostUserCard"
-import PostActions from "@/app/client/features/posts/components/PostActions"
-import PostAuthorActions from "@/app/client/features/posts/components/PostAuthorActions"
+import PostUserCard from "@client/features/posts/components/PostUserCard"
+import PostActions from "@client/features/posts/components/PostActions"
+import PostAuthorActions from "@client/features/posts/components/PostAuthorActions"
 import Menu from "@client/components/Menu"
 import { DEFAULT_POST_IMG } from "@client/data"
 import Comments from "@client/features/comments/components/Comments"
@@ -9,7 +9,7 @@ import { auth } from "@client/lib/auth"
 import { Link2Icon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"
-import { limitText } from "@/app/client/utils"
+import { limitText } from "@client/utils"
 
 async function PostPage({params}: {params: {postSlug: string}}) {
   const { postSlug } = params
@@ -51,7 +51,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
             {
               post.tags.map((tag) => (
                 <span key={tag} className="rounded-full hover:bg-main_color/70 hover:text-white">
-                  <Link className="px-2 py-1 flex gap-1 items-center truncate" href={`/blog?tag=${tag}`}>#
+                  <Link className="px-2 py-1 flex gap-1 items-center truncate" href={`/tags/${encodeURIComponent(tag)}`}>#
                     {
                       limitText({
                         text: tag,

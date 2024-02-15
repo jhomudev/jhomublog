@@ -1,4 +1,4 @@
-import StoriesList from "@/app/client/features/stories/components/StoriesList"
+import StoriesList from "@client/features/stories/components/StoriesList"
 
 function StoriesPage() {
   return (

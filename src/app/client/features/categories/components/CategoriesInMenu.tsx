@@ -14,10 +14,10 @@ function CategoriesInMenu() {
   return (
     <div className="flex flex-wrap gap-3">
       {
-        categories?.map(({id, name ,slug}) => (
+        categories?.slice(0, 9).map(({id, name ,slug}) => (
           <Link
             key={id}
-            href={`/blog?cat=${slug}`}
+            href={`/categories/${slug}`}
             className="py-2 px-4 rounded-lg flex justify-center items-center text-sm bg-bg_soft hover:brightness-95 dark:bg-bg_soft_dark"
             style={{backgroundColor:`${CATEGORIE_COLORS[slug as CatColors]}20`}}
           >
@@ -25,6 +25,12 @@ function CategoriesInMenu() {
           </Link>
         ))
       }
+      <Link
+        href={`/categories`}
+        className="py-2 px-4 rounded-lg flex justify-center items-center text-sm bg-bg_soft hover:brightness-95 dark:bg-bg_soft_dark"
+      >
+        Others
+      </Link>
     </div>
   )
 }

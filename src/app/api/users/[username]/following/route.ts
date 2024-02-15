@@ -1,4 +1,4 @@
-import db from "@/app/client/lib/prisma"
+import db from "@client/lib/prisma"
 import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
 

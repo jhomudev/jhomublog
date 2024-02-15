@@ -1,6 +1,6 @@
 'use client'
-import NoData from "@/app/client/components/molecules/NoData"
-import { getURLWithParams } from "@/app/client/utils"
+import NoData from "@client/components/molecules/NoData"
+import { getURLWithParams } from "@client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { useSearchParams, usePathname } from "next/navigation"
 import { useRouter } from "next/navigation"

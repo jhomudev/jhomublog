@@ -28,13 +28,15 @@ async function Footer() {
             <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/about'>About</Link></li>
             <li><Link className="text-text_color_soft dark:text-text_color_soft_dark" href='/contact'>Contact</Link></li>
           </ul>
+          {/* //TODO: Crear page categories y tags */}
           <ul className="flex flex-col gap-1">
             <li className="text-text_color dark:text-text_color_dark font-semibold">Categories</li>
             {
               cats?.map((cat, id) => {
+                // TODO: no se ve en start pero si en dev
                 if (id >= 5) return
                 return (
-                  <li key={cat.id}><Link className="text-text_color_soft dark:text-text_color_soft_dark" href={`/blog?cat=${cat.slug}`}>{cat.name}</Link></li>
+                  <li key={cat.id}><Link className="text-text_color_soft dark:text-text_color_soft_dark" href={`/categories/${cat.slug}`}>{cat.name}</Link></li>
                 )
               })
             }

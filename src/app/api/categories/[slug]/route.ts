@@ -1,5 +1,5 @@
-import { CategoryResponse } from "@/app/client/features/categories/types"
-import db from "@/app/client/lib/prisma"
+import { CategoryResponse } from "@client/features/categories/types"
+import db from "@client/lib/prisma"
 import { ApiReponseWithReturn } from "@client/types"
 import { NextRequest, NextResponse } from "next/server"
 

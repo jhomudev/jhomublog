@@ -1,4 +1,4 @@
-import { formatQuantity } from "@/app/client/utils"
+import { formatQuantity } from "@client/utils"
 import Image from "next/image"
 import FollowButton from "../../follows/components/FollowButton"
 import { User } from "../types"

@@ -1,6 +1,6 @@
-import ProfileAside from "@/app/client/features/profile/components/ProfileAside"
-import ProfileTabsContent from "@/app/client/features/profile/components/ProfileTabsContent"
-import { getUser } from "@/app/client/features/profile/services"
+import ProfileAside from "@client/features/profile/components/ProfileAside"
+import ProfileTabsContent from "@client/features/profile/components/ProfileTabsContent"
+import { getUser } from "@client/features/profile/services"
 
 type Props = {
   children: React.ReactNode

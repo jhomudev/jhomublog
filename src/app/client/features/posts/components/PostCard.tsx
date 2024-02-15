@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import MyTooltip from "@client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
 import { formatDate, limitText } from "@client/utils"
@@ -52,7 +52,7 @@ function PostCard({ post }: Props) {
             <span className="line-clamp-1">{post.user.name}</span>
           </div> -
           <time dateTime={formatDate(post.createdAt).shortReverse}>{formatDate(post.createdAt).short}</time> |
-          <span className="text-red-700 uppercase"><Link href={`/blog?cat=${post.cat.slug}`}>{post.cat.name}</Link></span>
+          <span className="text-red-700 uppercase"><Link href={`/categories/${post.cat.slug}`}>{post.cat.name}</Link></span>
         </div>
         <h3 className="text-2xl font-semibold line-clamp-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
         <p className="text-base text-balance text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
@@ -60,7 +60,7 @@ function PostCard({ post }: Props) {
           {
             post.tags.map((tag) => (
               <span key={tag} className="px-2 py-1 rounded-full text-xs bg-bg_soft dark:bg-bg_soft_dark">
-                <Link href={`/blog?tag=${tag}`}>
+                <Link href={`/tags/${tag}`}>
                 {
                       limitText({
                         text: tag,

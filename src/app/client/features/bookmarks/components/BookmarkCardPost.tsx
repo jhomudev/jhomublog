@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import MyTooltip from "@client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { DEFAULT_POST_IMG } from "@client/data"
 import { formatDate } from "@client/utils"

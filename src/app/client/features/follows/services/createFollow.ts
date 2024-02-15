@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/app/client/types"
+import { ApiResponse } from "@client/types"
 import axios from "axios"
 import { FollowInput } from "../types"
 

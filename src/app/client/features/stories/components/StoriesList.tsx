@@ -6,8 +6,8 @@ import useStories from "../hooks/useStories"
 import StorieCardPost from "./StorieCardPost"
 import StoriesListSkeleton from "./StoriesListSkeleton"
 import Link from "next/link"
-import { Button } from "@/app/client/components/ui/button"
-import NoData from "@/app/client/components/molecules/NoData"
+import { Button } from "@client/components/ui/button"
+import NoData from "@client/components/molecules/NoData"
 
 function StoriesList() {
   const { replace } = useRouter()

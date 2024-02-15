@@ -1,4 +1,4 @@
-import SearchPostsList from "@/app/client/features/search/components/SearchPostsList"
+import SearchPostsList from "@client/features/search/components/SearchPostsList"
 
 function SearchPostsPage() {
   return (

@@ -1,5 +1,5 @@
-import { getUser } from "@/app/client/features/profile/services"
-import { formatDate, formatQuantity } from "@/app/client/utils"
+import { getUser } from "@client/features/profile/services"
+import { formatDate, formatQuantity } from "@client/utils"
 
 type Props = {
   params: {

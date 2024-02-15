@@ -1,6 +1,6 @@
 'use client'
-import { useToast } from "@/app/client/components/ui/use-toast"
-import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import { useToast } from "@client/components/ui/use-toast"
+import MyTooltip from "@client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { CATEGORIE_COLORS, CatColors, DEFAULT_POST_IMG } from "@client/data"
 import { formatDate, formatQuantity } from "@client/utils"

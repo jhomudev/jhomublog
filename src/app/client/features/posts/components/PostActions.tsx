@@ -1,5 +1,5 @@
 'use client'
-import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import MyTooltip from "@client/components/molecules/MyTooltip"
 import { Button } from "@client/components/ui/button"
 import { formatQuantity } from "@client/utils"
 import { BookmarkFilledIcon, BookmarkIcon, ChatBubbleIcon, EyeOpenIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"

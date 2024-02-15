@@ -1,5 +1,5 @@
-import { DEFAULT_POST_IMG } from "@/app/client/data"
-import { formatDate, limitText } from "@/app/client/utils"
+import { DEFAULT_POST_IMG } from "@client/data"
+import { formatDate, limitText } from "@client/utils"
 import { ClockIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"
@@ -20,7 +20,7 @@ function PostCardSquare({post}: Props) {
             {
               post.tags.filter((_,id) => id < 6).map((tag) => (
                 <li key={tag} className="flex">
-                  <Link href={`/blog?tag=${tag}`} className="text-xs px-2 py-[2px] rounded-full text-white bg-main_color truncate">
+                  <Link href={`/tags/${tag}`} className="text-xs px-2 py-[2px] rounded-full text-white bg-main_color truncate">
                     {
                       limitText({
                         text: tag,

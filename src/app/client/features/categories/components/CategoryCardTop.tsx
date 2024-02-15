@@ -1,22 +1,10 @@
-'use client'
-import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import { getCategory } from "../services"
 import { Category } from "../types"
-import { CATEGORIE_COLORS, CatColors } from "@client/data"
+type Props = {
+  category: Category
+}
 
-function CategoryCardTop() {
-  const searchParams = useSearchParams()
-  const cat = searchParams.get('cat')
-  const [category, setCategory] = useState<Category>({} as Category)
-
-  useEffect(() => {
-    const getCat = () => getCategory(cat as string).then((res)=> res && setCategory(res))
-    cat && getCat()
-  }, [cat])
-
-  return cat && (
+function CategoryCardTop({category}: Props) {
+  return (
     <header className="flex flex-col gap-3 items-center justify-center p-3 mb-10 text-center">
       <div className="flex items-center gap-6">
         <h1

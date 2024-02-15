@@ -6,8 +6,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import useBookmarks from "../hooks/useBookmarks"
 import BookmarkCardPost from "./BookmarkCardPost"
 import BookmarksListSkeleton from "./BookmarksListSkeleton"
-import NoData from "@/app/client/components/molecules/NoData"
-import { Button } from "@/app/client/components/ui/button"
+import NoData from "@client/components/molecules/NoData"
+import { Button } from "@client/components/ui/button"
 import Link from "next/link"
 
 function BookmarksList() {

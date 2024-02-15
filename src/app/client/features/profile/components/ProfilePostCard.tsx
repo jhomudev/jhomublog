@@ -21,7 +21,7 @@ function ProfilePostCard({ post }: Props) {
         </h2>
         <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
         <div className="flex gap-2 items-center mt-auto">
-          <Link href={`/blog?cat=${post.cat.slug}`} className="relative z-20">
+          <Link href={`/categories/${post.cat.slug}`} className="relative z-20">
             <span className="font-semibold text-xs rounded-full px-2 py-1"
               style={{
                 color: `${CATEGORIE_COLORS[post.cat.slug as CatColors]}`,

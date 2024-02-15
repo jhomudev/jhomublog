@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@/app/client/components/ui/button"
+import { Button } from "@client/components/ui/button"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import useFollowActions from "../hooks/useFollowActions"

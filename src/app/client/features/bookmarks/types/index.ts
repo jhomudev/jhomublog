@@ -1,4 +1,4 @@
-import { BaseEntity } from "@/app/client/types"
+import { BaseEntity } from "@client/types"
 
 export type BookmarkInput = {
   postId: string

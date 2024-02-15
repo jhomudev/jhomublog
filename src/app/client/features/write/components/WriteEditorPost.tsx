@@ -1,7 +1,7 @@
 'use client'
-import WriteEditor from '@/app/client/features/write/components/WriteEditor';
-import WriteSelectCategory from '@/app/client/features/write/components/WriteSelectCategory';
-import WriteSelectTags from '@/app/client/features/write/components/WriteSelectTags';
+import WriteEditor from '@client/features/write/components/WriteEditor';
+import WriteSelectCategory from '@client/features/write/components/WriteSelectCategory';
+import WriteSelectTags from '@client/features/write/components/WriteSelectTags';
 import { Button } from '@client/components/ui/button';
 import useWritePost from '@client/features/write/hooks/useWritePost';
 import { slugify, uploadFileToStorage } from '@client/utils';

@@ -1,6 +1,6 @@
-import NoData from "@/app/client/components/molecules/NoData"
-import ProfileFollowersList from "@/app/client/features/profile/components/ProfileFollowersList"
-import { getUser } from "@/app/client/features/profile/services"
+import NoData from "@client/components/molecules/NoData"
+import ProfileFollowersList from "@client/features/profile/components/ProfileFollowersList"
+import { getUser } from "@client/features/profile/services"
 
 type Props = {
   params: {
