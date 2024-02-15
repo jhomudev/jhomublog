@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-main: #14A297;
+  --color-soft: #F0F0F0;
+  --color-soft-dark: #1F273A;
+}
+
 /* For react-inpu-tag component */
 .rti--container:focus-within {
   --rti-main: transparent !important;
@@ -19,6 +25,17 @@
   gap: var(--rti-s);
   line-height: 1.4;
   padding: 0 !important;
+}
+
+/* styles per content-post */
+.content-post pre {
+  scrollbar-width: thin;
+
+  @apply px-6 py-5 rounded-md bg-bg_soft dark:bg-bg_soft_dark text-sm overflow-x-auto;
+}
+
+.content-post blockquote {
+  @apply border-l-5 border-main_color/70 bg-bg_soft/40 dark:bg-bg_soft_dark/40 p-3 pl-5;
 }
 
 .content-post ul {

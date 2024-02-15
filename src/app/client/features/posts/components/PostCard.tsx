@@ -36,13 +36,15 @@ function PostCard({ post }: Props) {
 
   return (
     <article className="flex gap-10">
-      <div className="hidden lg:block flex-[1] relative h-full min-h-[100px] aspect-square">
+      <div className="hidden lg:block flex-[1] relative min-h-[100px]">
         <Image
           src={post.img || DEFAULT_POST_IMG}
           alt={post.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          loading="lazy" />
+          loading="lazy"
+          className="object-cover rounded-md"
+        />
       </div>
       <div className="flex-[3] flex flex-col gap-2 py-2 overflow-hidden">
         <div className="flex gap-2 items-center text-sm">
@@ -56,18 +58,18 @@ function PostCard({ post }: Props) {
         </div>
         <h3 className="text-2xl font-semibold line-clamp-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
         <p className="text-base text-balance text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {
             post.tags.map((tag) => (
               <span key={tag} className="px-2 py-1 rounded-full text-xs bg-bg_soft dark:bg-bg_soft_dark">
-                <Link href={`/tags/${tag}`}>
+                <Link href={`/tags/${tag}`} className="truncate">
                 {
-                      limitText({
-                        text: tag,
-                        limit: 22,
-                        noLimit: tag.length <= 20
-                      })
-                    }
+                  limitText({
+                    text: tag,
+                    limit: 22,
+                    noLimit: tag.length <= 20
+                  })
+                }
                 </Link>
               </span>
             ))

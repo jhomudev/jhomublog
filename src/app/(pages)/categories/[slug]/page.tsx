@@ -1,3 +1,4 @@
+import NoData from "@/app/client/components/molecules/NoData"
 import Menu from "@client/components/Menu"
 import CategoryCardTop from "@client/features/categories/components/CategoryCardTop"
 import { getCategory } from "@client/features/categories/services"
@@ -11,7 +12,7 @@ type Props = {
 async function CategoryPage({ params: { slug } }: Props) {
   const category = await getCategory(slug)
 
-  if (!category) return <p>Category not found</p>
+  if (!category) return <NoData title="Category not found" message="This category dont exist" />
   
   return (
     <>

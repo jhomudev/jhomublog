@@ -13,6 +13,7 @@ type Props = {
 function PostsListGrid({posts = [] , isLoading = true }: Props) {
   
   const hasPosts = posts.length > 0
+  const hasJustOne = posts.length === 1
 
   if (isLoading) return <PostsListGridSkeleton/>
 
@@ -20,7 +21,7 @@ function PostsListGrid({posts = [] , isLoading = true }: Props) {
   
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-10`}>
         {
           posts.map(post => (
             <PostCardSquare key={post.id} post={post} />

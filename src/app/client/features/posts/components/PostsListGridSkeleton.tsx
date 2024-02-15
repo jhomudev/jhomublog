@@ -2,7 +2,7 @@ import { Skeleton } from "@client/components/ui/skeleton"
 
 function PostsListGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
       {
         Array.from({length: 5}).map((_, id) => (
           <div key={id} className="flex flex-col gap-4">

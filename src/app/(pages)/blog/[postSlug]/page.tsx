@@ -36,8 +36,8 @@ async function PostPage({params}: {params: {postSlug: string}}) {
           </div>
           <PostActions post={post} />
         </div>
-        <div className="relative flex-1 h-[300px min-h-[300px]">
-          <Image className="object-cover rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
+        <div className="relative flex-1 min-h-[240px] sm:min-h-[300px]">
+          <Image className="object-fill rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
         </div>
       </section>
       <div className="flex flex-col lg:flex-row gap-16 mt-10">
@@ -46,8 +46,8 @@ async function PostPage({params}: {params: {postSlug: string}}) {
             <div dangerouslySetInnerHTML={{__html: post.content}} />
           </main>
           <div className="h-6 mt-7 border-y-1 border-bg_soft dark:border-bg_soft_dark border-dotted"></div>
-          <div className="tags flex flex-wrap gap-3 text-xs uppercase mt-7">
-            <span className="flex gap-1 items-center"><Link2Icon />Tags</span>
+          <div className="tags flex items-center flex-wrap gap-3 text-xs uppercase mt-7">
+            <span><Link href={"/tags"} className="flex gap-1 items-center"><Link2Icon />Tags</Link></span>
             {
               post.tags.map((tag) => (
                 <span key={tag} className="rounded-full hover:bg-main_color/70 hover:text-white">

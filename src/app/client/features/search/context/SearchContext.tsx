@@ -11,7 +11,7 @@ type Context = {
   setRecents: React.Dispatch<React.SetStateAction<SearchRecentItem[]>>
 }
 
-export const SEARCH_ITEMS_LOCAL_STORAGE = 'jhonanblog_search_recents'
+export const SEARCH_ITEMS_LOCAL_STORAGE = 'jhomublog_search_recents'
 
 const getRecentsFromLocalStorage = () => {
   if (typeof window !== 'undefined') {

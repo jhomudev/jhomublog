@@ -12,7 +12,7 @@ function Menu() {
   const { response: { isLoading: isLoadingAuthorPosts }, posts: authorPosts } = usePosts({ searchParams: searchParams.toString() })
   
   return (
-    <aside className="relative flex-1 w-full md:max-w-80 md:min-w-80">
+    <aside className="relative flex-1 w-full lg:max-w-80 lg:min-w-80">
       <div className="sticky top-3">
         <small className="text-text_color_soft dark:text-text_color_soft_dark">{ "What's hot?" }</small>
         <h2 className="mb-5 text-2xl font-semibold">Most popular</h2>

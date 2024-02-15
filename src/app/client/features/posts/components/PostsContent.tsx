@@ -18,9 +18,7 @@ function PostsContent({view = 'list', sp, hidePagination = false}: Props) {
   const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { posts, response: { isLoading, data } } = usePosts({ searchParams: sp + searchParams.toString() })
-
-  const hasPosts = posts.length > 0
+  const { posts, response: { isLoading, data } } = usePosts({ searchParams: sp ?? '' + searchParams.toString() })
 
   const handleChangePage = (page: number) => { 
     const url = getURLWithParams({
@@ -30,10 +28,6 @@ function PostsContent({view = 'list', sp, hidePagination = false}: Props) {
     replace(url)
   }
   
-  if (isLoading) return <PostsListSkeleton />
-
-  if (!hasPosts) return <NoData />
-
   return (
     <>
       <div>

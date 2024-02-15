@@ -7,7 +7,6 @@ type Props = {
   }
 }
 async function TagPage({ params: { tag } }: Props) {
-  
   return (
     <>
       <div className="mt-10">
