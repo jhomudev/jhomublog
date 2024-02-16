@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nombre del Proyecto
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Este proyecto es un blog desarrollado utilizando Next.js, una biblioteca de React que facilita la creación de aplicaciones web de una sola página con renderizado del lado del servidor (SSR). Proporciona una estructura sólida para el desarrollo rápido y eficiente de aplicaciones web modernas.
+
+El blog está diseñado para ser fácilmente personalizable y extensible, permitiendo a los usuarios agregar nuevas publicaciones, gestionar contenido y explorar temas de interés.
+
+## Características
+
+- **Renderizado del lado del servidor (SSR):** Mejora el rendimiento y la SEO al generar páginas web completamente renderizadas en el servidor.
+- **Routing Dinámico:** Utiliza el enrutamiento dinámico de Next.js para generar rutas de forma automática a partir del contenido del blog.
+- **Componentes Reutilizables:** Aprovecha las capacidades de componentización de React para crear componentes reutilizables y mantenibles.
+- **Optimización de Imágenes:** Implementa técnicas de optimización de imágenes para mejorar el rendimiento de carga de la aplicación.
+
+
+## Installation
+
+1. Clona el repositorio en tu máquina local.
+2. Instala las dependencias utilizando npm o yarn:
+
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+# o
+yarn install
 ```
+    
+## Environment Variables
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para ejecutar este proyecto, deberá agregar las siguientes variables de entorno al archivo .env y .env.local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **.env** 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`DATABASE_URL` => Api key prisma accelarate
 
-## Learn More
+- **.env** 
 
-To learn more about Next.js, take a look at the following resources:
+`GOOGLE_ID`  =>  ID de clientes - google (Credenciales) \
+`GOOGLE_SECRET` => google secret code\
+`AUTH_SECRET` => Llave de encriptación NextAuth - la definimos nosotros\
+`AUTH_URL` => Dominio de la aplicaión\
+`NEXT_PUBLIC_API_URL` => URL de la api -> [domino]/api\
+`NEXT_PUBLIC_TINYMCE_API_KEY` =>  api key library tinymce\
+`NEXT_PUBLIC_APP_HOSTNAME` => Dominio de la aplicaión\
+`FIREBASE_API_KEY` => Firebase storage api key 
+ 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+**Client:** Next js, React js,  TailwindCSS, Shadcdn, NextUI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Server:** Next Auth, Prisma ORM, Prisma Acelerate , Mongo DB
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
