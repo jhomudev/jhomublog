@@ -1,5 +1,5 @@
-import Menu from "@client/components/Menu"
-import PostsContent from "@client/features/posts/components/PostsContent"
+import Menu from "@/app/client/components/Menu"
+import PostsContent from "@/app/client/features/posts/components/PostsContent"
 
 type Props = {
   params: {

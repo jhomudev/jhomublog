@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { CATEGORIE_COLORS, CatColors, DEFAULT_POST_IMG } from "@client/data"
-import { formatDate } from "@client/utils"
+import { CATEGORIE_COLORS, CatColors, DEFAULT_POST_IMG } from "@/app/client/data"
+import { formatDate } from "@/app/client/utils"
 import { PostInPosts } from "../types"
 import PostsInMenuSkeleton from "./PostsInMenuSkeleton"
 

@@ -1,5 +1,5 @@
-import { DEFAULT_POST_IMG } from "@client/data"
-import { formatDate, limitText } from "@client/utils"
+import { DEFAULT_POST_IMG } from "@/app/client/data"
+import { formatDate, limitText } from "@/app/client/utils"
 import { ClockIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"

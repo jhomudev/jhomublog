@@ -1,7 +1,7 @@
 'use client'
-import MyTooltip from "@client/components/molecules/MyTooltip"
-import { Button } from "@client/components/ui/button"
-import { useToast } from "@client/components/ui/use-toast"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import { Button } from "@/app/client/components/ui/button"
+import { useToast } from "@/app/client/components/ui/use-toast"
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/modal'
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons"
 import Link from "next/link"

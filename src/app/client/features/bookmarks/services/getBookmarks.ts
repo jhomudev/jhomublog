@@ -1,4 +1,4 @@
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { BookmarkResponse, Bookmark } from "../types"
 import axios from "axios"
 import { formatBookmarksResponse } from "../adapters"

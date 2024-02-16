@@ -1,5 +1,5 @@
 'use server'
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { CategoryResponse } from "../types"
 
 const getCategory = async (slug: string): Promise<CategoryResponse | undefined> => { 

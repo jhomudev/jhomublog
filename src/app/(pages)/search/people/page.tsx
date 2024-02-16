@@ -1,4 +1,4 @@
-import SearchPeopleList from "@client/features/search/components/SearchPeopleList"
+import SearchPeopleList from "@/app/client/features/search/components/SearchPeopleList"
 
 function SearchPeoplePage() {
   return (

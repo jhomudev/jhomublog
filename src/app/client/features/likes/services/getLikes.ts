@@ -1,4 +1,4 @@
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { LikeResponse, Like } from "../types"
 import axios from "axios"
 import { formatLikesResponse } from "../adapters"

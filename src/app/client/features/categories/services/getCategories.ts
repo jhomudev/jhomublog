@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Category, CategoryResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { formatCategoryResponse } from "../adapters"
 
 const getCategories = async (): Promise<Category[] | undefined> => { 

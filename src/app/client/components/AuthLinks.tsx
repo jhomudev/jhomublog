@@ -1,7 +1,7 @@
 'use client'
-import MyTooltip from "@client/components/molecules/MyTooltip"
-import ThemeToggle from "@client/components/ThemeToggle"
-import UserDropdown from "@client/components/UserDropDown"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import ThemeToggle from "@/app/client/components/ThemeToggle"
+import UserDropdown from "@/app/client/components/UserDropDown"
 import { BellIcon, EnterIcon } from '@radix-ui/react-icons'
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"

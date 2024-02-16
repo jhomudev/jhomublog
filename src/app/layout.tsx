@@ -1,4 +1,4 @@
-import WritePostProvider from '@client/features/write/providers/WritePostProvider'
+import WritePostProvider from '@/app/client/features/write/providers/WritePostProvider'
 import type { Metadata } from 'next'
 import { Quicksand, Titillium_Web } from 'next/font/google'
 import Footer from './client/components/Footer'

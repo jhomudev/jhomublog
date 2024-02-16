@@ -1,5 +1,5 @@
-import FormLogin from "@client/features/auth/components/FormLogin"
-import ListSocialAuth from "@client/features/auth/components/ListSocialAuth"
+import FormLogin from "@/app/client/features/auth/components/FormLogin"
+import ListSocialAuth from "@/app/client/features/auth/components/ListSocialAuth"
 
 function LoginPage() {
   return (

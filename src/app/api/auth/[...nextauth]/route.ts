@@ -1,2 +1,2 @@
-export {GET, POST} from '@client/lib/auth'
+export {GET, POST} from '@/app/client/lib/auth'
 

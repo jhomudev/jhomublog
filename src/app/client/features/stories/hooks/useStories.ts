@@ -1,9 +1,9 @@
 import { useMemo } from "react"
 import useSWR from "swr"
 import { formatStorieResponse } from "../adapters"
-import { fetcher } from "@client/lib/swr"
+import { fetcher } from "@/app/client/lib/swr"
 import { StorieResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { useSession } from "next-auth/react"
 
 type Props = {

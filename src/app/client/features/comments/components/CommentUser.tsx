@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { formatDate } from "@client/utils"
+import { formatDate } from "@/app/client/utils"
 import Link from "next/link"
 import FollowButton from "../../follows/components/FollowButton"
 type Props = {

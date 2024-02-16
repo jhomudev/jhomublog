@@ -1,4 +1,4 @@
-import { Skeleton } from "@client/components/ui/skeleton"
+import { Skeleton } from "@/app/client/components/ui/skeleton"
 
 function PostsInMenuSkeleton() {
   return (

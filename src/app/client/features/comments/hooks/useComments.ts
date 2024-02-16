@@ -1,9 +1,9 @@
 import { useMemo } from "react"
 import useSWR from "swr"
 import { formatCommentResponse } from "../adapters"
-import { fetcher } from "@client/lib/swr"
+import { fetcher } from "@/app/client/lib/swr"
 import { CommentResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 
 type Props = {
   postId?: string

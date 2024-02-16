@@ -1,5 +1,5 @@
-import { Button } from "@client/components/ui/button";
-import { useToast } from "@client/components/ui/use-toast";
+import { Button } from "@/app/client/components/ui/button";
+import { useToast } from "@/app/client/components/ui/use-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

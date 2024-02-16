@@ -1,4 +1,4 @@
-import { BaseEntity } from "@client/types"
+import { BaseEntity } from "@/app/client/types"
 
 export type LikeInput = {
   postId: string

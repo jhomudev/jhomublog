@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { z } from 'zod'
 import { CommentInputSchema } from '../schemas'
-import { Button } from '@client/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@client/components/ui/form"
-import { useToast } from '@client/components/ui/use-toast'
+import { Button } from '@/app/client/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/app/client/components/ui/form"
+import { useToast } from '@/app/client/components/ui/use-toast'
 import { createComment } from '../services'
 
 const formSchema = z.object({

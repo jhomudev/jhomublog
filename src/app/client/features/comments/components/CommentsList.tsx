@@ -1,4 +1,4 @@
-import NoData from "@client/components/molecules/NoData"
+import NoData from "@/app/client/components/molecules/NoData"
 import { Comment } from "../types"
 import CommentUser from "./CommentUser"
 import CommentsSkeleton from "./CommentsSkeleton"

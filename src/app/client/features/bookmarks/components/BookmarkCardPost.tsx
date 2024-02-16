@@ -1,8 +1,8 @@
 'use client'
-import MyTooltip from "@client/components/molecules/MyTooltip"
-import { Button } from "@client/components/ui/button"
-import { DEFAULT_POST_IMG } from "@client/data"
-import { formatDate } from "@client/utils"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import { Button } from "@/app/client/components/ui/button"
+import { DEFAULT_POST_IMG } from "@/app/client/data"
+import { formatDate } from "@/app/client/utils"
 import { ArrowRightIcon, BookmarkFilledIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import Link from "next/link"

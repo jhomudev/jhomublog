@@ -1,5 +1,5 @@
-import ProfilePostsList from "@client/features/profile/components/ProfilePostsList"
-import { getUser } from "@client/features/profile/services"
+import ProfilePostsList from "@/app/client/features/profile/components/ProfilePostsList"
+import { getUser } from "@/app/client/features/profile/services"
 
 async function UserProfilePage({params}: {params: {username: string}}) {
   const { username } = params

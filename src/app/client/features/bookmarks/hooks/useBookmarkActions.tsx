@@ -1,5 +1,5 @@
-import { ToastAction} from "@client/components/ui/toast"
-import { useToast } from "@client/components/ui/use-toast"
+import { ToastAction} from "@/app/client/components/ui/toast"
+import { useToast } from "@/app/client/components/ui/use-toast"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { createBookmark, removeBookmark } from "../services"

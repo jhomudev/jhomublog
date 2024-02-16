@@ -1,4 +1,4 @@
-import { BaseEntity } from '@client/types';
+import { BaseEntity } from '@/app/client/types';
 export type PostInPosts = BaseEntity & {
   slug: string,
   title: string,

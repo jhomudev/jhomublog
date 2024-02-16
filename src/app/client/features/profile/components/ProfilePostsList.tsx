@@ -1,11 +1,11 @@
 'use client'
-import { getURLWithParams } from "@client/utils"
+import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import usePosts from "../../posts/hooks/usePosts"
 import StorieCardPost from "./ProfilePostCard"
 import ProfilePostsListSkeleton from "./ProfilePostsListSkeleton"
-import NoData from "@client/components/molecules/NoData"
+import NoData from "@/app/client/components/molecules/NoData"
 
 type Props = {
   username: string

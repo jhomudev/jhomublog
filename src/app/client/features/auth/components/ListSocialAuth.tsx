@@ -1,6 +1,6 @@
 'use client'
 import { signIn } from "next-auth/react"
-import { Button } from "@client/components/ui/button"
+import { Button } from "@/app/client/components/ui/button"
 import Image from "next/image"
 
 function ListSocialAuth() {

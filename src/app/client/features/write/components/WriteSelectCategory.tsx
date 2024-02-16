@@ -1,6 +1,6 @@
 'use client'
-import { Button } from "@client/components/ui/button"
-import { CATEGORIE_COLORS, CatColors } from "@client/data"
+import { Button } from "@/app/client/components/ui/button"
+import { CATEGORIE_COLORS, CatColors } from "@/app/client/data"
 import Image from "next/image"
 import useCategories from "../../categories/hooks/useCategories"
 import useWritePost from "../hooks/useWritePost"

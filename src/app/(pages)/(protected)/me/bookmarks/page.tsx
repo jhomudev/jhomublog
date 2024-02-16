@@ -1,4 +1,4 @@
-import BookmarksList from "@client/features/bookmarks/components/BookmarksList"
+import BookmarksList from "@/app/client/features/bookmarks/components/BookmarksList"
 
 function BookmarksPage() {
   return (

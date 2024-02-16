@@ -1,7 +1,7 @@
 'use client'
-import UserCardFollow from "@client/components/UserCardFollow"
-import NoData from "@client/components/molecules/NoData"
-import { getURLWithParams } from "@client/utils"
+import UserCardFollow from "@/app/client/components/UserCardFollow"
+import NoData from "@/app/client/components/molecules/NoData"
+import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import SearchPeopleListSkeleton from "../../search/components/SearchPeopleListSkeleton"

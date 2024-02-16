@@ -1,8 +1,8 @@
 import NoData from "@/app/client/components/molecules/NoData"
-import Menu from "@client/components/Menu"
-import CategoryCardTop from "@client/features/categories/components/CategoryCardTop"
-import { getCategory } from "@client/features/categories/services"
-import PostsContent from "@client/features/posts/components/PostsContent"
+import Menu from "@/app/client/components/Menu"
+import CategoryCardTop from "@/app/client/features/categories/components/CategoryCardTop"
+import { getCategory } from "@/app/client/features/categories/services"
+import PostsContent from "@/app/client/features/posts/components/PostsContent"
 
 type Props = {
   params: {

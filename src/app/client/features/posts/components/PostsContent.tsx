@@ -1,5 +1,5 @@
 'use client'
-import { getURLWithParams } from "@client/utils"
+import { getURLWithParams } from "@/app/client/utils"
 import { Pagination } from "@nextui-org/pagination"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import usePosts from "../hooks/usePosts"

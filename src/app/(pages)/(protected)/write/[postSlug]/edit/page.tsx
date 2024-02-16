@@ -1,6 +1,6 @@
-import { getPost } from "@client/features/posts/services"
-import WriteEditorPost from "@client/features/write/components/WriteEditorPost"
-import { auth } from "@client/lib/auth"
+import { getPost } from "@/app/client/features/posts/services"
+import WriteEditorPost from "@/app/client/features/write/components/WriteEditorPost"
+import { auth } from "@/app/client/lib/auth"
 import { redirect } from "next/navigation"
 
 async function EditPostPage({ params }: { params: { postSlug: string } }) {

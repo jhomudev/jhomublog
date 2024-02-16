@@ -1,6 +1,6 @@
 import axios from "axios"
 import { StorieResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { formatStorieResponse } from "../adapters"
 
 /**

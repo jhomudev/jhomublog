@@ -1,6 +1,6 @@
 'use client'
 
-import NoData from "@client/components/molecules/NoData"
+import NoData from "@/app/client/components/molecules/NoData"
 import { PostInPosts } from "../types"
 import PostCardSquare from "./PostCardSquare"
 import PostsListGridSkeleton from "./PostsListGridSkeleton"

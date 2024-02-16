@@ -1,5 +1,5 @@
 'use client'
-import { CATEGORIE_COLORS, CatColors } from "@client/data"
+import { CATEGORIE_COLORS, CatColors } from "@/app/client/data"
 import Image from "next/image"
 import Link from "next/link"
 import useCategories from "../hooks/useCategories"

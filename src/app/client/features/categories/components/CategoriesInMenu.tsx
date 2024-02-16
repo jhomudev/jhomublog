@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CATEGORIE_COLORS, CatColors } from "@client/data"
+import { CATEGORIE_COLORS, CatColors } from "@/app/client/data"
 import useCategories from "../hooks/useCategories"
 import CategoriesInMenuSkeleton from "./CategoriesInMenuSkeleton"
 

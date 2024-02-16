@@ -1,4 +1,4 @@
-import { BaseEntity } from "@client/types";
+import { BaseEntity } from "@/app/client/types";
 import { FollowInputSchema } from "../schemas"
 import { z } from "zod"
 

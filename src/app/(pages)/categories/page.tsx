@@ -1,5 +1,5 @@
-import Menu from "@client/components/Menu"
-import CategoriesListMain from "@client/features/categories/components/CategoriesListMain"
+import Menu from "@/app/client/components/Menu"
+import CategoriesListMain from "@/app/client/features/categories/components/CategoriesListMain"
 
 function CategoriesPage() {
   return (

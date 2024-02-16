@@ -1,10 +1,10 @@
 'use client'
-import WriteEditor from '@client/features/write/components/WriteEditor';
-import WriteSelectCategory from '@client/features/write/components/WriteSelectCategory';
-import WriteSelectTags from '@client/features/write/components/WriteSelectTags';
-import { Button } from '@client/components/ui/button';
-import useWritePost from '@client/features/write/hooks/useWritePost';
-import { slugify, uploadFileToStorage } from '@client/utils';
+import WriteEditor from '@/app/client/features/write/components/WriteEditor';
+import WriteSelectCategory from '@/app/client/features/write/components/WriteSelectCategory';
+import WriteSelectTags from '@/app/client/features/write/components/WriteSelectTags';
+import { Button } from '@/app/client/components/ui/button';
+import useWritePost from '@/app/client/features/write/hooks/useWritePost';
+import { slugify, uploadFileToStorage } from '@/app/client/utils';
 import { TrashIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

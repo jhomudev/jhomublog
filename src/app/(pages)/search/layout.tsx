@@ -1,7 +1,7 @@
-import NavSearchInput from "@client/features/search/components/NavSearchInput"
-import SearchPageContent from "@client/features/search/components/SearchPageContent"
-import Menu from "@client/components/Menu"
-import SearchTextResult from "@client/features/search/components/SearchTextResult"
+import NavSearchInput from "@/app/client/features/search/components/NavSearchInput"
+import SearchPageContent from "@/app/client/features/search/components/SearchPageContent"
+import Menu from "@/app/client/components/Menu"
+import SearchTextResult from "@/app/client/features/search/components/SearchTextResult"
 
 type Props = {
   children: React.ReactNode

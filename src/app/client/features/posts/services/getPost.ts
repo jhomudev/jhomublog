@@ -1,4 +1,4 @@
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import axios from "axios"
 import { formatPostResponse } from "../adapters"
 import { Post, PostResponse } from "../types"

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { PostInPosts, PostInPostsResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { formatPostsResponse } from "../adapters"
 
 /**

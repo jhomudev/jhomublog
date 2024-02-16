@@ -1,7 +1,7 @@
 'use client'
-import MyTooltip from "@client/components/molecules/MyTooltip"
-import { Button } from "@client/components/ui/button"
-import { formatQuantity } from "@client/utils"
+import MyTooltip from "@/app/client/components/molecules/MyTooltip"
+import { Button } from "@/app/client/components/ui/button"
+import { formatQuantity } from "@/app/client/utils"
 import { BookmarkFilledIcon, BookmarkIcon, ChatBubbleIcon, EyeOpenIcon, HeartFilledIcon, HeartIcon, MinusCircledIcon } from "@radix-ui/react-icons"
 import { useSession } from "next-auth/react"
 import usePostActions from "../hooks/usePostActions"

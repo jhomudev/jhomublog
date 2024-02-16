@@ -1,5 +1,5 @@
-import { fetcher } from "@client/lib/swr"
-import { ApiReponseWithReturn } from "@client/types"
+import { fetcher } from "@/app/client/lib/swr"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import { useMemo } from "react"
 import useSWR from "swr"
 import { formatPostsResponse } from "../adapters"

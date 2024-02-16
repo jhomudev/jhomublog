@@ -1,5 +1,5 @@
-import Menu from "@client/components/Menu"
-import TagsList from "@client/features/tags/components/TagsList"
+import Menu from "@/app/client/components/Menu"
+import TagsList from "@/app/client/features/tags/components/TagsList"
 
 function TagsPage() {
   return (

@@ -1,4 +1,4 @@
-import Menu from "@client/components/Menu"
+import Menu from "@/app/client/components/Menu"
 
 type Props = {
   children: React.ReactNode

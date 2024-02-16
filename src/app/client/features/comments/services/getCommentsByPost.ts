@@ -1,6 +1,6 @@
 import axios from "axios"
 import { CommentResponse } from "../types"
-import { ApiReponseWithReturn } from "@client/types"
+import { ApiReponseWithReturn } from "@/app/client/types"
 import {formatCommentResponse} from "../adapters"
 
 const getCommentsByPost = async (postSlug: string): Promise<CommentResponse[] | undefined> => {

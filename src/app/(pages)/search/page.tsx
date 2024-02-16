@@ -1,4 +1,4 @@
-import SearchRecentsList from "@client/features/search/components/SearchRecentsList"
+import SearchRecentsList from "@/app/client/features/search/components/SearchRecentsList"
 
 function SearchPage() {
   return (
