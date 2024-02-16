@@ -1,19 +1,8 @@
-import WritePostProvider from '@/app/client/features/write/providers/WritePostProvider'
 import type { Metadata } from 'next'
-import { Quicksand, Titillium_Web } from 'next/font/google'
-import Footer from './client/components/Footer'
-import NavBar from './client/components/NavBar'
-import { Toaster } from './client/components/ui/toaster'
-import SearchProvider from './client/features/search/providers/SearchProvider'
-import AuthProvider from './client/providers/AuthProvider'
-import NextUIProviderTheme from './client/providers/NextUIProviderTheme'
+import { Titillium_Web } from 'next/font/google'
 import './globals.css'
 
 
-const q = Quicksand({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-})
 
 const ti = Titillium_Web({
   subsets: ['latin'],
@@ -33,24 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ti.className} scroll-smooth`}>
-        <AuthProvider>
-          <NextUIProviderTheme>
-            <SearchProvider>
-              <WritePostProvider>
-                <div className="container-all bg-bg_main text-text_color dark:bg-bg_main_dark dark:text-text_color_dark min-h-screen">
-                  <div className="container px-6 md:px-10">
-                    <NavBar />
-                    <div className="min-h-[100dvh]">
-                      {children}
-                    </div>
-                    <Footer />
-                  </div>
-                </div>
-              </WritePostProvider>
-            </SearchProvider>
-          </NextUIProviderTheme>
-        </AuthProvider>
-        <Toaster />
+        <div className="container px-6 md:px-10">
+          <div className="min-h-[100dvh]">
+            {children}
+          </div>
+        </div>        
       </body>
     </html>
   )

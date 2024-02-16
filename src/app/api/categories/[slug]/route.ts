@@ -1,4 +1,3 @@
-import { CategoryResponse } from "@/app/client/features/categories/types"
 import db from "@/app/client/lib/prisma"
 import { ApiReponseWithReturn } from "@/app/client/types"
 import { NextRequest, NextResponse } from "next/server"
@@ -9,7 +8,7 @@ export const GET = async (_req: NextRequest, { params }: { params: { slug: strin
     const category = await db.category.findUnique({ where: { slug } })
 
     if (category) {
-      return NextResponse.json<ApiReponseWithReturn<CategoryResponse>>({
+      return NextResponse.json<ApiReponseWithReturn>({
         ok: true,
         message: 'Category fetched successfully',
         data: category
