@@ -4,11 +4,14 @@ import CategoriesList from "@/app/client/features/categories/components/Categori
 import PostsContent from "./client/features/posts/components/PostsContent";
 import { Suspense } from "react";
 import CategoriesListSkeleton from "./client/features/categories/components/CategoriesListSkeleton";
+import { Skeleton } from "./client/components/ui/skeleton";
 
 export default function Home() {
   return (
     <>
-      <Featured />
+      <Suspense fallback={<Skeleton className="w-full h-[300px]" />}>
+        <Featured />
+      </Suspense>
       <div className="mt-10">
         <h2 className="mt-3 mb-5 text-2xl font-semibold">Popular categories</h2>
         <Suspense fallback={<CategoriesListSkeleton />}>
