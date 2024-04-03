@@ -4,13 +4,14 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatFollowerResponse } from "../adapters"
 import { FollowerResponse, User } from "../types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   user: User
 }
 
 function useFollowers({ user }: Props) {
-  const response = useSWR<ApiReponseWithReturn<FollowerResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/users/${user.username}/followers`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<FollowerResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/users/${user.username}/followers`, fetcher, {
     keepPreviousData: true
   })
 

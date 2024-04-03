@@ -1,6 +1,7 @@
 import { ApiResponse } from "@/app/client/types"
 import axios from "axios"
 import { PostInput } from "../types"
+import { env } from "@/app/client/lib/env"
 
 /**
  * Update a post
@@ -10,7 +11,7 @@ import { PostInput } from "../types"
  */
 const editPost = async (postSlug: string, input: Omit<PostInput, 'userId'>): Promise<ApiResponse | undefined> => { 
   try {
-    const res = await axios.put<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postSlug}`, input)
+    const res = await axios.put<ApiResponse>(`${env.NEXT_PUBLIC_API_URL}/posts/${postSlug}`, input)
     return res.data
   } catch (error) {
     console.log(error)

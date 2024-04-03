@@ -1,5 +1,11 @@
 import Menu from "@/app/client/components/Menu"
 import PostsContent from "@/app/client/features/posts/components/PostsContent"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Jhomublog. A blog for all people who are interested in diverse topics.',
+}
 
 function BlogPage() {
   return (

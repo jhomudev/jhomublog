@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatFollowResponse } from "../adapters"
 import { FollowResponse } from "../types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   searchParams: string
@@ -11,7 +12,7 @@ type Props = {
 
 function useFollows({ searchParams}: Props) {
 
-  const response = useSWR<ApiReponseWithReturn<FollowResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/follows?${searchParams.toString()}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<FollowResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/follows?${searchParams.toString()}`, fetcher, {
     keepPreviousData: true
   })
 

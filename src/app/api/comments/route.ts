@@ -57,15 +57,12 @@ export const GET = async (req: NextRequest) => {
 export const POST = async (req: NextRequest) => {
   const {desc, userId, postId} = await req.json()
   try {
-    const [user, post, alreadyExist] = await db.$transaction([
+    const [user, post] = await db.$transaction([
       db.user.findUnique({
         where: {id: userId}
       }),
       db.post.findUnique({
         where: {id: postId}
-      }),
-      db.comment.findFirst({
-        where: {postId, userId}
       })
     ])
     if (!user) {
@@ -79,12 +76,6 @@ export const POST = async (req: NextRequest) => {
         ok: false,
         message: 'Post not found'
       }, {status: 400})
-    }
-    if (alreadyExist) {
-      return NextResponse.json({
-        ok: false,
-        message: 'Already commented'
-      }, {status: 409})
     }
 
     const comment = await db.comment.create({

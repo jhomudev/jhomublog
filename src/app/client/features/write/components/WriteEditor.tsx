@@ -1,6 +1,7 @@
 'use client'
 import { Editor } from '@tinymce/tinymce-react';
 import useWritePost from '../hooks/useWritePost';
+import { env } from '@/app/client/lib/env';
 
 type Props = {
   content?: string
@@ -16,7 +17,7 @@ export default function WriteEditor ({content}: Props) {
   return (
     <>
       <Editor
-        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+        apiKey={env.NEXT_PUBLIC_TINYMCE_API_KEY}
         initialValue={content || "<p>Write the content of post here!.</p>"}
         init={{
           height: 800,

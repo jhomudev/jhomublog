@@ -1,8 +1,16 @@
 import ProfilePostsList from "@/app/client/features/profile/components/ProfilePostsList"
 import { getUser } from "@/app/client/features/profile/services"
+import { Metadata } from "next"
 
-async function UserProfilePage({params}: {params: {username: string}}) {
-  const { username } = params
+export async function generateMetadata({params: {username}}: {params: {username: string}}): Promise<Metadata> {
+  const user = await getUser(username)
+
+  return {
+    title: user?.name,
+  }
+} 
+
+async function UserProfilePage({params: {username}}: {params: {username: string}}) {
   const user = await getUser(username)
 
   if (!user) {

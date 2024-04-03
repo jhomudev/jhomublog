@@ -13,13 +13,13 @@ function ProfilePostCard({ post }: Props) {
     <article className="relative flex gap-10 p-4 rounded-md bg-bg_soft/30 dark:bg-bg_soft_dark/30">
       <Link className="absolute w-full h-full z-10" href={`/blog/${post.slug}`} />
       <div className="flex-[4] flex flex-col gap-2 overflow-hidden">
-        <div className="flex gap-2 items-center text-sm">
+        <div className="flex gap-2 items-center text-xs">
           <time dateTime={formatDate(post.createdAt).shortReverse}>{formatDate(post.createdAt).simple}</time>
         </div>
-        <h2 className="text-2xl font-semibold line-clamp-2">
+        <h2 className="text-lg md:text-2xl font-semibold line-clamp-2">
           {post.title}
         </h2>
-        <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
+        <p className="text-sm md:text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
         <div className="flex gap-2 items-center mt-auto">
           <Link href={`/categories/${post.cat.slug}`} className="relative z-20">
             <span className="font-semibold text-xs rounded-full px-2 py-1"

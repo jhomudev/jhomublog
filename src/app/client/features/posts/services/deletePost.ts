@@ -1,3 +1,4 @@
+import { env } from "@/app/client/lib/env"
 import { ApiResponse } from "@/app/client/types"
 import axios from "axios"
 
@@ -8,7 +9,7 @@ import axios from "axios"
  */
 const deletePost = async (slug: string): Promise<ApiResponse | undefined> => { 
   try {
-    const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`)
+    const res = await axios.delete<ApiResponse>(`${env.NEXT_PUBLIC_API_URL}/posts/${slug}`)
     return res.data
   } catch (error) {
     console.log(error)

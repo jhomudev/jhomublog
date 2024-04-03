@@ -4,13 +4,16 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatPostsResponse } from "../adapters"
 import { PostInPostsResponse } from "../types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   searchParams?: string
+  search?: 'search' | 'popular'
 }
 
-function usePosts({ searchParams }: Props) {
-  const response = useSWR<ApiReponseWithReturn<PostInPostsResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/posts?${searchParams}`, fetcher, {
+function usePosts({ search = 'search', searchParams}: Props) {
+  const isPopular = search === 'popular'
+  const response = useSWR<ApiReponseWithReturn<PostInPostsResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/posts${isPopular ? '/popular' : '?' + searchParams}`, fetcher, {
     keepPreviousData: true
   })
 

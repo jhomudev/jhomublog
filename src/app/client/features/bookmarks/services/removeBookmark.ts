@@ -1,3 +1,4 @@
+import { env } from "@/app/client/lib/env"
 import { ApiResponse } from "@/app/client/types"
 import axios from "axios"
 
@@ -8,7 +9,7 @@ type Props = {
 
 const removeBookmark = async ({postId, userId}: Props): Promise<ApiResponse | undefined> => { 
   try {
-    const res = await axios.delete<ApiResponse>(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks`, {
+    const res = await axios.delete<ApiResponse>(`${env.NEXT_PUBLIC_API_URL}/bookmarks`, {
       data: { postId, userId }
     })
     const data = res.data

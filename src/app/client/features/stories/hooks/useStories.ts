@@ -5,6 +5,7 @@ import { fetcher } from "@/app/client/lib/swr"
 import { StorieResponse } from "../types"
 import { ApiReponseWithReturn } from "@/app/client/types"
 import { useSession } from "next-auth/react"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   searchParams?: string
@@ -12,7 +13,7 @@ type Props = {
 
 function useStories({ searchParams }: Props) {
   const {data: session } = useSession()
-  const response = useSWR<ApiReponseWithReturn<StorieResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/stories/${session?.user?.username}?${searchParams}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<StorieResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/stories/${session?.user?.username}?${searchParams}`, fetcher, {
     keepPreviousData: true
   })
   

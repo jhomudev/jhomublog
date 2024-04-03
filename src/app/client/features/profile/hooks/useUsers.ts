@@ -4,13 +4,14 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatUserResponse } from "../adapters"
 import { UserResponse } from "../types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   searchParams?: string
 }
 
 function useUsers({ searchParams }: Props) {
-  const response = useSWR<ApiReponseWithReturn<UserResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/users?${searchParams}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<UserResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/users?${searchParams}`, fetcher, {
     keepPreviousData: true
   })
 

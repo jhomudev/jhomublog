@@ -4,13 +4,14 @@ import { formatCommentResponse } from "../adapters"
 import { fetcher } from "@/app/client/lib/swr"
 import { CommentResponse } from "../types"
 import { ApiReponseWithReturn } from "@/app/client/types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   postId?: string
 }
 
 function useComments({postId}: Props) {
-  const response = useSWR<ApiReponseWithReturn<CommentResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/comments${postId ? `?postId=${postId}`: ''}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<CommentResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/comments${postId ? `?postId=${postId}`: ''}`, fetcher, {
     keepPreviousData: true
   })
   

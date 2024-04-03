@@ -46,16 +46,16 @@ function StorieCardPost({ storie, updateStories }: Props) {
 
   return (
       <>
-        <article className="flex gap-10 p-4">
+        <article className="flex gap-10 py-5">
           <div className="flex-[4] flex flex-col gap-2 overflow-hidden">
             <div className="flex gap-2 items-center text-sm">
               <span className="font-semibold uppercase" style={{ color: `${CATEGORIE_COLORS[storie.cat.slug as CatColors]}` }}>{ storie.cat.name }</span> -
               <time dateTime={formatDate(storie.createdAt).shortReverse}>{formatDate(storie.createdAt).short}</time>
             </div>
-            <h2 className="text-2xl font-semibold line-clamp-2">
+            <h2 className="text-lg md:text-2xl font-semibold line-clamp-2">
               <Link className="block" href={`/blog/${storie.slug}`}>{storie.title}</Link>
             </h2>
-            <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{storie.overview}</p>
+            <p className="text-sm text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{storie.overview}</p>
             <div className="flex gap-2 justify-between items-center mt-auto">
               <div className="flex gap-2">
                 <MyTooltip content="Likes">
@@ -70,7 +70,7 @@ function StorieCardPost({ storie, updateStories }: Props) {
                   <Button variant={'destructive'} size='icon' className="flex gap-1 items-center" onClick={() => setShowModal(true)}><TrashIcon fontSize={20} /></Button>
                 </MyTooltip>
               </div>
-              <Link href={`/blog/${storie.slug}`} className="w-max flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
+              <Link href={`/blog/${storie.slug}`} className="w-max text-sm md:text-base flex gap-2 items-center hover:gap-3 transition-all duration-200">Read More <ArrowRightIcon /> </Link>
             </div>
           </div>
           <div className="hidden lg:block flex-[1] relative h-full min-h-[100px] aspect-square">

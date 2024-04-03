@@ -1,5 +1,11 @@
 import Menu from "@/app/client/components/Menu"
 import CategoriesListMain from "@/app/client/features/categories/components/CategoriesListMain"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'Categories in blog',
+  description: 'Categories. Watch all the categories in our blog.',
+}
 
 function CategoriesPage() {
   return (

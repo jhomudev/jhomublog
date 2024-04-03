@@ -4,10 +4,11 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatCategoryResponse } from "../adapters"
 import { CategoryResponse } from "../types"
+import { env } from "@/app/client/lib/env"
 
 
 function useCategories() {
-  const response = useSWR<ApiReponseWithReturn<CategoryResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/categories`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<CategoryResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/categories`, fetcher, {
     keepPreviousData: true
   })
   

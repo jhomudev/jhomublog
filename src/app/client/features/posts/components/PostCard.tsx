@@ -35,8 +35,8 @@ function PostCard({ post }: Props) {
   }
 
   return (
-    <article className="flex gap-10">
-      <div className="hidden lg:block flex-[1] relative min-h-[100px]">
+    <article className="grid gap-7 grid-cols-1 lg:grid-cols-[minmax(150px,280px)_minmax(400px,1fr)]">
+      <div className="hidden lg:block w-full relative">
         <Image
           src={post.img || DEFAULT_POST_IMG}
           alt={post.title}
@@ -46,8 +46,8 @@ function PostCard({ post }: Props) {
           className="object-cover rounded-md"
         />
       </div>
-      <div className="flex-[3] flex flex-col gap-2 py-2 overflow-hidden">
-        <div className="flex gap-2 items-center text-sm">
+      <div className="w-full flex flex-col gap-2 py-2 overflow-hidden">
+        <div className="flex gap-2 items-center text-xs md:text-sm">
           <div className="relative flex gap-2 items-center">
             <Link href={`/${post.user.username}`} className="absolute z-10 w-full h-full" />
             <Image src={post.user.image} alt={post.user.name} className="rounded-full" width={20} height={20} />
@@ -56,12 +56,12 @@ function PostCard({ post }: Props) {
           <time dateTime={formatDate(post.createdAt).shortReverse}>{formatDate(post.createdAt).short}</time> |
           <span className="text-red-700 uppercase"><Link href={`/categories/${post.cat.slug}`}>{post.cat.name}</Link></span>
         </div>
-        <h3 className="text-2xl font-semibold line-clamp-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
-        <p className="text-base text-balance text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
-        <div className="flex flex-wrap gap-2">
+        <h3 className="text-lg md:text-2xl font-semibold line-clamp-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+        <p className="text-sm md:text-base text-balance text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{post.overview}</p>
+        <div className="hidden md:flex flex-wrap gap-2">
           {
             post.tags.map((tag) => (
-              <span key={tag} className="px-2 py-1 rounded-full text-xs bg-bg_soft dark:bg-bg_soft_dark">
+              <span key={tag} className="px-2 py-0.5 rounded-full text-[12px] bg-bg_soft dark:bg-bg_soft_dark">
                 <Link href={`/tags/${tag}`} className="truncate leading-normal">
                 {
                   limitText({

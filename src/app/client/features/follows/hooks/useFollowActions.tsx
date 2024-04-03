@@ -29,7 +29,7 @@ function useFollowActions({ userIdToFollow }: Props) {
       return
     }
     const action = isFollow ? removeFollow : createFollow
-    const res = await action({followingId: userIdToFollow, followerId: session.user?.id})
+    const res = await action({followingId: userIdToFollow, followerId: session.user?.id as string})
     
     if (!res?.ok) {
       toast({

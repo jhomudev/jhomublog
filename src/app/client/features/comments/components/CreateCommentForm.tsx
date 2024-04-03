@@ -40,7 +40,7 @@ function CreateCommentForm({postId, updateComments}: Props) {
     const body: z.infer<typeof CommentInputSchema> = {
       desc: data.desc,
       postId,
-      userId: session.user.id
+      userId: session.user.id as string
     }
 
     const validation = CommentInputSchema.safeParse(body)
@@ -69,7 +69,7 @@ function CreateCommentForm({postId, updateComments}: Props) {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={handleSubmitForm} className="flex gap-5 items-center">
+        <form onSubmit={handleSubmitForm} className="flex gap-3 flex-col">
           <FormField
             control={form.control}
             name="desc"
@@ -78,7 +78,7 @@ function CreateCommentForm({postId, updateComments}: Props) {
                 <FormControl>
                   <textarea
                     placeholder="Write a comment..."
-                    className="w-full p-3 rounded-md min-h-6 max-h-16 bg-bg_soft dark:bg-bg_soft_dark"
+                    className="w-full p-3 rounded-md min-h-[90px] max-h-[130px] bg-bg_soft dark:bg-bg_soft_dark"
                     {...field}
                   />
                 </FormControl>
@@ -87,7 +87,13 @@ function CreateCommentForm({postId, updateComments}: Props) {
             )}
           >
           </FormField>
-          <Button variant={'primary'} size={'lg'} type="submit" className={`${isSubmitLoading && 'animate-pulse pointer-events-none'}`}>Submit</Button>
+          <Button
+            variant={'primary'}
+            type="submit"
+            className={`w-fit ${isSubmitLoading && 'animate-pulse pointer-events-none'}`}
+          >
+            Post comment
+          </Button>
         </form>
       </Form>
     </>

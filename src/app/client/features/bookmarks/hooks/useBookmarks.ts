@@ -4,13 +4,14 @@ import { formatBookmarksResponse } from "../adapters"
 import { fetcher } from "@/app/client/lib/swr"
 import { BookmarkResponse } from "../types"
 import { ApiReponseWithReturn } from "@/app/client/types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   searchParamsStr?: string
 }
 
 function useBookmarks({searchParamsStr}: Props) {
-  const response = useSWR<ApiReponseWithReturn<BookmarkResponse[]>>(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks?${searchParamsStr}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<BookmarkResponse[]>>(`${env.NEXT_PUBLIC_API_URL}/bookmarks?${searchParamsStr}`, fetcher, {
     keepPreviousData: true
   })
   

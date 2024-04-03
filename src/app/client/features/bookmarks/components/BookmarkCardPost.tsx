@@ -36,10 +36,10 @@ function BookmarkCardPost({ bookmark, updateBookmarks }: Props) {
             </div> -
             <time dateTime={formatDate(bookmark.createdAt).shortReverse}>{formatDate(bookmark.post.createdAt).short}</time>
           </div>
-          <h2 className="text-2xl font-semibold line-clamp-2">
+          <h2 className="text-lg md:text-2xl font-semibold line-clamp-2">
             <Link className="block" href={`/blog/${bookmark.post.slug}`}>{bookmark.post.title}</Link>
           </h2>
-          <p className="text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{bookmark.post.overview}</p>
+          <p className="text-sm md:text-base text-text_color_soft dark:text-text_color_soft_dark line-clamp-2" >{bookmark.post.overview}</p>
           <div className="flex gap-2 justify-between items-center mt-auto">
             <div className="flex gap-1">
               <MyTooltip content="Remove from bookmarks">

@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import useSWR from "swr"
 import { formatPostInfoResponse } from "../adapters"
 import { PostInfo, PostInfoResponse } from "../types"
+import { env } from "@/app/client/lib/env"
 
 type Props = {
   postSlug: string
@@ -11,7 +12,7 @@ type Props = {
 }
 
 function usePostInfo({postSlug, username }: Props) {
-  const response = useSWR<ApiReponseWithReturn<PostInfoResponse>>(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postSlug}/info${username ? `?user=${username}` : ''}`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<PostInfoResponse>>(`${env.NEXT_PUBLIC_API_URL}/posts/${postSlug}/info${username ? `?user=${username}` : ''}`, fetcher, {
     keepPreviousData: true
   })
 

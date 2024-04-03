@@ -7,10 +7,38 @@ import PostUserCard from "@/app/client/features/posts/components/PostUserCard"
 import { getPost } from "@/app/client/features/posts/services"
 import { auth } from "@/app/client/lib/auth"
 import { Link2Icon } from "@radix-ui/react-icons"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
-async function PostPage({params}: {params: {postSlug: string}}) {
+type Props = {
+  params: {
+    postSlug: string
+  }
+}
+
+export async function generateMetadata({params: { postSlug }}: Props): Promise<Metadata> {
+  const post = await getPost(postSlug)
+
+  return {
+    title: post?.title,
+    description: post?.overview,
+    twitter: {
+      card: 'summary_large_image',
+      title: post?.title,
+      description: post?.overview,
+      images: [post?.img || DEFAULT_POST_IMG],
+      creator: post?.user.name
+    },
+    openGraph: {
+      title: post?.title,
+      description: post?.overview,
+      images: [post?.img || DEFAULT_POST_IMG],
+    }
+  }
+} 
+
+async function PostPage({params}: Props) {
   const { postSlug } = params
   const post = await getPost(postSlug)
   const session = await auth()
@@ -36,7 +64,7 @@ async function PostPage({params}: {params: {postSlug: string}}) {
           <PostActions post={post} />
         </div>
         <div className="relative flex-1 min-h-[240px] sm:min-h-[300px]">
-          <Image className="object-fill rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
+          <Image className="object-cover aspect-video rounded-lg" src={post.img || DEFAULT_POST_IMG} alt={post.title} fill />
         </div>
       </section>
       <div className="flex flex-col lg:flex-row gap-16 mt-10">

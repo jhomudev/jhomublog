@@ -3,12 +3,23 @@ import Menu from "@/app/client/components/Menu"
 import CategoryCardTop from "@/app/client/features/categories/components/CategoryCardTop"
 import { getCategory } from "@/app/client/features/categories/services"
 import PostsContent from "@/app/client/features/posts/components/PostsContent"
+import { Metadata } from "next"
 
 type Props = {
   params: {
     slug: string
   }
 }
+
+export async function generateMetadata({params: {slug}}: {params: {slug: string}}): Promise<Metadata> {
+  const category = await getCategory(slug)
+
+  return {
+    title: `Watch ${category?.name} posts`,
+    description: `Watch the interesting posts in ${category?.name} category`,
+  }
+} 
+
 async function CategoryPage({ params: { slug } }: Props) {
   const category = await getCategory(slug)
 

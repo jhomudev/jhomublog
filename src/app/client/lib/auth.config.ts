@@ -2,6 +2,7 @@ import type { NextAuthConfig } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, protectedRoutes  } from '@/routes'
 import db from './prisma'
+import { env } from './env'
 
 const getUserById = async (id: string) => {
   try {
@@ -24,8 +25,8 @@ const getUserById = async (id: string) => {
 export const authConfig: NextAuthConfig = {
   providers: [ 
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET
     })
   ],
   pages: {

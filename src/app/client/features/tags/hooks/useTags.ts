@@ -1,10 +1,11 @@
+import { env } from "@/app/client/lib/env"
 import { fetcher } from "@/app/client/lib/swr"
 import { ApiReponseWithReturn } from "@/app/client/types"
 import { useMemo } from "react"
 import useSWR from "swr"
 
 function useTags() {
-  const response = useSWR<ApiReponseWithReturn<string[]>>(`${process.env.NEXT_PUBLIC_API_URL}/posts/tags`, fetcher, {
+  const response = useSWR<ApiReponseWithReturn<string[]>>(`${env.NEXT_PUBLIC_API_URL}/posts/tags`, fetcher, {
     keepPreviousData: true
   })
 

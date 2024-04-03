@@ -8,7 +8,7 @@ function Menu() {
   searchParams.set('views', 'desc')
   searchParams.set('rowsPerPage', '3')
 
-  const { response: { isLoading: isLoadingPopular }, posts: popularPosts } = usePosts({ searchParams: searchParams.toString() })
+  const { response: { isLoading: isLoadingPopular }, posts: popularPosts } = usePosts({ searchParams: searchParams.toString(), search: 'popular' })
   const { response: { isLoading: isLoadingAuthorPosts }, posts: authorPosts } = usePosts({ searchParams: searchParams.toString() })
   
   return (
@@ -16,7 +16,7 @@ function Menu() {
       <div className="sticky top-3">
         <small className="text-text_color_soft dark:text-text_color_soft_dark">{ "What's hot?" }</small>
         <h2 className="mb-5 text-2xl font-semibold">Most popular</h2>
-        <PostsInMenu dataPost={{ posts: popularPosts, isLoading: isLoadingPopular }} />
+        <PostsInMenu dataPost={{ posts: popularPosts.slice(0, 3), isLoading: isLoadingPopular }} />
         <br />
         <small className="text-text_color_soft dark:text-text_color_soft_dark">Discover by topic</small>
         <h2 className="mb-5 text-2xl font-semibold">Categories</h2>

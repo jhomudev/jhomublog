@@ -2,9 +2,15 @@ import NavSearchInput from "@/app/client/features/search/components/NavSearchInp
 import SearchPageContent from "@/app/client/features/search/components/SearchPageContent"
 import Menu from "@/app/client/components/Menu"
 import SearchTextResult from "@/app/client/features/search/components/SearchTextResult"
+import { Metadata } from "next"
 
 type Props = {
   children: React.ReactNode
+}
+
+export const metadata: Metadata = {
+  title: 'Search',
+  description: 'Search the posts or people.',
 }
 
 function SearchLayout({children}: Props) {
